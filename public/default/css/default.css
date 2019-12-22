@@ -1,0 +1,6 @@
+.dropdown-nav-item {
+    color: rgba(0,0,0,.5);
+}
+.admin-menu-dropdown:hover {
+    cursor: pointer;
+}
