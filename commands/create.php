@@ -239,7 +239,7 @@ class createModel extends db{
         $sql = "DESCRIBE " . $this->name . ";";
         return ($this->selectResult($sql)) ? 1 : 0;
     }
- }
+ } 
 
 $newModel = new createModel($argv);
 //echo $newModel->name;
