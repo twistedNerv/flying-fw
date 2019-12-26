@@ -6,20 +6,20 @@ class menuController extends controller {
         parent::__construct();
     }
     
-    public function updateAction($menuId=0) {
+    public function updateAction($menuId=false) {
         $menuModel = $this->loadModel('menu');
-        if($menuId != 0) {
+        if($menuId) {
             $menuModel->findOneById($menuId);
         }
         if(isset($_POST['action']) && $_POST['action'] == 'handlemenu') {
-            $menuModel->setName(tools::sanitizePost($_POST['menu-title']));
-            $menuModel->setName(tools::sanitizePost($_POST['menu-description']));
-            $menuModel->setName(tools::sanitizePost($_POST['menu-url']));
-            $menuModel->setName(tools::sanitizePost($_POST['menu-level']));
-            $menuModel->setName(tools::sanitizePost($_POST['menu-position']));
-            $menuModel->setName(tools::sanitizePost($_POST['menu-parent']));
-            $menuModel->setName(tools::sanitizePost($_POST['menu-active']));
-            $menuModel->setName(tools::sanitizePost($_POST['menu-admin']));
+            $menuModel->setName($this->tools->sanitizePost($_POST['menu-title']));
+            $menuModel->setDescription($this->tools->sanitizePost($_POST['menu-description']));
+            $menuModel->setUrl($this->tools->sanitizePost($_POST['menu-url']));
+            $menuModel->setLevel($this->tools->sanitizePost($_POST['menu-level']));
+            $menuModel->setPosition($this->tools->sanitizePost($_POST['menu-position']));
+            $menuModel->setParent($this->tools->sanitizePost($_POST['menu-parent']));
+            $menuModel->setActive($this->tools->sanitizePost($_POST['menu-active']));
+            $menuModel->setAdmin($this->tools->sanitizePost($_POST['menu-admin']));
             $menuModel->flush();
             $this->tools->notification("Menu element urejen.", "primary");
             $this->tools->log('menu', "Menu item: " . $menuModel->getTitle() . " successfully added.");
@@ -32,7 +32,10 @@ class menuController extends controller {
                 $index = ($singleItem['parent'] != 0) ? $singleItem['parenttitle'] : 0;
                 $customMenuArray[$index][] =  ['id' => $singleItem['id'], 'title' => $singleItem['title'], 'url' => $singleItem['url'], 'parenttitle' => $singleItem['parenttitle']];
             }
-        $this->view->render('menu/update', ['pageMenuItems' => $customMenuArray, 'adminMenuItems' => $allAdminMenuItems, 'parentGroups' => $parentGroups]);
+        $this->view->assign('pageMenuItems', $customMenuArray);
+        $this->view->assign('adminMenuItems', $allAdminMenuItems);
+        $this->view->assign('parentGroups', $parentGroups);
+        $this->view->render('menu/update');
     }
 
     public function indexAction() {
@@ -55,7 +58,10 @@ class menuController extends controller {
         $allAdminMenuItems = $menuModel->findMenuItems(true, true, 'all');
         $parentGroups = $menuModel->findMenuItems(false, true, '0');
         
-        $this->view->render('menu/index', ['pageMenuItems' => $allPageMenuItems, 'adminMenuItems' => $allAdminMenuItems, 'parentGroups' => $parentGroups]);
+        $this->view->assign('pageMenuItems', $allPageMenuItems);
+        $this->view->assign('adminMenuItems', $allAdminMenuItems);
+        $this->view->assign('parentGroups', $parentGroups);
+        $this->view->render('menu/index');
     }
     
     public function removeAction($menuItemId) {

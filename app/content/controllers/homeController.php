@@ -10,6 +10,7 @@ class homeController extends controller {
     public function indexAction($name='') {
         $homeModel = $this->loadModel('home');
         $name = $homeModel->test("bla");
-        $this->view->render('home/index', ['name' => $name]);
+        $this->view->assign('name', $name);
+        $this->view->render('home/index');
     }
 }

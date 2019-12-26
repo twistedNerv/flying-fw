@@ -11,13 +11,14 @@ class userController extends controller {
     public function indexAction() {
         $this->tools->checkPageRights(4);
         $this->userModel->findOneById(10);
-        $this->view->render('user/index', ['name' => $this->userModel->name]);
-        $this->view->render('home/index', ['name' => $this->userModel->name]);
+        $this->view->assign('name', $this->userModel->name);
+        $this->view->render('user/index');
+        $this->view->render('home/index');
     }
     
-    public function updateAction($userId=0) {
+    public function updateAction($userId=false) {
         $userModel = $this->loadModel('user');
-        if($userId != 0) {
+        if($userId) {
             $userModel->findOneById($userId);
         }
         if(isset($_POST['action']) && $_POST['action'] == 'handleuser') {
@@ -35,7 +36,9 @@ class userController extends controller {
             $this->tools->log('user', "User: " . $userModel->getEmail() . " successfully added.");
         }
         $allUsers = $userModel->findAll();
-        $this->view->render('user/update', ['allUsers' => $allUsers, 'selectedUser' => $userModel]);
+        $this->view->assign('allUsers', $allUsers);
+        $this->view->assign('selectedUser', $userModel);
+        $this->view->render('user/update');
     }
     
     public function removeAction($userId) {

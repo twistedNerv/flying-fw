@@ -7,8 +7,8 @@ define('DB_DATABASE', 'mvc');
 
 if(php_sapi_name() != 'cli')
     define('USER_IP', $_SERVER['REMOTE_ADDR']);
-if($_SERVER['REMOTE_ADDR'] == "::1") {
+//if($_SERVER['REMOTE_ADDR'] == "::1") {
     define('URL','http://localhost:8080/mvc/');
-} else {
+/*} else {
     define('URL','http://10.20.124.226:8080/mvc/');
-}
+}*/

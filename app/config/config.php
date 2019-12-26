@@ -1,6 +1,5 @@
 <?php
 require 'app/config/globals.php';
-require 'app/config/tools.php';
 
 class config {
     public $configValues = [];

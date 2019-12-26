@@ -1,14 +1,23 @@
 <?php
+require_once 'app/include/template.php';
+require_once 'app/include/tools.php';
 
 class view {
 
+    public $vars = [];
+    
     public function __construct() {
         $this->session = new session;
         $this->config = new config;
+        $this->template = new template;
+        $this->tools = new tools;
         $this->displayHead();
     }
 
     public function render($view, $data=[]) {
+        if(!$data) {
+            $data = $this->vars;
+        }
         $contentPath = "content/";
         if (file_exists('app/views/' . $this->config->getParam('template'). '/' . $view . '.php')) {
             $contentPath = "";
@@ -20,6 +29,10 @@ class view {
             die("Err: View file exists in base and in content.");
         }
         require 'app/' . $contentPath . 'views/' . $this->config->getParam('template'). '/' . $view . '.php';
+    }
+    
+    public function assign($key, $value) {
+        $this->vars[$key] = $value;
     }
     
     private function displayHead() {
