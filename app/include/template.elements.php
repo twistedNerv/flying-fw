@@ -9,4 +9,8 @@ class templateElements extends template {
     public function test() {
         echo "test";
     }
+    
+    public function formInputText() {
+        
+    }
 }

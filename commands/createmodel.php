@@ -98,8 +98,10 @@ class createModel extends db{
         $fileString .= "\n";
         $fileString .= "\t\t";
         $fileString .= '$' . $this->name . 'Model->flush();';
+        $fileString .= "\n\t\t";
+        $fileString .= '$this->view->assign("name" => $" . $this->name . "Model->name)';
         $fileString .= "\n";
-        $fileString .= "\t\t$" . "this->view->render('" . $this->name . "/index', ['name' => $" . $this->name . "Model->name]);*/";
+        $fileString .= "\t\t$" . "this->view->render('" . $this->name . "/index');*/";
         $fileString .= "\n\t}";
         $fileString .= "\n\n}";
         file_put_contents("../app/controllers/" . $this->name . "Controller.php", $fileString);

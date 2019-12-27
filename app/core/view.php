@@ -14,10 +14,8 @@ class view {
         $this->displayHead();
     }
 
-    public function render($view, $data=[]) {
-        if(!$data) {
-            $data = $this->vars;
-        }
+    public function render($view) {
+        $data = $this->vars;
         $contentPath = "content/";
         if (file_exists('app/views/' . $this->config->getParam('template'). '/' . $view . '.php')) {
             $contentPath = "";
