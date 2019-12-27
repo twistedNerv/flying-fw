@@ -8,7 +8,7 @@ class templateElements extends template {
     }
     
     public function submitButton($nameid="", $buttontype="primary", $text="Potrdi", $class="") {
-        $fileContent = $this->getFileContent($this->filesFolder . 'submit_button.tmpl');
+        $fileContent = $this->getFileContent('submit_button');
         $ref = new ReflectionMethod($this, 'submitButton');
         foreach($ref->getParameters() as $param) {
                 $name = $param->name;
@@ -19,15 +19,13 @@ class templateElements extends template {
     }
     
     public function formInputText($type, $nameid, $value, $placeholder="", $required="") {
-        
-        $fileContent = $this->getFileContent($this->filesFolder . 'form_input_text.tmpl');
+        $fileContent = $this->getFileContent('form_input_text');
         $ref = new ReflectionMethod($this, 'formInputText');
         foreach($ref->getParameters() as $param) {
             $name = $param->name;
             $params[$name] = $$name;
         }
-        $fileContent = $this->replaceTags($params, $fileContent);
-        echo $fileContent;
+        echo $this->replaceTags($params, $fileContent);
     }
     
     private function replaceTags($params, $fileContent) {
@@ -38,7 +36,8 @@ class templateElements extends template {
         return $fileContent;
     }
     
-    public function getFileContent($file) {
+    public function getFileContent($filename) {
+        $file = $this->filesFolder . $filename . '.tmpl';
         if(file_exists($file)) {
             $content = file_get_contents($file);
             return $content;
