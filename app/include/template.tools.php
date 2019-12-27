@@ -7,7 +7,7 @@ class templateTools extends template {
     }
     
     public function readableColour($bg) {
-        list($r, $g, $b) = sscanf($color, "%02x%02x%02x");
+        list($r, $g, $b) = sscanf($bg, "%02x%02x%02x");
         $squared_contrast = (
                 $r * $r * .299 +
                 $g * $g * .587 +

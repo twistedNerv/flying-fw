@@ -9,6 +9,6 @@ class template {
     
     public function __construct() {
         $this->elements = new templateElements;
-        $this->tools = new templateTools();
+        $this->tools = new templateTools;
     }
 }
