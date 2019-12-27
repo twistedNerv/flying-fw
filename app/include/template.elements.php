@@ -7,6 +7,17 @@ class templateElements extends template {
         $this->filesFolder = 'app/views/' . $this->config->getParam('template'). '/template/elements/';
     }
     
+    public function submitButton($nameid="", $buttontype="primary", $text="Potrdi", $class="") {
+        $fileContent = $this->getFileContent($this->filesFolder . 'submit_button.tmpl');
+        $ref = new ReflectionMethod($this, 'submitButton');
+        foreach($ref->getParameters() as $param) {
+                $name = $param->name;
+                $params[$name] = $$name;
+        }
+        $fileContent = $this->replaceTags($params, $fileContent);
+        echo $fileContent;
+    }
+    
     public function formInputText($type, $nameid, $value, $placeholder="", $required="") {
         
         $fileContent = $this->getFileContent($this->filesFolder . 'form_input_text.tmpl');

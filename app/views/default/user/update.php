@@ -54,7 +54,9 @@
                             <option value="1" <?php echo ($data['selectedUser']->active == 1) ? "selected" : "" ?>>Aktiven</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">Potrdi</button>
+                    <?php 
+                        $this->template->elements->submitButton('', 'primary', 'Potrdi');
+                    ?>
                     <a class='btn btn-danger' href='<?= URL ?>user/update'>Prekliči</a>
                 </form>
             </div>
