@@ -9,11 +9,13 @@ class tools {
     public function checkPageRights($level) {
         $userLevel = $this->session->get('activeUser');
         //echo $userLevel['level'];die;
-        if (!$userLevel['level'] || $userLevel['level'] < $level) {
-            $redirectLocation = URL . "user/login";
-            //$redirectLocation = "location: ".URL."user/login";
-            //header($redirectLocation);
-            $this->redirect($redirectLocation);
+        if ($level != 0) {
+            if (!$userLevel['level'] || $userLevel['level'] < $level) {
+                $redirectLocation = URL . "user/login";
+                //$redirectLocation = "location: ".URL."user/login";
+                //header($redirectLocation);
+                $this->redirect($redirectLocation);
+            }
         }
     }
 

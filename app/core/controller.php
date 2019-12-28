@@ -22,5 +22,12 @@ class controller {
         $modelName = $model . 'Model';
         return new $modelName();
     }
+    
+    public function loadInclude($include) {
+        if(file_exists('app/include/' . strtolower($include) . '.php')) {
+            require_once 'app/include/' . strtolower($include) . '.php';
+            return new $include();
+        }
+    }
 
 }
