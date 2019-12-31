@@ -1,3 +1,7 @@
-$(document).ready(function () {
-    //here be mosters
+$(function () {
+    $(".pick-a-date").datepicker({
+        showAnim: "slideDown",
+        dateFormat: "dd.mm.yy",
+        firstDay: 1
+    });
 });

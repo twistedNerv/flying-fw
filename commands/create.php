@@ -169,9 +169,9 @@ class createModel extends db{
         $fileString .= "\n\t\t";
         $fileString .= '$allItems = $' . $this->name . 'Model->findAll();';
         $fileString .= "\n\t\t";
-        $fileString .= '$this->view->assign("items" => $allItems)';
+        $fileString .= '$this->view->assign("items", $allItems);';
         $fileString .= "\n\t\t";
-        $fileString .= '$this->view->assign("selected' . ucfirst($this->name) . '", $' . $this->name . 'Model)';
+        $fileString .= '$this->view->assign("selected' . ucfirst($this->name) . '", $' . $this->name . 'Model);';
         $fileString .= "\n\t\t";
         $fileString .= '$this->view->render("' . $this->name . '/update");';
         $fileString .= "\n\t";

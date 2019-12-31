@@ -13,15 +13,6 @@
         <?php $this->config->includeScript('notification.js');?>
         <?php $this->config->includeScript('ajax.js');?>
         <link href="<?=URL?>public/default/images/faviconukc.ico" rel="shortcut icon" type="image/x-icon" />
-        <script>
-            $(function() {
-                $(".pick-a-date").datepicker({
-                    showAnim: "slideDown",
-                    dateFormat: "dd.mm.yy",
-                    firstDay: 1
-                });
-            });
-        </script>
     </head>
     <body>
         <div class="container">

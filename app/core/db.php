@@ -45,6 +45,17 @@ class db extends PDO {
         return $this->result->fetchAll(PDO::FETCH_ASSOC);
     }
     
+    public function findAllByParam($ident, $identValue, $table) {
+        $columns = $this->getTableColumns($table);
+        $val = $identValue;
+        $sql = "SELECT " . implode(", ", $columns) . " FROM " . $table . " WHERE " . $ident . " = :" . $ident . ";";
+        $this->result = $this->prepare($sql);
+        $this->result->bindParam(':'.$ident, $val);
+        $this->result->execute();
+        $result = $this->result->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+    
     public function findAllSortedLimited($table, $orderBy, $order, $limit) {
         $columns = $this->getTableColumns($table);
         $sql = "SELECT " . implode(", ", $columns) . " FROM " . $table . " ORDER BY " . $orderBy . " " . $order . " LIMIT " . $limit . ";";
