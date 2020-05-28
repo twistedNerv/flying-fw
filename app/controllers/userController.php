@@ -3,6 +3,7 @@
 class userController extends controller {
 
     public $userModel;
+    
     public function __construct() {
         parent::__construct();
         $this->userModel = $this->loadModel("user");
@@ -17,19 +18,20 @@ class userController extends controller {
     }
     
     public function updateAction($userId=false) {
+        $this->tools->checkPageRights(4);
         $userModel = $this->loadModel('user');
         if($userId) {
             $userModel->findOneById($userId);
         }
         if(isset($_POST['action']) && $_POST['action'] == 'handleuser') {
-            $userModel->setName(tools::sanitizePost($_POST['user-name']));
-            $userModel->setSurname(tools::sanitizePost($_POST['user-surname']));
-            $userModel->setUsername(tools::sanitizePost($_POST['user-email']));
-            $userModel->setEmail(tools::sanitizePost($_POST['user-email']));
+            $userModel->setName($this->tools->sanitizePost($_POST['user-name']));
+            $userModel->setSurname($this->tools->sanitizePost($_POST['user-surname']));
+            $userModel->setUsername($this->tools->sanitizePost($_POST['user-email']));
+            $userModel->setEmail($this->tools->sanitizePost($_POST['user-email']));
             if(!$userModel->getId()) {
-                $userModel->setPassword(md5(tools::sanitizePost($_POST['user-password'])));
+                $userModel->setPassword(md5($this->tools->sanitizePost($_POST['user-password'])));
             }
-            $userModel->setLevel(tools::sanitizePost($_POST['user-level']));
+            $userModel->setLevel($this->tools->sanitizePost($_POST['user-level']));
             $userModel->setActive(1);
             $userModel->flush();
             $this->tools->notification("Uporabnik urejen.", "primary");
@@ -63,7 +65,7 @@ class userController extends controller {
     }
     
     public function logoutAction() {
-        unset($_SESSION['user']);
+        unset($_SESSION[APP_NAME . "_" . 'user']);
         $_SESSION = array();
 
 //        if(ini_get("session.use_cookies")) {
@@ -74,7 +76,7 @@ class userController extends controller {
 //            );
 //        }
         session_destroy();
-        tools::redirect(URL . 'user/login');
+        $this->tools->redirect(URL);
         //header('location: '.URL.'user/login.php');
     }
 }

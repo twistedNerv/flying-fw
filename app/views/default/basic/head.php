@@ -6,6 +6,7 @@
         <?php $this->config->includeScript('jquery.js');?>
         <?php $this->config->includeScript('jquery-ui.js');?>
         <?php $this->config->includeBootstrap();?>
+        <?php $this->config->includeFontawesomeCustom();?>
         <?php $this->config->includeStyle('default.css');?>
         <?php $this->config->includeStyle('notification.css');?>
         <?php $this->config->includeStyle('jquery-ui.css');?>

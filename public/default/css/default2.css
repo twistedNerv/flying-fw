@@ -1,0 +1,224 @@
+html {
+    height: 100%;
+}
+body {
+    min-height: 100%;
+    font-family: 'Source Sans Pro';
+    font-size: 15px;
+}
+.main-container {
+    //background-color: grey;
+}
+h2 {
+    font-family: 'QuickSand Light Bold';
+    font-size: 50px;
+    color: #555;
+    margin-bottom: 30px;
+}
+.content {
+    padding-bottom: 20px;
+}
+.bg-content {
+    background-color: #fcf8e8;
+}
+.subtitle {
+    font-family: 'QuickSand Light';
+    font-size: 25px;
+    color: #555;
+    padding: 10px 0 10px 0;
+    border: 1px dotted #ccc;
+    border-top: 0;
+    margin-bottom: 35px;
+    background-color: #e3e3e3;
+    border-radius: 0px;
+    box-shadow: 0px 1px 2px #555;
+    width: 100%;
+}
+.type-menu {
+    display: inline-block;
+    padding: 6px;
+    background-color: #636360;
+    border: 1px solid white;
+    border-top: 0;
+    border-bottom: 0;
+    //border-radius: 5px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+.type-menu:hover {
+    cursor: pointer;
+    background-color: #fcf8e8;
+    //box-shadow: 0 0 20px rgba(0, 0, 0, 0.2) inset;
+    text-decoration: none;
+}
+.type-menu:hover span{
+    color: #333;
+    //text-shadow: 0 0px 5px #000000;
+}
+.type-menu-active {
+    cursor: pointer;
+    background-color: #fcf8e8;
+    //box-shadow: 0 0 20px rgba(0, 0, 0, 0.2) inset;
+}
+.type-menu-active span {
+    font-family: 'QuickSand Light';
+    //text-shadow: 0 0px 5px #000000;
+    color: #333;
+}
+.type-menu-text {
+    color: #fff;
+    font-family: 'QuickSand Light';
+}
+.mod-menu i {
+    color: #444444;
+    padding: 5px 2px;
+    font-size: 40px;
+}
+.mod-menu i:hover {
+    color: #a68867;
+}
+.mod-settings {
+    margin-bottom: -10px;
+    border-left: 1px dotted #ccc;
+    border-top: 1px dotted #ccc;
+    border-right: 1px dotted #ccc;
+    border-radius: 3px;
+}
+.mod-settings i {
+    color: #444444;
+    padding: 5px 2px;
+    font-size: 20px;
+}
+.mod-settings i:hover {
+    color: #a68867;
+}
+.status-icon i {
+    font-size: 30px;
+    margin: 10px;
+    color: #555;
+    margin-bottom: 0;
+}
+.icon-title {
+    font-size: 11px;
+}
+.set-hover {
+    cursor: pointer;
+}
+.p-wrapper {
+    border: 1px solid #bdbdbd;
+    background-color: #fef8e7;
+    margin: 10px 0px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1), 0 0 20px rgba(0, 0, 0, 0.1) inset;
+    border-radius: 3px;
+    padding-bottom: 10px;
+}
+.p-wrapper:hover {
+    background-color: #eee8d7;
+}
+.detail-wrapper {
+    display:none;
+    background-color: #fef8e7;
+    margin-top: -10px;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+    border: 1px solid #bdbdbd;
+    border-top: 0;
+}
+.project-title {
+    position: relative;
+    top: 8px;
+    font-family: 'QuickSand Light';
+    font-size: 18px;
+    color: #333333;
+}
+.project-dates {
+    position: relative;
+    top: 10px;
+    font-family: 'QuickSand Light';
+    font-size: 14px;
+    color: #333333;
+}
+.project-description-area {
+    background-color: #efefef;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1) inset;
+    padding: 15px;
+    border: 1px solid #ccc;
+}
+.project-tasks-area {
+    margin-top: 20px;
+}
+.tasks-status-area {
+    //border: 1px dotted grey;
+    padding: 10px 5px 20px 5px;
+}
+.tasks-title {
+    background-color: grey;
+    color: white;
+    text-align: center;
+    font-family: 'QuickSand Light';
+}
+.tasks-task {
+    background-color: #f2f2f2;
+    margin: 3%;
+    width: 94%;
+    box-shadow: 0 0 5px #ccc;
+    border: 1px solid #bbb;
+    padding-right: 15px;
+}
+.tasks-add-task {
+    border: 1px dotted grey;
+    background-color: #ffffff;
+    width: 94%;
+    margin: 3%;
+}
+.addtask {
+    background-color: grey;
+    text-align: center;
+    color: white;
+    margin: 10px;
+    box-shadow: 0 0 5px #ccc;
+}
+.addtask:hover {
+    cursor: pointer;
+    background-color: #bbb;
+    color: #444;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1) inset;
+}
+.removetask {
+    position: absolute;
+    right: 5px;
+    top: 2px;
+    color: #444;
+}
+.removetask i:hover {
+    color: #a68867;
+    cursor: pointer;
+}
+.finishtask {
+    position: absolute;
+    right: 5px;
+    top: 25px;
+    color: #444;
+}
+.finishtask i:hover {
+    color: #a68867;
+    cursor: pointer;
+}
+.task-description {
+    border: 1px dotted gray;
+    padding: 3px;
+    width: 100%;
+    display: inline-block;
+    text-decoration: none;
+    font-style: italic;
+}
+
+.active-alert {
+    position: absolute;
+    right: 0px;
+    z-index: 9;
+    font-weight: bold;
+    background-color: #fddd5c;
+    border-left: 1px dotted #cccccc;
+    padding: 3px 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1) inset;
+}

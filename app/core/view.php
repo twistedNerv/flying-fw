@@ -13,7 +13,7 @@ class view {
         $this->tools = new tools;
         $this->displayHead();
     }
-
+    
     public function render($view) {
         $data = $this->vars;
         $contentPath = "content/";
