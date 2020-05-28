@@ -273,7 +273,7 @@ class userModel extends model {
         $this->db->result->bindParam(':password', $cryptPass);
         $this->db->result->execute();
         if ($this->db->result->rowCount() == 1) {
-            $_SESSION['activeUser'] = $this->db->result->fetch(PDO::FETCH_ASSOC);
+            $_SESSION[APP_NAME . "_" . 'activeUser'] = $this->db->result->fetch(PDO::FETCH_ASSOC);
             tools::log("login", "Logged in: userid: " . session::get('activeUser')['id'] . " / mail: " . $_POST['login-email']);
             //header('location: index');
             
@@ -282,5 +282,4 @@ class userModel extends model {
             tools::log("login", "Failed for userid: " . $_POST['login-email'] . " / pass: " . $_POST['login-password'] . ").");
         }
     }
-
 }

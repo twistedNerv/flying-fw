@@ -27,5 +27,13 @@ class templateElements extends template {
         echo parent::replaceTags($params, $fileContent);
     }
     
-    
+    public function formInputCustomRadio($title, $nameid, $checked) {
+        $fileContent = parent::getFileContent('form_input_custom_radio', $this->filesFolder);
+        $params['title'] = $title;
+        $params['nameid'] = $nameid;
+        $params['checked0'] = ($checked == 0) ? "checked" : "";
+        $params['checked1'] = ($checked == 1) ? "checked" : "";
+        $params['checked3'] = ($checked == 3) ? "checked" : "";
+        echo parent::replaceTags($params, $fileContent);
+    }
  }

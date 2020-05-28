@@ -29,5 +29,4 @@ class controller {
             return new $include();
         }
     }
-
 }

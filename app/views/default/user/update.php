@@ -31,14 +31,20 @@
             <div class="user-settings">
                 <form action="<?= URL ?>user/update/<?= $data['selectedUser']->id ?>" method="post">
                     <input type="hidden" name="action" value="handleuser">
-                    <?php 
-                        $this->template->elements->formInputText('text', 'user-name', $data['selectedUser']->name, 'ime', 'required');
-                        $this->template->elements->formInputText('text', 'user-surname', $data['selectedUser']->surname, 'priimek', 'required');
-                        $this->template->elements->formInputText('email', 'user-email', $data['selectedUser']->email, 'elektronski naslov', 'required');
-                        if(!$data['selectedUser']->id) { 
-                            $this->template->elements->formInputText('password', 'user-password', '', 'geslo', 'required');
-                        }
-                    ?>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="user-name" placeholder="ime" required value="<?php echo $data['selectedUser']->name; ?>">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="user-surname" placeholder="priimek" required value="<?php echo $data['selectedUser']->surname; ?>">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" name="user-email" placeholder="elektronski naslov" required value="<?php echo $data['selectedUser']->email; ?>">
+                    </div>
+                    <?php if (!$data['selectedUser']->id) { ?>
+                        <div class="form-group">
+                            <input type="password" class="form-control" name="user-password" placeholder="geslo" required value="">
+                        </div>
+                    <?php } ?>
                     <div class="form-group">
                         <select name="user-level" class="browser-default custom-select" required>
                             <option value="1" <?php echo ($data['selectedUser']->level == 1) ? "selected" : "" ?>>Uporabnik</option>
@@ -54,10 +60,8 @@
                             <option value="1" <?php echo ($data['selectedUser']->active == 1) ? "selected" : "" ?>>Aktiven</option>
                         </select>
                     </div>
-                    <?php 
-                        $this->template->elements->submitButton('', 'primary', 'Potrdi');
-                    ?>
-                    <a class='btn btn-danger' href='<?= URL ?>user/update'>Prekliči</a>
+                    <button type="submit" class="btn btn-primary">Potrdi</button>
+                    <a class='btn btn-danger ' href='<?= URL ?>user/update'>Prekliči</a>
                 </form>
             </div>
         </div>

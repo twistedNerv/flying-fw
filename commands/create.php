@@ -4,7 +4,7 @@ require_once '../app/core/db.php';
 require_once '../app/config/globals.php';
 
 class createModel extends db{
-   
+    
     public $db;
     public $name;
     public $tableCheck = 0;
@@ -13,13 +13,13 @@ class createModel extends db{
     public $viewCheck = 0;
     public $modelCheck = 0;
     public $columns = [];
-   
+    
     public function __construct($argv) {
         parent::__construct();
         $this->db = new db();
         $this->run($argv);
     }
-   
+    
     private function run($argv) {
         $this->checkCommand($argv);
         $this->tableCheck = ($this->tableCheck) ? $this->tableExist() : 0;
@@ -27,7 +27,7 @@ class createModel extends db{
         $this->modelCheck = ($this->modelCheck) ? ((file_exists("../app/models/" . $this->name . "Model.php")) ? 1 : 0) : 1;
         $this->controllerCheck = ($this->controllerCheck) ? ((file_exists("../app/controllers/" . $this->name . "Controller.php")) ? 1 : 0) : 1;
         $this->viewCheck = ($this->viewCheck) ? ((file_exists("../app/views/default/" . $this->name . "/index.php")) ? 1 : 0) : 1;
-       
+        
         if($this->tableCheck) {
             echo "Create table $this->name not selected or table already exist. \n\r";
             if(!$this->sqlDumpCheck) {
@@ -45,7 +45,7 @@ class createModel extends db{
                 //return false;
             }
         }
-       
+        
         if($this->modelCheck || $this->tableExist() == 0) {
             echo "Create model $this->name not selected, model alerady exist or table doesn't exist.\n\r";
         } else {
@@ -53,7 +53,7 @@ class createModel extends db{
             $this->createModel();
             echo "Model $this->name.php created.\n\r";
         }
-       
+        
         if($this->controllerCheck) {
             echo "Create controller $this->name not selected or controller alerady exist.\n\r";
         } else {
@@ -61,7 +61,7 @@ class createModel extends db{
             $this->createController();
             echo "Controller $this->name.php created.\n\r";
         }
-       
+        
         if($this->viewCheck) {
             echo "View $this->name alerady exist.\n\r";
         } else {
@@ -69,7 +69,7 @@ class createModel extends db{
             echo "View view/$this->name/index.php created.\n\r";
         }
     }
-   
+    
     private function checkCommand($argv) {
         if(!$argv[1]) {
             echo "Error: No package name selected.\nUse '[command] --help' for help.";
@@ -92,7 +92,7 @@ class createModel extends db{
         if(preg_match('/^[a-zA-Z0-9$_]+$/', $argv[1]) != 1) {
             echo "\nError: Forbidden characters used for package name.\nUse '[command] --help' for help.\n";
             die;
-        }
+        } 
         if(!$argv[2]) {
             echo "Error: No option selected.\nUse '[command] --help' for help.";
             die;
@@ -125,7 +125,7 @@ class createModel extends db{
             }
         }
     }
-   
+    
     private function createController() {
         $fileString = "<?php";
         $fileString .=  "\n\n";
@@ -169,11 +169,7 @@ class createModel extends db{
         $fileString .= "\n\t\t";
         $fileString .= '$allItems = $' . $this->name . 'Model->findAll();';
         $fileString .= "\n\t\t";
-        $fileString .= '$this->view->assign("items" => $allItems)';
-        $fileString .= "\n\t\t";
-        $fileString .= '$this->view->assign("selected' . ucfirst($this->name) . '", $' . $this->name . 'Model)';
-        $fileString .= "\n\t\t";
-        $fileString .= '$this->view->render("' . $this->name . '/update");';
+        $fileString .= '$this->view->render("' . $this->name . '/update", ["items" => $allItems, "selected' . ucfirst($this->name) . '" => $' . $this->name . 'Model]);';
         $fileString .= "\n\t";
         $fileString .= '}';
         $fileString .= "\n\n\t";
@@ -202,7 +198,7 @@ class createModel extends db{
         $fileString .= '}';
         file_put_contents("../app/controllers/" . $this->name . "Controller.php", $fileString);
     }
-   
+    
     private function createModel() {
         $fileString = "<?php";
         $fileString .=  "\n\n";
@@ -253,7 +249,7 @@ class createModel extends db{
         $fileString .= "\n}";
         file_put_contents("../app/models/" . $this->name . "Model.php", $fileString);
     }
-   
+    
     private function createView() {
         $fileString = '<div class="col-sm-12 text-center">';
         $fileString .= "\n\t";
@@ -270,9 +266,9 @@ class createModel extends db{
         $fileString .= '<h4>' . ucfirst($this->name) . '</h4>';
         $fileString .= "\n\t\t";
         $fileString .= '</div>';
-       
-       
-       
+        
+        
+        
         $fileString .= "<br>\n";
         $fileString .= 'Data from controller: <?=$data["id"]?>';
         $structure = '../app/views/default/' . $this->name . "/";
@@ -282,18 +278,18 @@ class createModel extends db{
             file_put_contents("../app/views/default/" . $this->name . "/index.php", $fileString);
         }
     }
-   
+    
     private function createTable() {
         $sql = file_get_contents("../app/dbschemas/" . $this->name . ".sql");
         $this->db->execute($sql);
     }
-   
+    
     private function createSqlDump() {
         $sql = "SHOW CREATE TABLE " . $this->name . ";";
         $result = $this->selectResult($sql);
         file_put_contents("../app/dbschemas/" . $this->name . ".sql", $result['Create Table']);
     }
-   
+    
     private function tableExist() {
         $sql = "DESCRIBE " . $this->name . ";";
         return ($this->selectResult($sql)) ? 1 : 0;
