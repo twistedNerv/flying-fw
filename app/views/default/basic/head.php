@@ -12,6 +12,7 @@
         <?php $this->config->includeStyle('jquery-ui.css');?>
         <?php $this->config->includeScript('default.js');?>
         <?php $this->config->includeScript('notification.js');?>
+        <script>var URL = "<?=URL?>";</script>
         <?php $this->config->includeScript('ajax.js');?>
         <link href="<?=URL?>public/default/images/faviconukc.ico" rel="shortcut icon" type="image/x-icon" />
         <script>

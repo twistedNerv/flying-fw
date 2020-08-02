@@ -7,7 +7,7 @@ class config {
     public function __construct() {
         $this->configValues = 
             [
-                'title' => 'mvc',
+                'title' => 'UKC MB - kardio2',
                 'template' => 'default',
                 'display_page_menu' => true
             ];
@@ -30,18 +30,18 @@ class config {
     }
     
     public function includeJquery() {
-        echo "<link rel='stylesheet' href='http://10.20.126.184/libs/jquery-3.4.1/jquery-ui.css'>";
-        echo "<script type='text/javascript' src='http://10.20.126.184/libs/jquery-3.4.1/jquery.js'></script>";
-        echo "<script type='text/javascript' src='http://10.20.126.184/libs/jquery-3.4.1/jquery-ui.js'></script>";
+        echo "<link rel='stylesheet' href='" . URL_ROOT . "/libs/jquery-3.4.1/jquery-ui.css'>";
+        echo "<script type='text/javascript' src='" . URL_ROOT . "/libs/jquery-3.4.1/jquery.js'></script>";
+        echo "<script type='text/javascript' src='" . URL_ROOT . "/libs/jquery-3.4.1/jquery-ui.js'></script>";
     }
     
     public function includeBootstrap() {
-        echo "<link rel='stylesheet' href='http://10.20.126.184/libs/bootstrap-4.3.1/css/bootstrap.min.css'>";
-        echo "<script type='text/javascript' src='http://10.20.126.184/libs/bootstrap-4.3.1/js/bootstrap.min.js'></script>";
+        echo "<link rel='stylesheet' href='" . URL_ROOT . "/libs/bootstrap-4.3.1/css/bootstrap.min.css'>";
+        echo "<script type='text/javascript' src='" . URL_ROOT . "/libs/bootstrap-4.3.1/js/bootstrap.min.js'></script>";
     }
     
     public function includeFontawesome() {
-        echo "<link rel='stylesheet' href='http://10.20.126.184/libs/fontawesome-free-5.12.0-web/css/all.css'>";
+        echo "<link rel='stylesheet' href='" . URL_ROOT . "/libs/fontawesome-free-5.12.0-web/css/all.css'>";
     }
     
     public function includeFontawesomeCustom() {
@@ -49,18 +49,18 @@ class config {
     }
     
     public function includeTimeline() {
-        echo "<script type='text/javascript' src='http://10.20.126.184/libs/timeline/timeline.min.js'></script>";
-        echo "<script type='text/javascript' src='http://10.20.126.184/libs/timeline/tether.min.js'></script>";
-        echo "<link rel='stylesheet' href='http://10.20.126.184/libs/timeline/jquery.timeline.min.css'>";
+        echo "<script type='text/javascript' src='" . URL_ROOT . "/libs/timeline/timeline.min.js'></script>";
+        echo "<script type='text/javascript' src='" . URL_ROOT . "/libs/timeline/tether.min.js'></script>";
+        echo "<link rel='stylesheet' href='" . URL_ROOT . "/libs/timeline/jquery.timeline.min.css'>";
     }
     
     public function includeEasyeditor() {
-        echo "<script type='text/javascript' src='http://10.20.126.184/libs/easyeditor/jquery.easyeditor.js'></script>";
-        echo "<link rel='stylesheet' href='http://10.20.126.184/libs/easyeditor/easyeditor.css'>";
-        echo "<link rel='stylesheet' href='http://10.20.126.184/libs/easyeditor/easyeditor-modal.css'>";
+        echo "<script type='text/javascript' src='" . URL_ROOT . "/libs/easyeditor/jquery.easyeditor.js'></script>";
+        echo "<link rel='stylesheet' href='" . URL_ROOT . "/libs/easyeditor/easyeditor.css'>";
+        echo "<link rel='stylesheet' href='" . URL_ROOT . "/libs/easyeditor/easyeditor-modal.css'>";
     }
     
     public function includeLibsFont($fontname) {
-        echo "<link rel='stylesheet' href='http://10.20.126.184/libs/fonts/fonts-" . $fontname .".css'>";
+        echo "<link rel='stylesheet' href='" . URL_ROOT . "/libs/fonts/fonts-" . $fontname .".css'>";
     }
 }
