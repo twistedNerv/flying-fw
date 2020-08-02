@@ -35,8 +35,9 @@ class bootstrap {
     
     public function parseUrl() {
         if(isset($_GET['url'])) {
-            return isset($_GET['url']) ? explode('/', filter_var(rtrim($_GET['url'], '/'), FILTER_SANITIZE_URL)) : null;
+            return explode('/', filter_var(rtrim($_GET['url'], '/'), FILTER_SANITIZE_URL));
         }
+        return null;
     }
     
 }
