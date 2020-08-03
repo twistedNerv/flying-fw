@@ -41,14 +41,11 @@ class view {
         $allMenuItems = $menuModel->findMenuItems(false, true, 'all');
         $allAdminMenuItems = $menuModel->findMenuItems(true, true, 'all');
         $parentGroups = $menuModel->findMenuItems(false, true, '0');
-        //echo "<pre>";var_dump($allMenuItems);echo "</pre>";
         $customMenuArray = [];
         foreach ($allMenuItems as $singleItem) {
             $index = ($singleItem['parent'] != 0) ? $singleItem['parenttitle'] : 0;
             $customMenuArray[$index][] = ['title' => $singleItem['title'], 'url' => $singleItem['url'], 'parenttitle' => $singleItem['parenttitle']];
-        }//echo "<pre>";var_dump($customMenuArray);
-
+        }
         require_once 'app/views/' . $this->config->getParam('template') . '/basic/head.php';
     }
-
 }
