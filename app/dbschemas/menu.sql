@@ -9,4 +9,8 @@ CREATE TABLE `menu` (
   `active` int(11) NOT NULL DEFAULT 0,
   `admin` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
+
+INSERT INTO `menu` (`title`, `description`, `url`, `level`, `position`, `parent`, `active`, `admin`) VALUES 
+("Edit menu", "Editing menu and menu groups", "menu", 4, 1, 0, 1, 1),
+("Edit users", "Editing users", "user/update", 4, 2, 0, 1, 1);

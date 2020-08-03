@@ -1,5 +1,4 @@
 <?php
-
 class tools {
 
     public function __construct() {
@@ -61,7 +60,7 @@ class tools {
     public function log($logtype, $log) {
         $link = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
         $dtNow = date("d.m.Y H:i:s");
-        $userIdParam = (isset(session::get('activeUser')['id'])) ? session::get('activeUser')['id'] : "N/A";
+        $userIdParam = (isset($this->session->get('activeUser')['id'])) ? $this->session->get('activeUser')['id'] : "N/A";
         $insertLog = $link->prepare('INSERT INTO logs (type, log, datetime, userid, userip, useragent) '
                 . 'VALUES (:type, :log, :datetime, :userid, :userip, :useragent)');
         $insertLog->bindParam(':type', $logtype);

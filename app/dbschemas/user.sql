@@ -15,4 +15,7 @@ CREATE TABLE `user` (
   `createdIP` varchar(45) DEFAULT NULL,
   `theme` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+INSERT INTO `user` (`name`, `surname`, `username`, `password`, `email`, `level`, `active`, `theme`) VALUES 
+("flying", "framework", "ffw", "098f6bcd4621d373cade4e832627b4f6", "test@test.com", 4, 1, "default");

@@ -7,9 +7,9 @@ class config {
     public function __construct() {
         $this->configValues = 
             [
-                'title' => 'UKC MB - kardio2',
-                'template' => 'default',
-                'display_page_menu' => true
+                'title' => ORG . ' - ' . APP_NAME,
+                'template' => TEMPLATE,
+                'display_page_menu' => DISPLAY_PAGE_MENU
             ];
     }
     

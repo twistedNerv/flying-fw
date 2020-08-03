@@ -53,6 +53,7 @@ class db extends PDO {
         $this->result->bindParam(':'.$ident, $val);
         $this->result->execute();
         $result = $this->result->fetchAll(PDO::FETCH_ASSOC);
+        //echo "<pre>";$this->result->debugDumpParams();die;
         return $result;
     }
     

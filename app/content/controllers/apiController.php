@@ -27,7 +27,7 @@ class apiController extends controller {
             $result .= "<td><a href='" . URL . "patient/update/" . $singleRow['id'] . "'>" . $singleRow['birthdate'] . "</a></td>";
             $result .= "<td><a href='" . URL . "patient/update/" . $singleRow['id'] . "'>" . $singleRow['datumVpisa'] . "</a></td>";
             $result .= "<td><a href='" . URL . "patient/update/" . $singleRow['id'] . "'>" . $singleRow['datumSprejema'] . "</a></td>";
-            $result .= "<td><a href='" . URL . "patient/remove/" . $singleRow['id'] . "' onclick='return confirm(&#34;Are you sure you want to delete this item?&#34;);'><img src='" . URL . "public/default/images/del.png' width='20px' title='Briši pacienta'></a></td>";
+            $result .= "<td><a href='" . URL . "patient/remove/" . $singleRow['id'] . "' onclick='return confirm(&#34;Are you sure you want to delete this item?&#34;);'><img src='" . URL . "public/" . TEMPLATE . "/images/del.png' width='20px' title='Briši pacienta'></a></td>";
         }
         echo $result;
     }

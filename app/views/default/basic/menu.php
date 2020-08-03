@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="<?=URL?>"><img src="<?=URL?>public/default/images/home.png" width="25px"/></a>
+    <a class="navbar-brand" href="<?=URL?>"><img src="<?=URL?>public/<?=TEMPLATE?>/images/home.png" width="25px"/></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -9,19 +9,22 @@
                 
             </li>
             <?php 
-            foreach ($customMenuArray as $key => $singleMenuItem) {
-                if ($key == "0") {
-                    foreach ($singleMenuItem as $singleSubmenuItem) {
-                        if (!isset($customMenuArray[$singleSubmenuItem['title']])) {
-                            echo "<li class='nav-item'>";
-                            echo "<a href='" . URL . $singleSubmenuItem['url'] . "' class='nav-link'><strong>" . $singleSubmenuItem['title'] . "</strong><span class='sr-only'>(current)</span></a>";
-                            echo "</li>";
-                        }
-                    }
+//            echo "<pre>";
+//            var_dump($allMenuItems);
+//            echo "</pre>";
+            $childrenParents = array_unique(array_column($allMenuItems, 'parent'));
+            //var_dump($childrenParents);
+            foreach ($parentGroups as $singleParent) {
+                if (!in_array($singleParent['id'], $childrenParents)) {
+                    echo "<li class='nav-item'>";
+                    echo "<a href='" . URL . $singleParent['url'] . "' class='nav-link'><strong>" . $singleParent['title'] . "</strong><span class='sr-only'>(current)</span></a>";
+                    echo "</li>";
                 } else {
-                    echo '<li class="dropdown dropdown-nav-item"><a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#"><strong>' . $key . '</strong><span class="caret"></span></a><ul class="dropdown-menu">';
-                    foreach($singleMenuItem as $singleSubmenuItem) {
-                        echo '<li><a href="' . URL . $singleSubmenuItem['url'] . '" class="dropdown-item">' . $singleSubmenuItem['title'] . '</a></li>';
+                    echo '<li class="dropdown dropdown-nav-item"><a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#"><strong>' . $singleParent['title'] . '</strong><span class="caret"></span></a><ul class="dropdown-menu">';
+                    foreach($allMenuItems as $singleItem) {
+                        if ($singleItem['parent'] == $singleParent['id']) {
+                            echo '<li><a href="' . URL . $singleItem['url'] . '" class="dropdown-item">' . $singleItem['title'] . '</a></li>';
+                        }
                     }
                     echo '</ul></li>';
                 }

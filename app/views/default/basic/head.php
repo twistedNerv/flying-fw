@@ -14,7 +14,7 @@
         <?php $this->config->includeScript('notification.js');?>
         <script>var URL = "<?=URL?>";</script>
         <?php $this->config->includeScript('ajax.js');?>
-        <link href="<?=URL?>public/default/images/faviconukc.ico" rel="shortcut icon" type="image/x-icon" />
+        <link href="<?=URL?>public/<?=TEMPLATE?>/images/faviconukc.ico" rel="shortcut icon" type="image/x-icon" />
         <script>
             $(function() {
                 $(".pick-a-date").datepicker({

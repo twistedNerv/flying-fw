@@ -8,11 +8,45 @@
         </div>
         <div class="col-sm-12">
             <?php
-            foreach ($data['pageMenuItems'] as $singleItem) {
-                $mgTitleText = ($singleItem['parenttitle']) ? " - " . $singleItem['parenttitle'] : "<i> - brez menu skupine</i>";
-                echo "<div><a href='" . URL . "menu/delete/" . $singleItem['id'] . "'><img src='" . URL . "public/default/images/del.png' width='20px' title='Briši postavko iz menuja'></a> " . $singleItem['title'] . "(<a href='" . URL . $singleItem['url'] . "'>" . $singleItem['url'] . "</a>) " . $mgTitleText . "</div>";
+            foreach ($data['parentGroups'] as $singleParent) {
+                echo "<hr>
+                    <div>
+                        <strong>" . $singleParent['title'] . " (" . $singleParent['url'] . ")</strong>
+                        <a href='" . URL . $singleParent['url'] . "' title='Odpri povezavo' target=”_blank”>
+                            <i class='fas fa-link'></i>
+                        </a> |  
+                        <a href='" . URL . "menu/move/up/" . $singleParent['id'] . "' title='Premakni gor'>
+                            <i class='fas fa-angle-double-up'></i>
+                        </a>
+                        <a href='" . URL . "menu/move/down/" . $singleParent['id'] . "' title='Premakni dol'>
+                            <i class='fas fa-angle-double-down'></i>
+                        </a> | 
+                        <a href='" . URL . "menu/remove/" . $singleParent['id'] . "' title='Briši postavko iz menuja'>
+                            <i class='fas fa-trash-alt' style='color:red'></i>
+                        </a> 
+                    ";
+                foreach ($data['pageMenuItems'] as $singleItem) {
+                    if ($singleItem['parent'] == $singleParent['id']) {
+                        echo "<div>
+                                " . $singleItem['title'] . " (" . $singleItem['url'] . ")
+                                <a href='" . URL . $singleItem['url'] . "' title='Odpri povezavo' target=”_blank”>
+                                    <i class='fas fa-link'></i>
+                                </a> | 
+                                <a href='" . URL . "menu/move/up/" . $singleItem['id'] . "' title='Premakni gor'>
+                                    <i class='fas fa-angle-double-up' style='font-size:13px;'></i>
+                                </a>
+                                <a href='" . URL . "menu/move/down/" . $singleItem['id'] . "' title='Premakni dol'>
+                                    <i class='fas fa-angle-double-down' style='font-size:13px;'></i>
+                                </a> | 
+                                <a href='" . URL . "menu/remove/" . $singleItem['id'] . "' title='Briši postavko iz menuja'>
+                                    <i class='fas fa-trash-alt' style='font-size:13px;color:red'></i>
+                                </a> 
+                            </div>";
+                    }
+                }
+                echo "</div>";
             }
-            ?>
+           ?>
         </div>
         <hr>
         <div class="row">
@@ -22,8 +56,21 @@
             <div class="col-sm-12">
                 <?php
                 foreach ($data['adminMenuItems'] as $singleItem) {
-                    $mgTitleText = ($singleItem['parenttitle']) ? " - " . $singleItem['parenttitle'] : "<i> - brez menu skupine</i>";
-                    echo "<div><a href='" . URL . "menu/delete/" . $singleItem['id'] . "'><img src='" . URL . "public/default/images/del.png' width='20px' title='Briši postavko iz menuja'></a> " . $singleItem['title'] . "(<a href='" . URL . $singleItem['url'] . "'>" . $singleItem['url'] . "</a>) " . $mgTitleText . "</div>";
+                    echo "<div>
+                            " . $singleItem['title'] . " (" . $singleItem['url'] . ")
+                            <a href='" . URL . $singleItem['url'] . "' title='Odpri povezavo' target=”_blank”>
+                                <i class='fas fa-link'></i>
+                            </a> | 
+                            <a href='" . URL . "menu/move/up/" . $singleItem['id'] . "' title='Premakni gor'>
+                                <i class='fas fa-angle-double-up'></i>
+                            </a>
+                            <a href='" . URL . "menu/move/down/" . $singleItem['id'] . "' title='Premakni dol'>
+                                <i class='fas fa-angle-double-down'></i>
+                            </a> | 
+                            <a href='" . URL . "menu/remove/" . $singleItem['id'] . "' title='Briši postavko iz menuja'>
+                                <i class='fas fa-trash-alt' style='color:red'></i>
+                            </a> 
+                        </div>";
                 }
                 ?>
             </div>
@@ -44,20 +91,8 @@
             <div class="form-group">
                 <input type="text" class="form-control" name="menu-url" placeholder="URL" required>
             </div>
-            <!--                    <div class="form-group">
-                                    <select name="menu-parent" class="browser-default custom-select" required>
-                                        <option value="0" selected disabled>Določi starša</option>
-                                        <option value="0" disabled>---------------------</option>
-                                        <option value="0">Parent</option>
-            <?php
-//            foreach ($data['pageMenuItems'] as $singleParent) {
-//                echo "<option value='" . $singleParent['id'] . "'>" . $singleParent['title'] . "</option>";
-//            }
-            ?>
-                                    </select>
-                                </div>-->
             <div class="form-group">
-                <select name="menu-group" class="browser-default custom-select">
+                <select name="menu-parent" class="browser-default custom-select">
                     <option value="0" selected disabled>Glava skupine</option>
                     <?php
                     foreach ($data['parentGroups'] as $parentGroupItem) {

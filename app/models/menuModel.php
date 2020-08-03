@@ -170,6 +170,10 @@ class menuModel extends model {
         }
         return $this;
     }
+    
+    public function findAllByParent($parent) {
+        return $this->db->findAllByParam('parent', $parent, 'menu');
+    }
 
     public function findMenuItems($admin = false, $active = true, $parent = '0') {
         $adminCondition = ($admin) ? "AND menu.admin = 1" : "AND menu.admin = 0";
@@ -191,8 +195,32 @@ class menuModel extends model {
                                         WHERE 1=1 " . $adminCondition . " " . $activeCondition . " " . $parentCondition . "
                                         ORDER BY parent ASC, position;");
         $this->db->result->execute();
-        //echo "<pre>";$this->db->result->debugDumpParams();die;
+        //echo "<pre>";$this->db->result->debugDumpParams();echo "</pre>";//die;
         return $this->db->result->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function findNextItem($direction, $admin, $parent, $currentPosition) {
+        if ($direction == "up") {
+            $direction = "<"; 
+            $way = "DESC";
+        } else {
+            $direction = ">";
+            $way = "ASC";
+        }
+        $sql = "SELECT * FROM menu 
+            WHERE active = 1 AND admin = " . $admin . " AND parent = " . $parent . " AND position " . $direction . " " . $currentPosition . "
+            ORDER BY position " . $way . " LIMIT 1;";
+        //echo $sql;
+        $result = $this->db->selectAllResults($sql);
+        //var_dump($result);
+        //die;
+        return $this->db->selectResult($sql);
+    }
+    
+    public function getNextPosition($admin, $parent) {
+        $parent = (!$parent) ? "0" : $parent;
+        $sql = "SELECT position FROM menu WHERE active = 1 AND admin = " . $admin . " AND parent = " . $parent . " ORDER BY position DESC LIMIT 1";
+       // echo $sql;die;
+        return $this->db->selectResult($sql);
+    }
 }

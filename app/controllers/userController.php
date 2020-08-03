@@ -44,6 +44,7 @@ class userController extends controller {
     }
     
     public function removeAction($userId) {
+        $this->tools->checkPageRights(4);
         if ($userId) {
             $userModel = $this->loadModel('user');
             $userModel->findOneById($userId);

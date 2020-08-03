@@ -11,7 +11,7 @@
             foreach ($data['allUsers'] as $singleItem) {
                 echo "<div>
                         <a href='" . URL . "user/update/" . $singleItem['id'] . "'>" . $singleItem['email'] . "</a>
-                        <a href='" . URL . "user/remove/" . $singleItem['id'] . "'><img src='" . URL . "public/default/images/del.png' width='20px' title='Briši skrbnika'></a>
+                        <a href='" . URL . "user/remove/" . $singleItem['id'] . "'><img src='" . URL . "public/" . TEMPLATE . "/images/del.png' width='20px' title='Briši skrbnika'></a>
                       </div>";
             }
             ?>
