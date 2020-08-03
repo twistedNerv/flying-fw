@@ -274,7 +274,9 @@ class userModel extends model {
         $this->db->result->execute();
         if ($this->db->result->rowCount() == 1) {
             $_SESSION[APP_NAME . "_" . 'activeUser'] = $this->db->result->fetch(PDO::FETCH_ASSOC);
-            tools::log("login", "Logged in: userid: " . session::get('activeUser')['id'] . " / mail: " . $_POST['login-email']);
+            $tools = new tools; //$this->loadModel('tools');
+            $session = new session();
+            $tools->log("login", "Logged in: userid: " . $session->get('activeUser')['id'] . " / mail: " . $_POST['login-email']);
             //header('location: index');
             
             tools::redirect(URL . 'index');

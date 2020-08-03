@@ -11,18 +11,20 @@
             <?php 
             $childrenParents = array_unique(array_column($allMenuItems, 'parent'));
             foreach ($parentGroups as $singleParent) {
-                if (!in_array($singleParent['id'], $childrenParents)) {
-                    echo "<li class='nav-item'>";
-                    echo "<a href='" . URL . $singleParent['url'] . "' class='nav-link'><strong>" . $singleParent['title'] . "</strong><span class='sr-only'>(current)</span></a>";
-                    echo "</li>";
-                } else {
-                    echo '<li class="dropdown dropdown-nav-item"><a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#"><strong>' . $singleParent['title'] . '</strong><span class="caret"></span></a><ul class="dropdown-menu">';
-                    foreach($allMenuItems as $singleItem) {
-                        if ($singleItem['parent'] == $singleParent['id']) {
-                            echo '<li><a href="' . URL . $singleItem['url'] . '" class="dropdown-item">' . $singleItem['title'] . '</a></li>';
+                if ($singleParent['level'] <= $this->session->get('activeUser')['level']){
+                    if (!in_array($singleParent['id'], $childrenParents)) {
+                        echo "<li class='nav-item'>";
+                        echo "<a href='" . URL . $singleParent['url'] . "' class='nav-link'><strong>" . $singleParent['title'] . "</strong><span class='sr-only'>(current)</span></a>";
+                        echo "</li>";
+                    } else {
+                        echo '<li class="dropdown dropdown-nav-item"><a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#"><strong>' . $singleParent['title'] . '</strong><span class="caret"></span></a><ul class="dropdown-menu">';
+                        foreach($allMenuItems as $singleItem) {
+                            if ($singleItem['parent'] == $singleParent['id'] && $singleItem['level'] <= $this->session->get('activeUser')['level']) {
+                                echo '<li><a href="' . URL . $singleItem['url'] . '" class="dropdown-item">' . $singleItem['title'] . '</a></li>';
+                            }
                         }
+                        echo '</ul></li>';
                     }
-                    echo '</ul></li>';
                 }
             } ?>
             <?php 
@@ -34,7 +36,9 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-55">
                             <?php foreach($allAdminMenuItems as $singleAdminMenuItem) {
-                                echo "<a class='dropdown-item' href='" . URL . $singleAdminMenuItem['url'] . "'>" . $singleAdminMenuItem['title'] . "</a>";
+                                if ($singleAdminMenuItem['level'] <= $this->session->get('activeUser')['level']){
+                                    echo "<a class='dropdown-item' href='" . URL . $singleAdminMenuItem['url'] . "'>" . $singleAdminMenuItem['title'] . "</a>";
+                                }
                             } ?>
                             <a class='dropdown-item' href='<?=URL?>user/logout'>Logout</a>
                         </div>

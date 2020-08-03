@@ -10,6 +10,7 @@ define('URL_ROOT_PUBLIC', $mainSettings['URL_ROOT_PUBLIC']);
 define('APP_NAME', $mainSettings['APP_NAME']);
 define('ORG', $mainSettings['ORGANIZATION']);
 define('TEMPLATE', $mainSettings['TEMPLATE']);
+define('TITLE', $mainSettings['TITLE']);
 define('DISPLAY_PAGE_HEADER', $mainSettings['DISPLAY_PAGE_HEADER']);
 define('DB_HOST', $mainSettings['DB_HOST']);
 define('DB_USERNAME', $mainSettings['DB_USERNAME']);

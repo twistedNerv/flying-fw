@@ -12,11 +12,10 @@ class view {
         $this->config = new config;
         $this->template = new template;
         $this->tools = new tools;
-        if (DISPLAY_PAGE_HEADER)
-            $this->displayHead();
     }
 
-    public function render($view) {
+    public function render($view, $displayHeader = true) {
+        if (DISPLAY_PAGE_HEADER && $displayHeader) $this->displayHead();
         $data = $this->vars;
         $contentPath = "content/";
         if (file_exists('app/views/' . $this->config->getParam('template') . '/' . $view . '.php')) {
@@ -41,11 +40,6 @@ class view {
         $allMenuItems = $menuModel->findMenuItems(false, true, 'all');
         $allAdminMenuItems = $menuModel->findMenuItems(true, true, 'all');
         $parentGroups = $menuModel->findMenuItems(false, true, '0');
-        $customMenuArray = [];
-        foreach ($allMenuItems as $singleItem) {
-            $index = ($singleItem['parent'] != 0) ? $singleItem['parenttitle'] : 0;
-            $customMenuArray[$index][] = ['title' => $singleItem['title'], 'url' => $singleItem['url'], 'parenttitle' => $singleItem['parenttitle']];
-        }
         require_once 'app/views/' . $this->config->getParam('template') . '/basic/head.php';
     }
 }

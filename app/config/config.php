@@ -7,7 +7,7 @@ class config {
     public function __construct() {
         $this->configValues = 
             [
-                'title' => ORG . ' - ' . APP_NAME,
+                'title' => TITLE,
                 'template' => TEMPLATE,
                 'display_page_header' => DISPLAY_PAGE_HEADER
             ];

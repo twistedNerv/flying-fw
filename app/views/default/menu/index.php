@@ -1,5 +1,5 @@
 <div class="col-sm-12 text-center"> 
-    <h2>Admin - Menu</h2>
+    <h2>Menu</h2>
 </div>
 <div class="col-sm-4 text-right"> 
     <div class="row">
@@ -9,9 +9,14 @@
         <div class="col-sm-12">
             <?php
             foreach ($data['parentGroups'] as $singleParent) {
+                $notActive = ($singleParent['active']) ? "" : "<span style='color:red'>NA</span>";
                 echo "<hr>
                     <div>
-                        <strong>" . $singleParent['title'] . " (" . $singleParent['url'] . ")</strong> | 
+                        $notActive
+                        <strong>" . $singleParent['title'] . " (" . $singleParent['level'] . ")</strong> | 
+                        <a href='" . URL . "menu/index/" . $singleParent['id'] . "' title='Uredi element'>
+                            <i class='far fa-edit'></i>
+                        </a> | 
                         <a href='" . URL . $singleParent['url'] . "' title='Odpri povezavo' target=”_blank”>
                             <i class='fas fa-external-link-alt'></i></i>
                         </a> |  
@@ -27,8 +32,13 @@
                     ";
                 foreach ($data['pageMenuItems'] as $singleItem) {
                     if ($singleItem['parent'] == $singleParent['id']) {
+                        $notActive = ($singleItem['active']) ? "" : "<span style='color:red'>NA</span>";
                         echo "<div>
-                                " . $singleItem['title'] . " (" . $singleItem['url'] . ") | 
+                                $notActive
+                                " . $singleItem['title'] . " (" . $singleItem['level'] . ") | 
+                                <a href='" . URL . "menu/index/" . $singleItem['id'] . "' title='Uredi element'>
+                                    <i class='far fa-edit'></i>
+                                </a> |
                                 <a href='" . URL . $singleItem['url'] . "' title='Odpri povezavo' target=”_blank”>
                                     <i class='fas fa-external-link-alt'></i>
                                 </a> | 
@@ -56,8 +66,13 @@
             <div class="col-sm-12">
                 <?php
                 foreach ($data['adminMenuItems'] as $singleItem) {
+                    $notActive = ($singleItem['active']) ? "" : "<span style='color:red'>NA</span>";
                     echo "<div>
-                            " . $singleItem['title'] . " (" . $singleItem['url'] . ") | 
+                            $notActive
+                            " . $singleItem['title'] . " (" . $singleItem['level'] . ") | 
+                            <a href='" . URL . "menu/index/" . $singleItem['id'] . "' title='Uredi element'>
+                                <i class='far fa-edit'></i>
+                            </a> |
                             <a href='" . URL . $singleItem['url'] . "' title='Odpri povezavo' target=”_blank”>
                                 <i class='fas fa-external-link-alt'></i>
                             </a> | 
@@ -78,43 +93,53 @@
     </div>
 </div>
 <div class="col-sm-8">
-    <h4>Dodaj element v menu</h4>
+    <?php if ($data['selectedItem']->id) { ?>
+        <a href="<?= URL ?>menu">Dodaj element</a>
+        <h4>Uredi element</h4>
+    <?php } else { ?>
+        <h4>Dodaj element v menu</h4>
+    <?php } ?>
     <div class="user-settings">
-        <form action="<?= URL ?>menu/index" method="post">
+        <form action="<?= URL ?>menu/index/<?=$data['selectedItem']->id ?>" method="post">
             <input type="hidden" name="action" value="addmenuitem">
             <div class="form-group">
-                <input type="text" class="form-control" name="menu-title" placeholder="Naslov" required>
+                <input type="text" class="form-control" name="menu-title" placeholder="Naslov" required <?=$this->template->setUpdateTextValue($data['selectedItem']->title)?>>
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" name="menu-description" placeholder="Opis" required>
+                <input type="text" class="form-control" name="menu-description" placeholder="Opis" required <?=$this->template->setUpdateTextValue($data['selectedItem']->description)?>>
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" name="menu-url" placeholder="URL" required>
+                <input type="text" class="form-control" name="menu-url" placeholder="URL" required <?=$this->template->setUpdateTextValue($data['selectedItem']->url)?>>
             </div>
             <div class="form-group">
                 <select name="menu-parent" class="browser-default custom-select">
-                    <option value="0" selected disabled>Glava skupine</option>
+                    <option value="0">Glava skupine</option>
                     <?php
                     foreach ($data['parentGroups'] as $parentGroupItem) {
-                        echo "<option value='" . $parentGroupItem['id'] . "'>" . $parentGroupItem['title'] . "</option>";
+                        echo "<option " . $this->template->setUpdateSelectValue($parentGroupItem['id'], $parentGroupItem['id'], $data['selectedItem']->parent) . ">" . $parentGroupItem['title'] . "</option>";
                     }
                     ?>
                 </select>
             </div>
             <div class="form-group">
-                <select name="menu-active" class="browser-default custom-select" required>
-                    <option value="0" selected disabled>Aktiven</option>
-                    <option value="0" disabled>---------------------</option>
-                    <option value="1">Da</option>
-                    <option value="0">Ne</option>
+                <select name="menu-admin" class="browser-default custom-select" required>
+                    <option <?=$this->template->setUpdateSelectValue(1, $data['selectedItem']->admin, 1)?>>Administratorski menu</option>
+                    <option <?=$this->template->setUpdateSelectValue(0, $data['selectedItem']->admin, 0)?>>Uporabniški menu</option>
                 </select>
             </div>
             <div class="form-group">
-                <select name="menu-admin" class="browser-default custom-select" required>
-                    <option value="0" selected disabled>Admin</option>
-                    <option value="0" disabled>---------------------</option>
-                    <option value="1">Da</option>
-                    <option value="0">Ne</option>
+                <select name="menu-level" class="browser-default custom-select" required>
+                    <option <?=$this->template->setUpdateSelectValue(1, $data['selectedItem']->level, 1)?>>Dostopno vsem uporabnikom</option>
+                    <option <?=$this->template->setUpdateSelectValue(2, $data['selectedItem']->level, 2)?>>Dostopno skrbnikom</option>
+                    <option <?=$this->template->setUpdateSelectValue(3, $data['selectedItem']->level, 3)?>>Dostopno moderatorjem</option>
+                    <option <?=$this->template->setUpdateSelectValue(4, $data['selectedItem']->level, 4)?>>Dostopno administratorjem</option>
+                    <option <?=$this->template->setUpdateSelectValue(5, $data['selectedItem']->level, 5)?>>Dostopno superadminom</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <select name="menu-active" class="browser-default custom-select" required>
+                    <option <?=$this->template->setUpdateSelectValue(1, $data['selectedItem']->active, 1)?>>Aktiven</option>
+                    <option <?=$this->template->setUpdateSelectValue(0, $data['selectedItem']->active, 0)?>>Neaktiven</option>
                 </select>
             </div>
             <button type="submit" class="btn btn-primary">Potrdi</button>

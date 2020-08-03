@@ -7,32 +7,35 @@ class menuController extends controller {
         $this->tools->checkPageRights(4);
     }
     
-    public function indexAction() {
-        $menuModel = $this->loadModel("menu");
+    public function indexAction($menuId=false) {
+        $newMenuItem = $this->loadModel('menu');
+        if($menuId) {
+            $newMenuItem->findOneById($menuId);
+        }
         if (isset($_POST['action']) && $_POST['action'] == 'addmenuitem') {
-            $newMenuItem = $this->loadModel('menu');
             $newMenuItem->setTitle($this->tools->sanitizePost($_POST['menu-title']));
             $newMenuItem->setDescription($this->tools->sanitizePost($_POST['menu-description']));
             $newMenuItem->setUrl($this->tools->sanitizePost($_POST['menu-url']));
-            $level = (isset($_POST['menu-level']) && $_POST['menu-level']) ? $this->tools->sanitizePost($_POST['menu-level']) : "1";
-            $newMenuItem->setLevel($level);
-            $parent = (isset($_POST['menu-parent'])) ? $_POST['menu-parent'] : "0";
-            $position = $menuModel->getNextPosition($_POST['menu-admin'], $parent)['position'];
-            $position++;
-            $newMenuItem->setPosition($position);
-            $newMenuItem->setParent($this->tools->sanitizePost($parent));
+            $newMenuItem->setLevel($this->tools->sanitizePost($_POST['menu-level']));
+            if (!$menuId) {
+                $position = $newMenuItem->getNextPosition($_POST['menu-admin'], $_POST['menu-parent'])['position'] + 1;
+                $newMenuItem->setPosition($position);
+            }
+            $newMenuItem->setParent($this->tools->sanitizePost($_POST['menu-parent']));
             $newMenuItem->setActive($this->tools->sanitizePost($_POST['menu-active']));
             $newMenuItem->setAdmin($this->tools->sanitizePost($_POST['menu-admin']));
             $newMenuItem->flush();
             $this->tools->notification("Dodan element v menu.", "primary");
             $this->tools->log('menu', "New menu element $newMenuItem->title added");
         }
-        $allPageMenuItems = $menuModel->findMenuItems(false, true, 'all');
-        $allAdminMenuItems = $menuModel->findMenuItems(true, true, 'all');
-        $parentGroups = $menuModel->findMenuItems(false, true, '0');
+        $menuModel = $this->loadModel('menu');
+        $allPageMenuItems = $menuModel->findMenuItems(false, false, 'all');
+        $allAdminMenuItems = $menuModel->findMenuItems(true, false, 'all');
+        $parentGroups = $menuModel->findMenuItems(false, false, '0');
         $this->view->assign('pageMenuItems', $allPageMenuItems);
         $this->view->assign('adminMenuItems', $allAdminMenuItems);
         $this->view->assign('parentGroups', $parentGroups);
+        $this->view->assign('selectedItem', $newMenuItem);
         $this->view->render('menu/index');
     }
     
@@ -66,6 +69,7 @@ class menuController extends controller {
             $swapItem->setPosition($current_position);
             $swapItem->flush();
         }
+        $this->tools->log('menu', "Menu item with id: $id moved $direction.");
         $this->tools->redirect(URL . 'menu');
     }
 }

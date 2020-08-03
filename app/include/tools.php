@@ -3,16 +3,14 @@ class tools {
 
     public function __construct() {
         require_once 'app/core/session.php';
-        $this->session = new session;    }
+        $this->session = new session;    
+    }
 
     public function checkPageRights($level) {
         $userLevel = $this->session->get('activeUser');
-        //echo $userLevel['level'];die;
         if ($level != 0) {
             if (!$userLevel['level'] || $userLevel['level'] < $level) {
                 $redirectLocation = URL . "user/login";
-                //$redirectLocation = "location: ".URL."user/login";
-                //header($redirectLocation);
                 $this->redirect($redirectLocation);
             }
         }
@@ -21,14 +19,6 @@ class tools {
     public function sanitizePost($postData) {
         $result = (isset($postData) && $postData != "") ? filter_var($postData, FILTER_SANITIZE_STRING) : "";
         return $result;
-    }
-    
-    public function cleanFileString($file) {
-        $file = str_replace("'", "", $file);
-        $file = str_replace('"', '', $file);
-        $file = str_replace(' ', '-', $file);
-        $file = str_replace('%', '-', $file);
-        return $file;
     }
     
     public function genericPostToObj($object, $class, $postData) {

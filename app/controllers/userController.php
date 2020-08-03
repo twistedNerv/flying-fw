@@ -6,6 +6,7 @@ class userController extends controller {
     
     public function __construct() {
         parent::__construct();
+        //
         $this->userModel = $this->loadModel("user");
     }
 

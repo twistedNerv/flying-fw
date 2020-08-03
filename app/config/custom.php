@@ -6,6 +6,7 @@ $mainSettings = [
     'APP_NAME' => 'mvc',
     'TEMPLATE' => 'default',
     'ORGANIZATION' => 'DEMO',
+    'TITLE' => 'mvc - DEMO',
     //MySql
     'DB_HOST' => 'localhost',
     'DB_USERNAME' => 'root',
