@@ -12,7 +12,7 @@ class view {
         $this->config = new config;
         $this->template = new template;
         $this->tools = new tools;
-        if (DISPLAY_PAGE_MENU)
+        if (DISPLAY_PAGE_HEADER)
             $this->displayHead();
     }
 

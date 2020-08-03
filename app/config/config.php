@@ -9,7 +9,7 @@ class config {
             [
                 'title' => ORG . ' - ' . APP_NAME,
                 'template' => TEMPLATE,
-                'display_page_menu' => DISPLAY_PAGE_MENU
+                'display_page_header' => DISPLAY_PAGE_HEADER
             ];
     }
     

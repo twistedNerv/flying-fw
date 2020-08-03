@@ -13,5 +13,5 @@ $mainSettings = [
     'DB_DATABASE' => 'mvc',
     //options
     'DISPLAY_ERRORS' => true,
-    'DISPLAY_PAGE_MENU' => true
+    'DISPLAY_PAGE_HEADER' => true
 ];

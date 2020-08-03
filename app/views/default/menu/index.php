@@ -11,9 +11,9 @@
             foreach ($data['parentGroups'] as $singleParent) {
                 echo "<hr>
                     <div>
-                        <strong>" . $singleParent['title'] . " (" . $singleParent['url'] . ")</strong>
+                        <strong>" . $singleParent['title'] . " (" . $singleParent['url'] . ")</strong> | 
                         <a href='" . URL . $singleParent['url'] . "' title='Odpri povezavo' target=”_blank”>
-                            <i class='fas fa-link'></i>
+                            <i class='fas fa-external-link-alt'></i></i>
                         </a> |  
                         <a href='" . URL . "menu/move/up/" . $singleParent['id'] . "' title='Premakni gor'>
                             <i class='fas fa-angle-double-up'></i>
@@ -22,24 +22,24 @@
                             <i class='fas fa-angle-double-down'></i>
                         </a> | 
                         <a href='" . URL . "menu/remove/" . $singleParent['id'] . "' title='Briši postavko iz menuja'>
-                            <i class='fas fa-trash-alt' style='color:red'></i>
+                            <i class='fas fa-times'></i>
                         </a> 
                     ";
                 foreach ($data['pageMenuItems'] as $singleItem) {
                     if ($singleItem['parent'] == $singleParent['id']) {
                         echo "<div>
-                                " . $singleItem['title'] . " (" . $singleItem['url'] . ")
+                                " . $singleItem['title'] . " (" . $singleItem['url'] . ") | 
                                 <a href='" . URL . $singleItem['url'] . "' title='Odpri povezavo' target=”_blank”>
-                                    <i class='fas fa-link'></i>
+                                    <i class='fas fa-external-link-alt'></i>
                                 </a> | 
                                 <a href='" . URL . "menu/move/up/" . $singleItem['id'] . "' title='Premakni gor'>
-                                    <i class='fas fa-angle-double-up' style='font-size:13px;'></i>
+                                    <i class='fas fa-angle-double-up'></i>
                                 </a>
                                 <a href='" . URL . "menu/move/down/" . $singleItem['id'] . "' title='Premakni dol'>
-                                    <i class='fas fa-angle-double-down' style='font-size:13px;'></i>
+                                    <i class='fas fa-angle-double-down'></i>
                                 </a> | 
                                 <a href='" . URL . "menu/remove/" . $singleItem['id'] . "' title='Briši postavko iz menuja'>
-                                    <i class='fas fa-trash-alt' style='font-size:13px;color:red'></i>
+                                    <i class='fas fa-times'></i>
                                 </a> 
                             </div>";
                     }
@@ -57,9 +57,9 @@
                 <?php
                 foreach ($data['adminMenuItems'] as $singleItem) {
                     echo "<div>
-                            " . $singleItem['title'] . " (" . $singleItem['url'] . ")
+                            " . $singleItem['title'] . " (" . $singleItem['url'] . ") | 
                             <a href='" . URL . $singleItem['url'] . "' title='Odpri povezavo' target=”_blank”>
-                                <i class='fas fa-link'></i>
+                                <i class='fas fa-external-link-alt'></i>
                             </a> | 
                             <a href='" . URL . "menu/move/up/" . $singleItem['id'] . "' title='Premakni gor'>
                                 <i class='fas fa-angle-double-up'></i>
@@ -68,7 +68,7 @@
                                 <i class='fas fa-angle-double-down'></i>
                             </a> | 
                             <a href='" . URL . "menu/remove/" . $singleItem['id'] . "' title='Briši postavko iz menuja'>
-                                <i class='fas fa-trash-alt' style='color:red'></i>
+                                <i class='fas fa-times'></i>
                             </a> 
                         </div>";
                 }

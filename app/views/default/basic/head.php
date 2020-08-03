@@ -28,7 +28,7 @@
     <body>
         <div class="container">
             <?php 
-            if($this->config->getParam('display_page_menu')) {
+            if($this->config->getParam('display_page_header')) {
                 require 'menu.php';
             }
             ?>

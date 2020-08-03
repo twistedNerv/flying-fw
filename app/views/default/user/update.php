@@ -1,17 +1,19 @@
 <div class="col-sm-12 text-center">
-    <h2>Urejanje skrbnikov</h2><br>
+    <h2>Urejanje uporabnikov</h2><br>
 </div>
 <div class="col-sm-4 text-right">
     <div class="row">
         <div class="col-sm-12">
-            <h4>Izberi skrbnika</h4>
+            <h4>Seznam uporabnikov</h4>
         </div>
         <div class="col-sm-12">
             <?php
             foreach ($data['allUsers'] as $singleItem) {
+                $selectedUserClass = ($data['selectedUser']->id == $singleItem['id']) ? "font-weight-bold" : "";
                 echo "<div>
-                        <a href='" . URL . "user/update/" . $singleItem['id'] . "'>" . $singleItem['email'] . "</a>
-                        <a href='" . URL . "user/remove/" . $singleItem['id'] . "'><img src='" . URL . "public/" . TEMPLATE . "/images/del.png' width='20px' title='Briši skrbnika'></a>
+                        <span class='" . $selectedUserClass . "'>" . $singleItem['name'] . " " . $singleItem['surname'] . " (" . $singleItem['level'] . ")</span> | 
+                        <a href='" . URL . "user/update/" . $singleItem['id'] . "' title='Uredi uporabnika'><i class='far fa-edit'></i></a> | 
+                        <a href='" . URL . "user/remove/" . $singleItem['id'] . "' title='Briši uporabnika'><i class='fas fa-times'></i></a>
                       </div>";
             }
             ?>
