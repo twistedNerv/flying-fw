@@ -9,11 +9,7 @@
                 
             </li>
             <?php 
-//            echo "<pre>";
-//            var_dump($allMenuItems);
-//            echo "</pre>";
             $childrenParents = array_unique(array_column($allMenuItems, 'parent'));
-            //var_dump($childrenParents);
             foreach ($parentGroups as $singleParent) {
                 if (!in_array($singleParent['id'], $childrenParents)) {
                     echo "<li class='nav-item'>";
