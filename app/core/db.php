@@ -76,7 +76,7 @@ class db extends PDO {
         }
     }
     
-    public function flush($object, $table) {
+    public function flush($object, $table, $sqlDump=0) {
         $columns = $this->getTableColumns($table);
         $updArray = [];
         if(!$object->id) {
@@ -101,7 +101,9 @@ class db extends PDO {
             }
         }
         $this->result->execute($updArray);
-        //echo "<pre>";$this->result->debugDumpParams();die;
+        if ($sqlDump == 1) {
+            echo "<pre>";$this->result->debugDumpParams();die;
+        }
     }
     
     public function getTableColumns($table) {

@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="<?=URL?>"><img src="<?=URL?>public/<?=TEMPLATE?>/images/home.png" width="25px"/></a>
+    <a class="navbar-brand" href="<?=URL?>" title="Domov"><i class="fas fa-home"></i></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -14,13 +14,13 @@
                 if ($singleParent['level'] <= $this->session->get('activeUser')['level']){
                     if (!in_array($singleParent['id'], $childrenParents)) {
                         echo "<li class='nav-item'>";
-                        echo "<a href='" . URL . $singleParent['url'] . "' class='nav-link'><strong>" . $singleParent['title'] . "</strong><span class='sr-only'>(current)</span></a>";
+                        echo "<a href='" . URL . $singleParent['url'] . "' class='nav-link' title='" . $singleParent['description'] . "'>" . $singleParent['title'] . "<span class='sr-only'>(current)</span></a>";
                         echo "</li>";
                     } else {
-                        echo '<li class="dropdown dropdown-nav-item"><a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#"><strong>' . $singleParent['title'] . '</strong><span class="caret"></span></a><ul class="dropdown-menu">';
+                        echo '<li class="dropdown dropdown-nav-item"><a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#" title="' . $singleParent['description'] . '">' . $singleParent['title'] . '<span class="caret"></span></a><ul class="dropdown-menu">';
                         foreach($allMenuItems as $singleItem) {
                             if ($singleItem['parent'] == $singleParent['id'] && $singleItem['level'] <= $this->session->get('activeUser')['level']) {
-                                echo '<li><a href="' . URL . $singleItem['url'] . '" class="dropdown-item">' . $singleItem['title'] . '</a></li>';
+                                echo '<li><a href="' . URL . $singleItem['url'] . '" class="dropdown-item" title="' . $singleItem['description'] . '">' . $singleItem['title'] . '</a></li>';
                             }
                         }
                         echo '</ul></li>';

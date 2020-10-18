@@ -251,8 +251,8 @@ class userModel extends model {
         return $this->db->findAll('user');
     }
 
-    public function flush() {
-        $this->db->flush($this, 'user');
+    public function flush($sqlDump=0) {
+        $this->db->flush($this, 'user', $sqlDump);
     }
 
     public function remove() {

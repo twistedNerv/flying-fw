@@ -26,7 +26,7 @@ class createModel extends db{
         $this->sqlDumpCheck = ($this->sqlDumpCheck) ? ((file_exists("../app/dbschemas/" . $this->name . ".sql")) ? 1 : 0) : 1;
         $this->modelCheck = ($this->modelCheck) ? ((file_exists("../app/models/" . $this->name . "Model.php")) ? 1 : 0) : 1;
         $this->controllerCheck = ($this->controllerCheck) ? ((file_exists("../app/controllers/" . $this->name . "Controller.php")) ? 1 : 0) : 1;
-        $this->viewCheck = ($this->viewCheck) ? ((file_exists("../app/views/" . TEMPLATE . "/" . $this->name . "/index.php")) ? 1 : 0) : 1;
+        $this->viewCheck = ($this->viewCheck) ? ((file_exists("../app/views/default/" . $this->name . "/index.php")) ? 1 : 0) : 1;
         
         if($this->tableCheck) {
             echo "Create table $this->name not selected or table already exist. \n\r";
@@ -231,8 +231,8 @@ class createModel extends db{
         $fileString .= "\t\treturn $" . "this->db->findAll('" . $this->name . "');\n";
         $fileString .= "\t}";
         $fileString .= "\n\n";
-        $fileString .= "\tpublic function flush() {\n";
-        $fileString .= "\t\t$" . "this->db->flush($" . "this, '" . $this->name . "');\n";
+        $fileString .= "\tpublic function flush($" . "sqlDump=0) {\n";
+        $fileString .= "\t\t$" . "this->db->flush($" . "this, '" . $this->name . "', $" . "sqlDump);\n";
         $fileString .= "\t}";
         $fileString .= "\n\n";
         $fileString .= "\tpublic function remove() {\n";
@@ -271,11 +271,11 @@ class createModel extends db{
         
         $fileString .= "<br>\n";
         $fileString .= 'Data from controller: <?=$data["id"]?>';
-        $structure = '../app/views/' . TEMPLATE . '/' . $this->name . "/";
+        $structure = '../app/views/default/' . $this->name . "/";
         if(!mkdir($structure, 0777, true)) {
             echo "Failed to create folder...";
         } else {
-            file_put_contents("../app/views/" . TEMPLATE . "/" . $this->name . "/index.php", $fileString);
+            file_put_contents("../app/views/default/" . $this->name . "/index.php", $fileString);
         }
     }
     

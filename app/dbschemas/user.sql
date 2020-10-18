@@ -18,4 +18,4 @@ CREATE TABLE `user` (
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 INSERT INTO `user` (`name`, `surname`, `username`, `password`, `email`, `level`, `active`, `theme`) VALUES 
-("Flying", "Framework", "ffw", "098f6bcd4621d373cade4e832627b4f6", "test@test.com", 4, 1, "default");
+("Flying", "Framework", "ffw", "098f6bcd4621d373cade4e832627b4f6", "test@test.com", 5, 1, "default");

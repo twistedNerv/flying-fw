@@ -3,13 +3,14 @@
     <head>
         <title><?=$this->config->getParam('title')?></title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <?php $this->config->includeScript('jquery.js');?>
-        <?php $this->config->includeScript('jquery-ui.js');?>
+        <?php $this->config->includeJquery();?>
         <?php $this->config->includeBootstrap();?>
         <?php $this->config->includeFontawesomeCustom();?>
-        <?php $this->config->includeStyle('default.css');?>
+        <?php $this->config->includeEasyeditor();?>
         <?php $this->config->includeStyle('notification.css');?>
-        <?php $this->config->includeStyle('jquery-ui.css');?>
+        <?php //$this->config->includeStyle('jquery-ui.css');?>
+        <?php $this->config->includeStyle('fonts/fonts.css');?>
+        <?php $this->config->includeStyle('default.css');?>
         <?php $this->config->includeScript('default.js');?>
         <?php $this->config->includeScript('notification.js');?>
         <script>var URL = "<?=URL?>";</script>

@@ -155,8 +155,8 @@ class menuModel extends model {
         return $this->db->findAll('menu');
     }
 
-    public function flush() {
-        $this->db->flush($this, 'menu');
+    public function flush($sqlDump=0) {
+        $this->db->flush($this, 'menu', $sqlDump);
     }
 
     public function remove() {

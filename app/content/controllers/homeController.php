@@ -4,13 +4,13 @@ class homeController extends controller {
     
     public function __construct() {
         parent::__construct();
-        $this->tools->checkPageRights(2);
+        $this->tools->checkPageRights(4);
     }
     
-    public function indexAction($name='') {
-        $homeModel = $this->loadModel('home');
-        $name = $homeModel->test("bla");
-        $this->view->assign('name', $name);
-        $this->view->render('home/index');
+    public function indexAction() {
+        $boardModel = $this->loadModel('board');
+        $allItems = $boardModel->findAllSortedBy('id', 'desc', 5);
+        $this->view->assign('items', $allItems);
+        $this->view->render("home/index");
     }
 }
