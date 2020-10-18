@@ -106,17 +106,36 @@ class db extends PDO {
         }
     }
     
-    public function getTableColumns($table) {
-        $sql = "SELECT COLUMN_NAME
+    public function createTable($table) {
+        $sql = file_get_contents("app/dbschemas/" . $table . ".sql");
+        $this->execute($sql);
+    }
+    
+    public function createSqlDump($table) {
+        $sql = "SHOW CREATE TABLE " . $table . ";";
+        $result = $this->selectResult($sql);
+        file_put_contents("app/dbschemas/" . $table . ".sql", $result['Create Table']);
+    }
+    
+    public function tableExists($table) {
+        $sql = "DESCRIBE " . $table . ";";
+        return ($this->selectResult($sql)) ? 1 : 0;
+    }
+    
+    public function getTables() {
+        $sql = "SHOW TABLES;";
+        $this->result = $this->selectAllResults($sql);
+        return array_column($this->result, "Tables_in_" . APP_NAME); 
+    }
+    
+    public function getTableColumns($table, $details=false) {
+        $sql = "SELECT COLUMN_NAME, COLUMN_TYPE
                 FROM INFORMATION_SCHEMA.COLUMNS
                 WHERE TABLE_SCHEMA = '" . DB_DATABASE . "' AND TABLE_NAME = '" . $table . "';";
-        $result = $this->selectAllResults($sql);
-        $val = "";
-        foreach($result as $singleColumn) {
-            $val .= $singleColumn['COLUMN_NAME'] . ",";
-        }
-        $val = rtrim($val,",");
-        $columnArray = explode(",", $val);
-        return $columnArray;
+        $this->result = $this->selectAllResults($sql);
+        if (!$details) {
+            return array_column($this->result, "COLUMN_NAME");
+        } 
+        return $this->result;
     }
 }

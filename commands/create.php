@@ -29,19 +29,19 @@ class createModel extends db{
         $this->viewCheck = ($this->viewCheck) ? ((file_exists("../app/views/default/" . $this->name . "/index.php")) ? 1 : 0) : 1;
         
         if($this->tableCheck) {
-            echo "Create table $this->name not selected or table already exist. \n\r";
+            echo "Create table $this->name not selected or table already exists. \n\r";
             if(!$this->sqlDumpCheck) {
                 $this->createSqlDump();
                 echo "Sql dump $this->name.sql created.\n\r";
             } else {
-                echo "Create sql schema file $this->name.sql not selected or file already exist.\n\r";
+                echo "Create sql schema file $this->name.sql not selected or file already exists.\n\r";
             }
         } else {
             if($this->sqlDumpCheck) {
                 $this->createTable();
                 echo "Table $this->name created.\n\r";
             } else {
-                echo "Can't create table, schema or model. DB table or file with sql schema doesn't exist.";
+                echo "Can't create table, schema or model (DB table or file with sql schema doesn't exists).\n\r";
                 //return false;
             }
         }
@@ -55,7 +55,7 @@ class createModel extends db{
         }
         
         if($this->controllerCheck) {
-            echo "Create controller $this->name not selected or controller alerady exist.\n\r";
+            echo "Create controller $this->name not selected or controller alerady exists.\n\r";
         } else {
             $this->columns = $this->db->getTableColumns($this->name);
             $this->createController();
@@ -63,7 +63,7 @@ class createModel extends db{
         }
         
         if($this->viewCheck) {
-            echo "View $this->name alerady exist.\n\r";
+            echo "View $this->name alerady exists.\n\r";
         } else {
             $this->createView();
             echo "View view/$this->name/index.php created.\n\r";
@@ -72,7 +72,7 @@ class createModel extends db{
     
     private function checkCommand($argv) {
         if(!$argv[1]) {
-            echo "Error: No package name selected.\nUse '[command] --help' for help.";
+            echo "Error: No package name selected.\nUse '[command] --help' for help.\n";
             die;
         }
         if($argv[1] == "--help") {
@@ -94,7 +94,7 @@ class createModel extends db{
             die;
         } 
         if(!$argv[2]) {
-            echo "Error: No option selected.\nUse '[command] --help' for help.";
+            echo "Error: No option selected.\nUse '[command] --help' for help.\n";
             die;
         }
         $this->name = $argv[1];
@@ -196,7 +196,7 @@ class createModel extends db{
         $fileString .= '}';
         $fileString .= "\n";
         $fileString .= '}';
-        file_put_contents("../app/controllers/" . $this->name . "Controller.php", $fileString);
+        file_put_contents("../app/content/controllers/" . $this->name . "Controller.php", $fileString);
     }
     
     private function createModel() {
@@ -247,7 +247,7 @@ class createModel extends db{
         $fileString .= "\t\treturn $" . "this;\n";
         $fileString .= "\t}";
         $fileString .= "\n}";
-        file_put_contents("../app/models/" . $this->name . "Model.php", $fileString);
+        file_put_contents("../app/content/models/" . $this->name . "Model.php", $fileString);
     }
     
     private function createView() {
@@ -271,11 +271,11 @@ class createModel extends db{
         
         $fileString .= "<br>\n";
         $fileString .= 'Data from controller: <?=$data["id"]?>';
-        $structure = '../app/views/default/' . $this->name . "/";
+        $structure = '../app/content/views/default/' . $this->name . "/";
         if(!mkdir($structure, 0777, true)) {
             echo "Failed to create folder...";
         } else {
-            file_put_contents("../app/views/default/" . $this->name . "/index.php", $fileString);
+            file_put_contents("../app/content/views/default/" . $this->name . "/index.php", $fileString);
         }
     }
     

@@ -108,9 +108,9 @@ class boardModel extends model {
 		return $this->db->findAll('board');
 	}
 
-	public function flush() {
-		$this->db->flush($this, 'board');
-	}
+	public function flush($sqlDump=0) {
+        $this->db->flush($this, 'board', $sqlDump);
+    }
 
 	public function remove() {
 		$this->db->delete($this, 'board');
