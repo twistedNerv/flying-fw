@@ -1,5 +1,5 @@
 # flying-fw
-Custom light PHP framework
+Custom light PHP framework (mvc)
 
 Why yet another framework? Because I had time and it was fun :)
 
