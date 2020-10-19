@@ -9,6 +9,7 @@ Installation:
 2. update file: app/config/custom.php
 3. run all scripts in app/dbschemas
 4. default admin login: test@test.com / test
+
 (check the config file for libs paths)
 
 Module builder:
