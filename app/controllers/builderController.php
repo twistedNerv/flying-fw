@@ -44,11 +44,13 @@ class builderController extends controller {
             }
             if (isset($_POST['wish-view-index']) && $_POST['wish-view-index'] == "1") {
                 $this->createViewIndex($table_name);
-                $status_desc .= "Class " . $table_name . "View created<br>";
+                $builderModel->addToMenu($table_name, 'index', 1);
+                $status_desc .= "View " . $table_name . "Update created and added in menu<br>";
             }
             if (isset($_POST['wish-view-update']) && $_POST['wish-view-update'] == "1") {
                 $this->createViewUpdate($table_name);
-                $status_desc .= "Class " . $table_name . "View created<br>";
+                $builderModel->addToMenu($table_name, 'update', 2);
+                $status_desc .= "View " . $table_name . "Update created and added in menu<br>";
             }
         }
         $this->view->assign('tables', $allTables);
@@ -155,6 +157,9 @@ class builderController extends controller {
         if ($type != 'create') {
             $fileString .= "\n\n\t";
             $fileString .= 'public function updateAction($id=0) {';
+            $fileString .= "\n";
+            $fileString .= "\t\t";
+            $fileString .= "$" . "this->tools->checkPageRights(4);";
             $fileString .= "\n";
             $fileString .= "\t\t";
             $fileString .= '$' . $table . 'Model = $this->loadModel("' . $table . '");';
