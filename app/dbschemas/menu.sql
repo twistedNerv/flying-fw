@@ -11,9 +11,10 @@ CREATE TABLE `menu` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
 
-INSERT INTO `menu` (`title`, `description`, `url`, `level`, `position`, `parent`, `active`, `admin`) VALUES 
+INSERT INTO `menu` (`title`, `description`, `url`, `level`, `position`, `parent`, `active`, `admin`) VALUES
 ("Edit menu", "Editing menu and menu groups", "menu", 4, 1, 0, 1, 1),
 ("Edit users", "Editing users", "user/update", 4, 2, 0, 1, 1),
 ("Builder", "Creating modules", "builder/index", 5, 3, 0, 1, 1),
-("Preglej", "Preglej zadnja obvestila", "board/index", 2, 1, 4, 1, 0),
-("Uredi", "Dodaj ali uredi obvestila", "board/update", 2, 2, 4, 1, 0);
+("Board", "Glavna skupina Board", "board", 2, 1, 0, 1, 0),
+("Preglej", "Preglej zadnja obvestila", "board/index", 2, 2, 4, 1, 0),
+("Uredi", "Dodaj ali uredi obvestila", "board/update", 2, 3, 4, 1, 0);
