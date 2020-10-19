@@ -18,7 +18,7 @@ Module builder:
 If all options selected there should be created table in db/sql schema file, controller, model, index view, update view, views added to menu
 
 Workflow:
-Custom module (controller, module, views) is added to installation by default.
+Custom module Board (controller, module, views in content) is added to installation by default.
 
 Controller code example:
 <pre>
