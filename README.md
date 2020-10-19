@@ -15,7 +15,7 @@ Module builder:
 2. set source destination (db table / schema file / create new - write a name)
 3. choose options to be created
 4. confirm
-If all options selected there should be created table in db/sql schema file, controller, model, index view, update view
+If all options selected there should be created table in db/sql schema file, controller, model, index view, update view, views added to menu
 
 Workflow:
 Custom module (controller, module, views) is added to installation by default.
