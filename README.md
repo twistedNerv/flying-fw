@@ -21,7 +21,7 @@ Workflow:
 Custom module (controller, module, views) is added to installation by default.
 
 Controller code example:
-
+<pre>
   public function updateAction($id = 0) {
         $boardModel = $this->loadModel("board");
         if ($id != 0) {
