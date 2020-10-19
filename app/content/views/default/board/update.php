@@ -1,10 +1,10 @@
 <div class="col-sm-12 text-center"> 
-    <h2>Objave na vstopni strani</h2>
+    <h2>Obvestila na vstopni strani</h2>
 </div>
 <div class="col-sm-4 text-right"> 
     <div class="row">
         <div class="col-sm-12">
-            <h4>Objave</h4>
+            <h4>Obvestila</h4>
         </div>
         <div class="col-sm-12">
             <?php
@@ -22,10 +22,10 @@
 </div>
 <div class="col-sm-8">
     <?php if ($data['selectedBoard']->id) { ?>
-        <a href="<?= URL ?>board/update">Dodaj objavo</a>
-        <h4>Uredi objavo</h4>
+        <a href="<?= URL ?>board/update">Dodaj obvestilo</a>
+        <h4>Uredi obvestilo</h4>
     <?php } else { ?>
-        <h4>Dodaj objavo</h4>
+        <h4>Dodaj obvestilo</h4>
     <?php } ?>
     <div class="user-settings">
         <form action="<?= URL ?>board/update<?php echo ($data['selectedBoard']->id) ? "/" . $data['selectedBoard']->id : "" ?>" method="post">

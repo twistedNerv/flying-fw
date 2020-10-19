@@ -8,9 +8,6 @@ class homeController extends controller {
     }
     
     public function indexAction() {
-        $boardModel = $this->loadModel('board');
-        $allItems = $boardModel->findAllSortedBy('id', 'desc', 5);
-        $this->view->assign('items', $allItems);
         $this->view->render("home/index");
     }
 }

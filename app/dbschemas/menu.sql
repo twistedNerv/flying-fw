@@ -13,4 +13,5 @@ CREATE TABLE `menu` (
 
 INSERT INTO `menu` (`title`, `description`, `url`, `level`, `position`, `parent`, `active`, `admin`) VALUES 
 ("Edit menu", "Editing menu and menu groups", "menu", 4, 1, 0, 1, 1),
-("Edit users", "Editing users", "user/update", 4, 2, 0, 1, 1);
+("Edit users", "Editing users", "user/update", 4, 2, 0, 1, 1),
+("Builder", "Creating modules", "builder/index", 5, 3, 0, 1, 1);

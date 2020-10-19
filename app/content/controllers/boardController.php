@@ -5,6 +5,13 @@ class boardController extends controller {
     public function __construct() {
         parent::__construct();
     }
+    
+    public function indexAction() {
+        $boardModel = $this->loadModel('board');
+        $allItems   = $boardModel->findAllSortedBy('id', 'desc', 4);
+        $this->view->assign('items', $allItems);
+        $this->view->render("board/index");
+    }
 
     public function updateAction($id = 0) {
         $boardModel = $this->loadModel("board");
