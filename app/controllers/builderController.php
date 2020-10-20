@@ -192,7 +192,7 @@ class builderController extends controller {
             $fileString .= "\n\t\t";
             $fileString .= "}";
             $fileString .= "\n\t\t";
-            $fileString .= "$" . "columns = $" . "testModel->db->getTableColumns('" . $table . "');";
+            $fileString .= "$" . "columns = $" . $table . "Model->db->getTableColumns('" . $table . "');";
             $fileString .= "\n\t\t";
             $fileString .= '$allItems = $' . $table . 'Model->findAll();';
             $fileString .= "\n\t\t";
