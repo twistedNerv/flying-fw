@@ -1,5 +1,5 @@
 <div class="col-sm-12 text-center"> 
-    <h2>Pregled logov</h2>
+    <h2>Logs review</h2>
 </div>
 <div class="col-sm-12"> 
     <div class="raow">
@@ -9,24 +9,24 @@
                     <div class="col-sm-2">
                         <div class="row">
                             <div class="col-sm-12">
-                                <strong>Išči po logu:</strong><input type="text" class="form-control filter-condition-search" id="person-surname" name="filter-condition-search" placeholder="Vnesi niz..." value="<?php echo (isset($_POST['filter-condition-search'])) ? $_POST['filter-condition-search'] : ""; ?>">
+                                <strong>Search log:</strong><input type="text" class="form-control filter-condition-search" id="person-surname" name="filter-condition-search" placeholder="Vnesi niz..." value="<?php echo (isset($_POST['filter-condition-search'])) ? $_POST['filter-condition-search'] : ""; ?>">
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-4 filter-logs-date">
                         <div class="row">
                             <div class="col-sm-6">
-                                <strong>Čas od:</strong>
+                                <strong>From:</strong>
                                 <input type="date" class="form-control" name="filter-condition-logs_datetime-from" value="<?php echo ($_POST['filter-condition-logs_datetime-from']) ? date('Y-m-d', strtotime($_POST['filter-condition-logs_datetime-from'])) : ""; ?>" min="01/01/1900" max="31/12/2020">
                             </div>  
                             <div class="col-sm-6">
-                                <strong>Čas do:</strong>
+                                <strong>To:</strong>
                                 <input type="date" class="form-control" name="filter-condition-logs_datetime-to" value="<?php echo ($_POST['filter-condition-logs_datetime-to']) ? date('Y-m-d', strtotime($_POST['filter-condition-logs_datetime-to'])) : ""; ?>" min="01/01/1900" max="31/12/2020">
                             </div>  
                         </div>  
                     </div>  
                     <div class="col-sm-1">
-                        <strong>Razred:</strong>
+                        <strong>Class:</strong>
                         <select name="filter-condition-type" class="form-control">
                             <option value=""> - - - </option>
                             <?php foreach ($data['typeset'] as $singleType) { ?>
@@ -35,7 +35,7 @@
                         </select>
                     </div>
                     <div class="col-sm-1">
-                        <strong>Uporabnik:</strong>
+                        <strong>User:</strong>
                         <select name="filter-condition-user" class="form-control">
                             <option value=""> - - - </option>
                             <?php foreach ($data['userset'] as $singleUser) { ?>
@@ -46,20 +46,20 @@
                     <div class="col-sm-4 filter-swab-order">
                         <div class="row">
                             <div class="col-sm-4">
-                                <strong>Razvrsti po:</strong>
+                                <strong>Order by:</strong>
                                 <select name="filter-order-by" class="form-control">
                                     <option value=""> - - - </option>
-                                    <option value="type" <?= (isset($_POST['filter-order-by']) && $_POST['filter-order-by'] == 'type') ? 'selected' : ''; ?>>tipu</option>
-                                    <option value="logdatetime" <?= (isset($_POST['filter-order-by']) && $_POST['filter-order-by'] == 'logdatetime') ? 'selected' : ''; ?>>datumu</option>
-                                    <option value="userid" <?= (isset($_POST['filter-order-by']) && $_POST['filter-order-by'] == 'userid') ? 'selected' : ''; ?>>uporabniku</option>
+                                    <option value="type" <?= (isset($_POST['filter-order-by']) && $_POST['filter-order-by'] == 'type') ? 'selected' : ''; ?>>class</option>
+                                    <option value="logdatetime" <?= (isset($_POST['filter-order-by']) && $_POST['filter-order-by'] == 'logdatetime') ? 'selected' : ''; ?>>date</option>
+                                    <option value="userid" <?= (isset($_POST['filter-order-by']) && $_POST['filter-order-by'] == 'userid') ? 'selected' : ''; ?>>user</option>
                                 </select>
                             </div>
                             <div class="col-sm-4">
-                                <strong>V smeri:</strong>
+                                <strong>Direction:</strong>
                                 <select name="filter-order-direction" class="form-control">
                                     <option value=""> - - - </option>
-                                    <option value="DESC" <?= (isset($_POST['filter-order-direction']) && $_POST['filter-order-direction'] == 'DESC') ? 'selected' : ''; ?>>Padajoče</option>
-                                    <option value="ASC" <?= (isset($_POST['filter-order-direction']) && $_POST['filter-order-direction'] == 'ASC') ? 'selected' : ''; ?>>Naraščujoče</option>
+                                    <option value="DESC" <?= (isset($_POST['filter-order-direction']) && $_POST['filter-order-direction'] == 'DESC') ? 'selected' : ''; ?>>Descending</option>
+                                    <option value="ASC" <?= (isset($_POST['filter-order-direction']) && $_POST['filter-order-direction'] == 'ASC') ? 'selected' : ''; ?>>Ascending</option>
                                 </select>
                             </div>
                             <div class="col-sm-4">
@@ -76,7 +76,7 @@
                         </div>
                     </div>
                     <div class="col-sm-1 filter-logs-submit">
-                        <button type="submit" class="btn btn-primary filter-logs-submit-btn no-print">Išči</button>
+                        <button type="submit" class="btn btn-primary filter-logs-submit-btn no-print">Search</button>
                     </div>
                     </form>
                 </div>
@@ -86,11 +86,11 @@
                     <table class="table logs-table text-center">
                         <thead>
                             <tr>
-                                <th>Datum</th>
-                                <th>Razred</th>
+                                <th>Date</th>
+                                <th>Class</th>
                                 <th>Log</th>
-                                <th>Uporabnik</th>
-                                <th>IP</th>
+                                <th>User</th>
+                                <th>Ip</th>
                             </tr>
                         </thead>
                         <tbody class="logs-list">

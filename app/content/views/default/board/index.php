@@ -1,7 +1,7 @@
 <div class="col-sm-12"> 
     <div class="row"> 
         <div class="col-sm-2"></div>
-        <div class="col-sm-8 text-center"><h2>Obvestila</h2></div> 
+        <div class="col-sm-8 text-center"><h2>Board</h2></div> 
         <div class="col-sm-2"></div>
         
         <div class="col-sm-2"></div>

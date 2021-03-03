@@ -1,10 +1,10 @@
 <div class="col-sm-12 text-center"> 
-    <h2>Obvestila na vstopni strani</h2>
+    <h2>Board posts</h2>
 </div>
 <div class="col-sm-4 text-right"> 
     <div class="row">
         <div class="col-sm-12">
-            <h4>Obvestila</h4>
+            <h4>Posts</h4>
         </div>
         <div class="col-sm-12">
             <?php
@@ -12,8 +12,8 @@
                 $selectedBoardClass = ($data['selectedBoard']->id == $singleItem['id']) ? "font-weight-bold" : "";
                 echo "<div>
                         <span class='" . $selectedBoardClass . "'>" . $singleItem['title'] . " (" . $singleItem['postdate'] . ")</span> | 
-                        <a href='" . URL . "board/update/" . $singleItem['id'] . "' title='Uredi objavo'><i class='far fa-edit'></i></a> |
-                        <a href='" . URL . "board/remove/" . $singleItem['id'] . "' title='Briši objavo' onclick='return confirm(&#34;Res želiš brisat?&#34;);'><i class='fas fa-times' title='Briši konzilij'></i></a>
+                        <a href='" . URL . "board/update/" . $singleItem['id'] . "' title='Edit post'><i class='far fa-edit'></i></a> |
+                        <a href='" . URL . "board/remove/" . $singleItem['id'] . "' title='Remove post' onclick='return confirm(&#34;You really want to remove?&#34;);'><i class='fas fa-times' title='Remove post'></i></a>
                       </div>";
             }
             ?>
@@ -22,25 +22,25 @@
 </div>
 <div class="col-sm-8">
     <?php if ($data['selectedBoard']->id) { ?>
-        <a href="<?= URL ?>board/update">Dodaj obvestilo</a>
-        <h4>Uredi obvestilo</h4>
+        <a href="<?= URL ?>board/update">Add post</a>
+        <h4>Edit post</h4>
     <?php } else { ?>
-        <h4>Dodaj obvestilo</h4>
+        <h4>Add post</h4>
     <?php } ?>
     <div class="user-settings">
         <form action="<?= URL ?>board/update<?php echo ($data['selectedBoard']->id) ? "/" . $data['selectedBoard']->id : "" ?>" method="post">
             <input type="hidden" name="action" value="handleboard">
             <div class="form-group">
-                <input type="text" class="form-control" name="board-title" placeholder="Naslov" value="<?php echo ($data['selectedBoard']->id) ? $data['selectedBoard']->title : ""; ?>">
+                <input type="text" class="form-control" name="board-title" placeholder="Title" value="<?php echo ($data['selectedBoard']->id) ? $data['selectedBoard']->title : ""; ?>">
             </div>
             <div class="form-group">
-                <label for="board-content">Opis</label>
+                <label for="board-content">Description</label>
                 <textarea type="text" id="board-content" class="form-control" name="board-content" required>
                     <?php echo ($data['selectedBoard']->id) ? $data['selectedBoard']->content : ""; ?>
                 </textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Potrdi</button>
-            <a class='btn btn-danger' href="<?= URL ?>board/update">Prekliči</a>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a class='btn btn-danger' href="<?= URL ?>board/update">Cancel</a>
         </form>
     </div>
 </div>

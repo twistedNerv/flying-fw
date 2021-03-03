@@ -12,8 +12,8 @@
                 $selectedActiongroupClass = ($data['selectedActiongroup']->id == $singleItem['id']) ? "font-weight-bold" : "";
                 echo "<div>
                         <span class='" . $selectedActiongroupClass . "'>" . $singleItem['name'] . "</span> | 
-                        <a href='" . URL . "actiongroup/update/" . $singleItem['id'] . "' title='Uredi actiongroup'><i class='far fa-edit'></i></a> |
-                        <a href='" . URL . "actiongroup/remove/" . $singleItem['id'] . "' title='Briši actiongroup' onclick='return confirm(&#34;Res želiš brisat?&#34;);'><i class='fas fa-times' title='Briši actiongroup'></i></a>
+                        <a href='" . URL . "actiongroup/update/" . $singleItem['id'] . "' title='Edit actiongroup'><i class='far fa-edit'></i></a> |
+                        <a href='" . URL . "actiongroup/remove/" . $singleItem['id'] . "' title='Remove actiongroup' onclick='return confirm(&#34;You really want to remove?&#34;);'><i class='fas fa-times' title='Remove actiongroup'></i></a>
                       </div>";
             }
             ?>
@@ -43,8 +43,8 @@
             <div class="form-group">
                 <input type="text" class="form-control" name="actiongroup-section" placeholder="section term" value="<?php echo ($data['selectedActiongroup']->id) ? $data['selectedActiongroup']->section : ""; ?>">
             </div>
-            <button type="submit" class="btn btn-primary">Potrdi</button>
-            <a class='btn btn-danger' href="http://localhost:8080/mvc/actiongroup/update">Prekliči</a>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a class='btn btn-danger' href="http://localhost:8080/mvc/actiongroup/update">Cancel</a>
         </form>
     </div>
     <?php if ($data['selectedActiongroup']->id) { ?>

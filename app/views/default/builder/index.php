@@ -80,7 +80,7 @@
                 <input type="checkbox" class="form-control" name="wish-view-grid" id="wish-view-grid" value="1">
             </div>
             <div class="col-sm-12">
-                <button type="submit" class="btn btn-primary">Potrdi</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
             </div>
         </div>
     </form>
