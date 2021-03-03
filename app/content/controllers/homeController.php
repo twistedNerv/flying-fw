@@ -4,7 +4,7 @@ class homeController extends controller {
     
     public function __construct() {
         parent::__construct();
-        $this->tools->checkPageRights(4);
+        $this->tools->checkPageRights(3);
     }
     
     public function indexAction() {

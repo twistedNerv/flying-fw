@@ -278,6 +278,7 @@ class userModel extends model {
             $session = new session();
             $tools->log("login", "Logged in: userid: " . $session->get('activeUser')['id'] . " / mail: " . $_POST['login-email']);
             //header('location: index');
+            
             $tools->redirect(URL . 'index');
         } else {
             $tools->log("login", "Failed for userid: " . $_POST['login-email'] . " / pass: " . $_POST['login-password'] . ").");

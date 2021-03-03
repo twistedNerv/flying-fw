@@ -8,6 +8,7 @@ class controller {
         $this->session = new session();
         $this->config = new config;
         $this->tools = new tools;
+        $this->checkUserMembershipSite();
     }
 
     public function loadModel($model) {
@@ -22,11 +23,17 @@ class controller {
         $modelName = $model . 'Model';
         return new $modelName();
     }
-    
+
     public function loadInclude($include) {
-        if(file_exists('app/include/' . strtolower($include) . '.php')) {
+        if (file_exists('app/include/' . strtolower($include) . '.php')) {
             require_once 'app/include/' . strtolower($include) . '.php';
             return new $include();
+        }
+    }
+
+    public function checkUserMembershipSite() {
+        if(!$this->tools->checkUserMembershipActiongroup()) {
+            $this->tools->redirect(URL . 'home/index');
         }
     }
 }

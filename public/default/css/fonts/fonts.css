@@ -47,3 +47,7 @@
          url('quicksand-v19-latin-ext-700.ttf')  format('truetype'), /* Safari, Android, iOS */
          url('quicksand-v19-latin-ext-700.svg#svgFontName') format('svg'); /* Legacy iOS */
 }
+@font-face {
+    font-family:'Gloria Hallelujah';
+    src: url('GloriaHallelujah-Regular.ttf') format('truetype');
+}

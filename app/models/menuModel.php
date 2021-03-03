@@ -155,7 +155,7 @@ class menuModel extends model {
         return $this->db->findAll('menu');
     }
 
-    public function flush($sqlDump=0) {
+    public function flush($sqlDump = 0) {
         $this->db->flush($this, 'menu', $sqlDump);
     }
 
@@ -170,7 +170,7 @@ class menuModel extends model {
         }
         return $this;
     }
-    
+
     public function findAllByParent($parent) {
         return $this->db->findAllByParam('parent', $parent, 'menu');
     }
@@ -195,12 +195,28 @@ class menuModel extends model {
                                         WHERE 1=1 " . $adminCondition . " " . $activeCondition . " " . $parentCondition . "
                                         ORDER BY parent ASC, position;");
         $this->db->result->execute();
-        return $this->db->result->fetchAll(PDO::FETCH_ASSOC);
+        //echo "<pre>";$this->db->result->debugDumpParams();die;
+        $menuItems = $this->db->result->fetchAll(PDO::FETCH_ASSOC);
+        $session = new session();
+        if ($session->get('activeUser')['level'] < 5 && $admin == false) {
+            $membershipModel = new membershipModel;
+            $actiongroupModel = new actiongroupModel;
+            $allActionGroups = $actiongroupModel->findAll();
+            foreach ($menuItems as $key => $singleItem) {
+                if ($this->in_array_r($singleItem['url'], $allActionGroups)) {
+                    $userMember = $membershipModel->findOneByUserAndGroup($session->get('activeUser')['id'], $actiongroupModel->findOneByAction($singleItem['url'])->id);
+                    if (!$userMember) {
+                        unset($menuItems[$key]);
+                    }
+                }
+            }
+        }
+        return $menuItems;
     }
 
     public function findNextItem($direction, $admin, $parent, $currentPosition) {
         if ($direction == "up") {
-            $direction = "<"; 
+            $direction = "<";
             $way = "DESC";
         } else {
             $direction = ">";
@@ -211,10 +227,20 @@ class menuModel extends model {
             ORDER BY position " . $way . " LIMIT 1;";
         return $this->db->selectResult($sql);
     }
-    
+
     public function getNextPosition($admin, $parent) {
         $parent = (!$parent) ? "0" : $parent;
         $sql = "SELECT position FROM menu WHERE active = 1 AND admin = " . $admin . " AND parent = " . $parent . " ORDER BY position DESC LIMIT 1";
         return $this->db->selectResult($sql);
     }
+
+    private function in_array_r($needle, $haystack, $strict = false) {
+        foreach ($haystack as $item) {
+            if (($strict ? $item === $needle : $item == $needle) || (is_array($item) && $this->in_array_r($needle, $item, $strict))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

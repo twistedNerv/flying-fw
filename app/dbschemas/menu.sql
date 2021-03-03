@@ -9,12 +9,14 @@ CREATE TABLE `menu` (
   `active` int(11) NOT NULL DEFAULT 0,
   `admin` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
 
 INSERT INTO `menu` (`title`, `description`, `url`, `level`, `position`, `parent`, `active`, `admin`) VALUES
-("Edit menu", "Editing menu and menu groups", "menu", 4, 1, 0, 1, 1),
-("Edit users", "Editing users", "user/update", 4, 2, 0, 1, 1),
-("Builder", "Creating modules", "builder/index", 5, 3, 0, 1, 1),
-("Board", "Glavna skupina Board", "board", 2, 1, 0, 1, 0),
-("Preglej", "Preglej zadnja obvestila", "board/index", 2, 2, 4, 1, 0),
-("Uredi", "Dodaj ali uredi obvestila", "board/update", 2, 3, 4, 1, 0);
+("Menu", "Editing menu and menu groups", "menu", 4, 1, 0, 1, 1),
+("Users", "Editing users", "user/update", 4, 1, 0, 1, 1),
+("Groups", "Editing action groups", "actiongroup/update", 4, 2, 0, 1, 1),
+("Logs", "View logs", "logs/index", 4, 3, 0, 1, 1),
+("Builder", "Creating modules", "builder/index", 5, 4, 0, 1, 1),
+("Board", "Board - main menu group", "board", 2, 1, 0, 1, 0),
+("View", "View last board posts", "board/index", 2, 2, 4, 1, 0),
+("Edit", "Edit board posts", "board/update", 2, 3, 5, 1, 0);

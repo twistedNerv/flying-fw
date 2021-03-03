@@ -15,7 +15,7 @@ class boardController extends controller {
 
     public function updateAction($id = 0) {
         $boardModel = $this->loadModel("board");
-        if ($id != 0)  {
+        if ($id != 0) {
             $boardModel->findOneById($id);
         }
         if (isset($_POST["action"]) && $_POST["action"] == "handleboard") {

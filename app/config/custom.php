@@ -7,6 +7,7 @@ $mainSettings = [
     'TEMPLATE' => 'default',
     'ORGANIZATION' => 'DEMO',
     'TITLE' => 'mvc - DEMO',
+    'HEADER_TITLE' => 'Flying Framework',
     //MySql
     'DB_HOST' => 'localhost',
     'DB_USERNAME' => 'root',

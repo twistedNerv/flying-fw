@@ -27,12 +27,23 @@
         </script>
     </head>
     <body>
-        <div class="container">
+        <div class="col-sm-2"></div>
+        <div class="container col-sm-8">
+            <div class="col-sm-12 header no-print">
+                <div class="header-content">
+                    <div class="col-sm-4 float-left">
+                        <img src='<?= URL ?>public/<?= TEMPLATE ?>/images/logo.png' class="header-logo">
+                    </div>
+                    <div class="col-sm-8 header-right">
+                        <span class="float-left"><h1 class="header-title"><?=$this->config->getParam('header_title')?></h1></span>
+                        <span class="float-right"><img src="<?= URL ?>public/<?= TEMPLATE ?>/images/img-right.png"></span>
+                    </div>
+                </div>
+            </div>
             <?php 
             if($this->config->getParam('display_page_header')) {
                 require 'menu.php';
             }
             ?>
-            
             <div id="content" class="content row">
                 

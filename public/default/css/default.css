@@ -3,12 +3,11 @@ html {
     background-color: #f7f2e7;
 }
 .header {
-    background-image: linear-gradient(45deg, #eee, #a67280, #595a5e);
+    background-image: linear-gradient(45deg, #eee, #c7b198, #eee);
     box-shadow:  0 0 20px rgba(0.3, 0.3, 0.3, 0.3);
 }
 .header-content {
     height: 80px;
-    background-image: url(../images/cardio.png);
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
@@ -24,6 +23,18 @@ html {
     overflow:hidden;
     background-origin: content-box;
 }
+.header-title {
+    font-family: 'Gloria Hallelujah' !important;
+    font-size: 40px;
+    text-shadow: 0 0 1px #000;
+    color: #c26565;
+}
+.header-logo {
+    opacity: 0.6;
+    width: 250px;
+    top: 7px;
+    position: relative;
+}
 body {
     font-family: 'Source Sans Pro';
     font-size: 15px;
@@ -35,6 +46,11 @@ h1, h2, h3, h4, h5, h6 {
     color: #595a5e;
     margin: 30px 30px 30px 20px;
     padding-left: 0;
+}
+h1 {
+    font-size: 50px;
+    margin-bottom: 30px;
+    margin-top: 10px;
 }
 h2 {
     font-size: 40px;
@@ -84,7 +100,7 @@ h5d {
 .navbar-light {
     background-color: #797a7e !important;
     border-radius: 0 0 4px 4px;
-    border: 1px solid #666;
+    border: 1px solid #777;
     box-shadow:  0 0 20px rgba(0.3, 0.3, 0.3, 0.51); 
 }
 .nav-link {
@@ -96,6 +112,15 @@ h5d {
 }
 .admin-menu-dropdown:hover {
     cursor: pointer;
+}
+.logout-dropdown-item {
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    background-color:#eee;
+}
+.logout-dropdown-item:hover {
+    color: #ddd;
+    background-color:#797a7e;
 }
 .navbar-brand i {
     font-size: 25px;
@@ -114,10 +139,6 @@ a:hover {
 i.fa-plus-circle, 
 i.fa-plus-square {
     padding-left: 5px;
-    font-size: 20px;
-}
-i.fa-heartbeat {
-    color: #c26565;
     font-size: 20px;
 }
 .fa-times {
@@ -183,6 +204,12 @@ table td {
     border-radius: 3px;
     box-shadow: 0 0 5px grey;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1), 0 0 20px rgba(0, 0, 0, 0.1) inset;
+}
+.logs-table td {
+    padding: 5px !important;
+    margin: 5px;
+    border: 1px solid #dee2e6 !important;
+    font-size: 12px;
 }
 .board-section {
     border: 1px solid #ddd;

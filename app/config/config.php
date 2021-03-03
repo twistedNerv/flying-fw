@@ -8,6 +8,7 @@ class config {
         $this->configValues = 
             [
                 'title' => TITLE,
+                'header_title' => HEADER_TITLE,
                 'template' => TEMPLATE,
                 'display_page_header' => DISPLAY_PAGE_HEADER
             ];

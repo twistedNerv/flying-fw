@@ -8,8 +8,8 @@ class builderController extends controller {
 
     public function indexAction() {
         $builderModel = $this->loadModel('builder');
-        $allSchemas = array_values(array_diff(scandir('app/dbschemas/'), ['.', '..', 'logs.sql', 'user.sql', 'menu.sql']));
-        $allTables = array_values(array_diff($builderModel->db->getTables(), ['logs', 'user', 'menu']));
+        $allSchemas = array_values(array_diff(scandir('app/dbschemas/'), ['.', '..', 'logs.sql', 'user.sql', 'menu.sql', 'actiongroup.sql', 'membership.sql']));
+        $allTables = array_values(array_diff($builderModel->db->getTables(), ['logs', 'user', 'menu', 'actiongroup', 'membership']));
         $type = (isset($_POST['type']) && $_POST['type'] != "") ? $_POST['type'] : "";
         $status_desc = "";
         $table_name = "";
@@ -192,7 +192,7 @@ class builderController extends controller {
             $fileString .= "\n\t\t";
             $fileString .= "}";
             $fileString .= "\n\t\t";
-            $fileString .= "$" . "columns = $" . $table . "Model->db->getTableColumns('" . $table . "');";
+            $fileString .= '$' . 'columns = $' . $table . '->db->getTableColumns("$' . $table . '");';
             $fileString .= "\n\t\t";
             $fileString .= '$allItems = $' . $table . 'Model->findAll();';
             $fileString .= "\n\t\t";

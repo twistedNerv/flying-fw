@@ -7,4 +7,4 @@ CREATE TABLE `logs` (
   `userip` varchar(45) DEFAULT NULL,
   `useragent` varchar(150) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8

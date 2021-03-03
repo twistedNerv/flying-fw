@@ -32,7 +32,7 @@
                 if($this->session->get('activeUser')) { ?>
                     <li class="nav-item dropdown" style="position:absolute;right:0;">
                         <a class="nav-link dropdown-toggle admin-menu-dropdown" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-user"> Admin</i>
+                            <i class="fas fa-user"></i> <?=$this->session->get('activeUser')['name']?> <?=$this->session->get('activeUser')['surname']?>
                         </a>
                         <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-55">
                             <?php foreach($allAdminMenuItems as $singleAdminMenuItem) {
@@ -40,7 +40,7 @@
                                     echo "<a class='dropdown-item' href='" . URL . $singleAdminMenuItem['url'] . "'>" . $singleAdminMenuItem['title'] . "</a>";
                                 }
                             } ?>
-                            <a class='dropdown-item' href='<?=URL?>user/logout'>Logout</a>
+                            <a class='dropdown-item logout-dropdown-item' href='<?=URL?>user/logout'>Logout</a>
                         </div>
                     </li>
                 <?php } else { ?>
