@@ -8,7 +8,7 @@ Installation:
 1. copy code on server
 2. update file: app/config/custom.php
 3. run all scripts in app/dbschemas
-4. default admin login: test@test.com / test
+4. default admin login: test@test.test / test
 
 Module builder:
 1. open builder/index
