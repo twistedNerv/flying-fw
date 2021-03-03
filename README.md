@@ -10,8 +10,6 @@ Installation:
 3. run all scripts in app/dbschemas
 4. default admin login: test@test.com / test
 
-(check the config file for libs paths)
-
 Module builder:
 1. open builder/index
 2. set source destination (db table / schema file / create new - write a name)
@@ -20,4 +18,4 @@ Module builder:
 If all options selected there should be created table in db/sql schema file, controller, model, index view, update view, views added to menu
 
 Workflow:
-Custom module Board (controller, module, views files in content folder) is added for example.
+Custom module Board (controller, module, views files in content folder) is added for example in app/content/.
