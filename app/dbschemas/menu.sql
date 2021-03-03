@@ -18,5 +18,5 @@ INSERT INTO `menu` (`title`, `description`, `url`, `level`, `position`, `parent`
 ("Logs", "View logs", "logs/index", 4, 3, 0, 1, 1),
 ("Builder", "Creating modules", "builder/index", 5, 4, 0, 1, 1),
 ("Board", "Board - main menu group", "board", 2, 1, 0, 1, 0),
-("View", "View last board posts", "board/index", 2, 2, 4, 1, 0),
-("Edit", "Edit board posts", "board/update", 2, 3, 5, 1, 0);
+("View posts", "View last board posts", "board/index", 2, 2, 4, 1, 0),
+("Edit posts", "Edit board posts", "board/update", 2, 3, 5, 1, 0);
