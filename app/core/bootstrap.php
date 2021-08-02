@@ -23,7 +23,7 @@ class bootstrap {
         require_once 'app/' . $this->contentPath . 'controllers/' . $this->controller . '.php';
         $this->controller = new $this->controller;
         
-        if(isset($url[1])) {
+        if(isset($url[1])) { 
             if(method_exists($this->controller, $url[1]."Action")) {
                 $this->method = $url[1]."Action";
                 unset($url[1]);
