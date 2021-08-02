@@ -18,7 +18,7 @@ class tools {
     }
 
     public function checkUserMembershipActiongroup() {
-        if ($this->session->get('activeUser')['level'] == 5) 
+        if ($this->session->get('activeUser') && $this->session->get('activeUser')['level'] == 5) 
             return true;
         
         $classMethod = $this->getUrlClassMethod();

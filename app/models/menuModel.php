@@ -198,7 +198,7 @@ class menuModel extends model {
         //echo "<pre>";$this->db->result->debugDumpParams();die;
         $menuItems = $this->db->result->fetchAll(PDO::FETCH_ASSOC);
         $session = new session();
-        if ($session->get('activeUser')['level'] < 5 && $admin == false) {
+        if ($session->get('activeUser') && $session->get('activeUser')['level'] < 5 && $admin == false) {
             $membershipModel = new membershipModel;
             $actiongroupModel = new actiongroupModel;
             $allActionGroups = $actiongroupModel->findAll();

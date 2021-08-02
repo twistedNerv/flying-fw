@@ -11,7 +11,7 @@
             <?php 
             $childrenParents = array_unique(array_column($allMenuItems, 'parent'));
             foreach ($parentGroups as $singleParent) {
-                if ($singleParent['level'] <= $this->session->get('activeUser')['level']){
+                if ($this->session->get('activeUser') && $singleParent['level'] <= $this->session->get('activeUser')['level']){
                     if (!in_array($singleParent['id'], $childrenParents)) {
                         echo "<li class='nav-item'>";
                         echo "<a href='" . URL . $singleParent['url'] . "' class='nav-link' title='" . $singleParent['description'] . "'>" . $singleParent['title'] . "<span class='sr-only'>(current)</span></a>";
@@ -28,7 +28,7 @@
                 }
             } ?>
             <?php 
-            if($this->session->get('activeUser')['level'] >= 4) {
+            if($this->session->get('activeUser') && $this->session->get('activeUser')['level'] >= 4) {
                 if($this->session->get('activeUser')) { ?>
                     <li class="nav-item dropdown" style="position:absolute;right:0;">
                         <a class="nav-link dropdown-toggle admin-menu-dropdown" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
