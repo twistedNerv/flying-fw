@@ -79,7 +79,9 @@ $" . "mainSettings = [
                     }
                 }
             }
-            echo "Installation finished. <a href='" . $url_root_local . $app_name . "'>Local</a>";
+            echo "<meta http-equiv='refresh' content='5; url=" . $url_root_local . $app_name . "' />";
+            echo "Installation finished. You will be redirected to main page in a few moments.<br><br>"
+            . "In case it doesn't redirect automatically, click here: <a href='" . $url_root_local . $app_name . "'>Local</a>";
         } else {
             require_once 'form.php';
         }

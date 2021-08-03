@@ -1,14 +1,14 @@
 <!doctype html>
 <html>
     <head>
-        <title>mvc - DEMO</title>
+        <title>Installer</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <link rel='stylesheet' href='http://localhost/mvc/public/default/css/jquery-ui.css'>
-        <link rel='stylesheet' href='http://localhost/mvc/public/default/custom/bootstrap-4.3.1/css/bootstrap.min.css'>
-        <link rel='stylesheet' href='http://localhost/mvc/public/default/custom/fontawesome-free-5.12.0-web/css/all.css'>
-        <link rel='stylesheet' href='http://localhost/mvc/public/default/css/fonts/fonts.css'>
-        <link rel='stylesheet' href='http://localhost/mvc/public/default/css/default.css'>
-        <link rel="shortcut icon" href="http://localhost/mvc/public/default/images/faviconukc.ico" type="image/x-icon" />
+        <link rel='stylesheet' href='../public/default/css/jquery-ui.css'>
+        <link rel='stylesheet' href='../public/default/custom/bootstrap-4.3.1/css/bootstrap.min.css'>
+        <link rel='stylesheet' href='../public/default/custom/fontawesome-free-5.12.0-web/css/all.css'>
+        <link rel='stylesheet' href='../public/default/css/fonts/fonts.css'>
+        <link rel='stylesheet' href='../public/default/css/default.css'>
+        <link rel="shortcut icon" href="../public/default/images/faviconukc.ico" type="image/x-icon" />
     </head>
     <body>
         <div class="col-sm-2"></div>
@@ -87,8 +87,8 @@
                                 <div class="form-group">
                                     <label>Title</label>
                                     <input type="text" class="form-control" name="title" value="mvc" required>
-                                </div>
-                                <div class="form-group">
+                                </div> 
+                               <div class="form-group">
                                     <label>Header Title</label>
                                     <input type="text" class="form-control" name="header_title" value="MVC - DEMO" required>
                                 </div>
