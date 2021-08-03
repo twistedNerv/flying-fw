@@ -2,12 +2,12 @@
 $mainSettings = [
     //general
     'URL_ROOT_LOCAL' => 'http://localhost/',
-    'URL_ROOT_PUBLIC' => 'http://add.some.public.address/',
+    'URL_ROOT_PUBLIC' => 'http://public.live/',
     'APP_NAME' => 'mvc',
     'TEMPLATE' => 'default',
-    'ORGANIZATION' => 'demo',
-    'TITLE' => 'mvc',
-    'HEADER_TITLE' => 'MVC - DEMO',
+    'ORGANIZATION' => 'DEMO',
+    'TITLE' => 'mvc - DEMO',
+    'HEADER_TITLE' => 'Flying Framework',
     //MySql
     'DB_HOST' => 'localhost',
     'DB_USERNAME' => 'root',

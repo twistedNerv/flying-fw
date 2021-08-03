@@ -86,7 +86,7 @@ class builderController extends controller {
         }
     }
     
-    private function createModel($table, $columns=[], $type) {
+    private function createModel($table, $columns=[], $type='') {
         $fileString = "<?php";
         $fileString .=  "\n\n";
         $fileString .= "class " . $table . "Model extends model {";
@@ -139,7 +139,7 @@ class builderController extends controller {
         file_put_contents("app/content/models/" . $table . "Model.php", $fileString);
     }
     
-    private function createController($table, $columns=[], $type) {
+    private function createController($table, $columns=[], $type='') {
         $fileString = "<?php";
         $fileString .=  "\n\n";
         $fileString .= "class " . $table . "Controller extends controller {";

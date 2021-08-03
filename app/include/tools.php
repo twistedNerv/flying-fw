@@ -8,7 +8,7 @@ class tools {
     }
 
     public function checkPageRights($level) {
-        $userLevel = $this->session->get('activeUser')['level'];
+        $userLevel = ($this->session->get('activeUser')) ? $this->session->get('activeUser')['level'] : "";
         if ($level != 0) {
             if (!$userLevel || $userLevel < $level) {
                 $redirectLocation = URL . "user/login";

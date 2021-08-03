@@ -5,4 +5,4 @@ CREATE TABLE `actiongroup` (
   `action` varchar(45) COLLATE utf8_slovenian_ci DEFAULT NULL,
   `section` varchar(45) COLLATE utf8_slovenian_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;

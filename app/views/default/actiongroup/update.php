@@ -44,7 +44,7 @@
                 <input type="text" class="form-control" name="actiongroup-section" placeholder="section term" value="<?php echo ($data['selectedActiongroup']->id) ? $data['selectedActiongroup']->section : ""; ?>">
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
-            <a class='btn btn-danger' href="http://localhost:8080/mvc/actiongroup/update">Cancel</a>
+            <a class='btn btn-danger' href="<?= URL ?>actiongroup/update">Cancel</a>
         </form>
     </div>
     <?php if ($data['selectedActiongroup']->id) { ?>
