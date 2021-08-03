@@ -47,6 +47,8 @@ $" . "mainSettings = [
     'DISPLAY_PAGE_HEADER' => " . $display_page_header . "
 ];";
             file_put_contents('../app/config/custom.php', $custom_file);
+            exec('chown root:root ../app/config/custom.php');
+            exec('chmod 777 ../app/config/custom.php');
 }
             if ($create_db || $create_tables) {
                 
@@ -69,10 +71,7 @@ $" . "mainSettings = [
                             unset($files[0]); unset($files[1]);
                         }
                         foreach ($files as $file) {
-                            echo '222';
-                            //echo $file;
                             $sql = file_get_contents("../app/dbschemas/" . $file);
-                            //var_dump($sql);
                             $pdo->exec($sql);
                         }
                     } catch (PDOException $e) {
@@ -80,6 +79,7 @@ $" . "mainSettings = [
                     }
                 }
             }
+            echo "Installation finished. <a href='" . $url_root_local . $app_name . "'>Local</a>";
         } else {
             require_once 'form.php';
         }
