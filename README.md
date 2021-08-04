@@ -5,10 +5,10 @@ Why yet another framework? Because I had time and it was fun :)
 
 ------------------------------------------
 Installation:
-1. copy code on server
-2. update file: app/config/custom.php
-3. run all sql scripts in app/dbschemas
-4. default super admin login: test@test.test / test
+1. Clone or copy code on server
+2. Run http://yourBaseUrl/install
+3. Fill form and press Install. After install you'll be redirected to main/login page
+4. Default super-admin login: test@test.test / test
 
 Module builder:
 1. open builder/index
