@@ -109,11 +109,6 @@ class builderController extends controller {
                 $fileString .= "\t\t$" . "this->" . $singleColumn . " = $" . $singleColumn . ";\n";
                 $fileString .= "\t\treturn $". "this;\n";
                 $fileString .= "\t}\n\n";
-                $fileString .= "\tpublic function findOneBy" . ucfirst($singleColumn) . "($" . "value) {\n";
-                $fileString .= "\t\t$" . "result = $" . "this->db->findOneByParam('" . $singleColumn . "', $" . "value, '" . $table . "');\n";
-                $fileString .= "\t\t$" . "this->fill" . ucfirst($table) . "($" . "result);\n";
-                $fileString .= "\t\treturn $" . "this;\n";
-                $fileString .= "\t}\n\n";
             }
             $fileString .= "\tpublic function findAll() {\n";
             $fileString .= "\t\treturn $" . "this->db->findAll('" . $table . "');\n";
@@ -168,7 +163,7 @@ class builderController extends controller {
             $fileString .= 'if($id != 0) {';
             $fileString .= "\n";
             $fileString .= "\t\t\t";
-            $fileString .= '$' . $table . 'Model->findOneById($id);';
+            $fileString .= '$' . $table . 'Model->findOneBy("id", $id);';
             $fileString .= "\n";
             $fileString .= "\t\t";
             $fileString .= "}";
@@ -212,7 +207,7 @@ class builderController extends controller {
             $fileString .= "\n\t\t\t";
             $fileString .= '$' . $table . 'Model = $this->loadModel("' . $table . '");';
             $fileString .= "\n\t\t\t";
-            $fileString .= '$' . $table . 'Model->findOneById($id);';
+            $fileString .= '$' . $table . 'Model->findOneBy("id", $id);';
             $fileString .= "\n\t\t\t";
             $fileString .= '$' . $table . 'Model->remove();';
             $fileString .= "\n\t\t\t";

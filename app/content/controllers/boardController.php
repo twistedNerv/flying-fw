@@ -16,7 +16,7 @@ class boardController extends controller {
     public function updateAction($id = 0) {
         $boardModel = $this->loadModel("board");
         if ($id != 0) {
-            $boardModel->findOneById($id);
+            $boardModel->findOneBy('id', $id);
         }
         if (isset($_POST["action"]) && $_POST["action"] == "handleboard") {
             $boardModel->setTitle($this->tools->sanitizePost($_POST["board-title"]));
@@ -37,7 +37,7 @@ class boardController extends controller {
     public function removeAction($id) {
         if ($id) {
             $boardModel = $this->loadModel("board");
-            $boardModel->findOneById($id);
+            $boardModel->findOneBy('id', $id);
             $boardModel->remove();
             $this->tools->log("board", "Board element with id: $id removed.");
             $this->tools->redirect(URL . "board/update");

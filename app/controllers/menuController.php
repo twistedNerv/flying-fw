@@ -10,7 +10,7 @@ class menuController extends controller {
     public function indexAction($menuId=false) {
         $newMenuItem = $this->loadModel('menu');
         if($menuId) {
-            $newMenuItem->findOneById($menuId);
+            $newMenuItem->findOneBy('id', $menuId);
         }
         if (isset($_POST['action']) && $_POST['action'] == 'addmenuitem') {
             $newMenuItem->setTitle($this->tools->sanitizePost($_POST['menu-title']));
@@ -42,12 +42,12 @@ class menuController extends controller {
     public function removeAction($menuItemId) {
         if ($menuItemId) {
             $menuModel = $this->loadModel('menu');
-            $menuModel->findOneById($menuItemId);
+            $menuModel->findOneBy('id', $menuItemId);
             $menuModel->remove();
             $childrenModel = $this->loadModel('menu');
             $children = $childrenModel->findAllByParent($menuItemId);
             foreach ($children as $singleChild) {
-                $menuModel->findOneById($singleChild['id']);
+                $menuModel->findOneBy('id', $singleChild['id']);
                 $menuModel->remove();
             }
             $this->tools->log('menu', "Menu item with id: $menuItemId and its potential subitems removed.");
@@ -59,13 +59,13 @@ class menuController extends controller {
     
     public function moveAction($direction, $id) {
         $menuModel = $this->loadModel('menu');
-        $menuItem = $menuModel->findOneById($id);
+        $menuItem = $menuModel->findOneBy('id', $id);
         $current_position = $menuItem->position;
         $nearItem = $menuModel->findNextItem($direction, $menuItem->admin, $menuItem->parent, $current_position);
         if ($nearItem['position'] > 0 && $menuItem->position > 0) {
             $menuItem->setPosition($nearItem['position']);
             $menuItem->flush();
-            $swapItem = $menuModel->findOneById($nearItem['id']);
+            $swapItem = $menuModel->findOneBy('id', $nearItem['id']);
             $swapItem->setPosition($current_position);
             $swapItem->flush();
         }

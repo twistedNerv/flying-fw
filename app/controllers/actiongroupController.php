@@ -16,7 +16,7 @@ class actiongroupController extends controller {
         $actiongroupUsers = [];
         
         if ($id != 0) {
-            $actiongroupModel->findOneById($id);
+            $actiongroupModel->findOneBy('id', $id);
             $membershipModel = $this->loadModel('membership');
             $actiongroupUsers = $membershipModel->findAllActiongroupUsers($id);
         }
@@ -41,7 +41,7 @@ class actiongroupController extends controller {
     public function removeAction($id) {
         if ($id) {
             $actiongroupModel = $this->loadModel("actiongroup");
-            $actiongroupModel->findOneById($id);
+            $actiongroupModel->findOneBy('id', $id);
             $actiongroupModel->remove();
             $this->tools->log("actiongroup", "Actiongroup element with id: $id removed.");
             $this->tools->redirect(URL . "actiongroup/update");

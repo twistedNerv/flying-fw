@@ -25,24 +25,12 @@ class menuModel extends model {
         return $this;
     }
 
-    public function findOneById($value) {
-        $result = $this->db->findOneByParam('id', $value, 'menu');
-        $this->fillMenu($result);
-        return $this;
-    }
-
     public function getTitle() {
         return $this->title;
     }
 
     public function setTitle($title) {
         $this->title = $title;
-        return $this;
-    }
-
-    public function findOneByTitle($value) {
-        $result = $this->db->findOneByParam('title', $value, 'menu');
-        $this->fillMenu($result);
         return $this;
     }
 
@@ -55,24 +43,12 @@ class menuModel extends model {
         return $this;
     }
 
-    public function findOneByDescription($value) {
-        $result = $this->db->findOneByParam('description', $value, 'menu');
-        $this->fillMenu($result);
-        return $this;
-    }
-
     public function getUrl() {
         return $this->url;
     }
 
     public function setUrl($url) {
         $this->url = $url;
-        return $this;
-    }
-
-    public function findOneByUrl($value) {
-        $result = $this->db->findOneByParam('url', $value, 'menu');
-        $this->fillMenu($result);
         return $this;
     }
 
@@ -85,24 +61,12 @@ class menuModel extends model {
         return $this;
     }
 
-    public function findOneByLevel($value) {
-        $result = $this->db->findOneByParam('level', $value, 'menu');
-        $this->fillMenu($result);
-        return $this;
-    }
-
     public function getPosition() {
         return $this->position;
     }
 
     public function setPosition($position) {
         $this->position = $position;
-        return $this;
-    }
-
-    public function findOneByPosition($value) {
-        $result = $this->db->findOneByParam('position', $value, 'menu');
-        $this->fillMenu($result);
         return $this;
     }
 
@@ -115,24 +79,12 @@ class menuModel extends model {
         return $this;
     }
 
-    public function findOneByParent($value) {
-        $result = $this->db->findOneByParam('parent', $value, 'menu');
-        $this->fillMenu($result);
-        return $this;
-    }
-
     public function getActive() {
         return $this->active;
     }
 
     public function setActive($active) {
         $this->active = $active;
-        return $this;
-    }
-
-    public function findOneByActive($value) {
-        $result = $this->db->findOneByParam('active', $value, 'menu');
-        $this->fillMenu($result);
         return $this;
     }
 
@@ -145,14 +97,18 @@ class menuModel extends model {
         return $this;
     }
 
-    public function findOneByAdmin($value) {
-        $result = $this->db->findOneByParam('admin', $value, 'menu');
+    public function findOneBy($ident, $value) {
+        $result = $this->db->findOneByParam($ident, $value, 'menu');
         $this->fillMenu($result);
         return $this;
     }
 
     public function findAll() {
         return $this->db->findAll('menu');
+    }
+    
+    public function findAllBy($ident, $identVal, $orderBy = null, $orderDirection = 'ASC', $limit=null) {
+        return $this->db->findAllByParam($ident, $identVal, 'menu', $orderBy, $orderDirection, $limit);
     }
 
     public function flush($sqlDump = 0) {

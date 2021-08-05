@@ -45,12 +45,15 @@ class db extends PDO {
         return $this->result->fetchAll(PDO::FETCH_ASSOC);
     }
     
-    public function findAllByParam($ident, $identValue, $table, $orderby=null, $orderDirection="ASC") {
+    public function findAllByParam($ident, $identValue, $table, $orderby=null, $orderDirection="ASC", $limit=null) {
         $columns = $this->getTableColumns($table);
         $val = $identValue;
         $sql = "SELECT " . implode(", ", $columns) . " FROM " . $table . " WHERE " . $ident . " = :" . $ident;
         if ($orderby) {
             $sql .= " ORDER BY " . $orderby . " " . $orderDirection;
+        }
+        if ($limit) {
+            $sql .= " LIMIT " . $limit;
         }
         $sql .= ";";
         $this->result = $this->prepare($sql);

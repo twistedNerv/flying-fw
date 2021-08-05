@@ -21,24 +21,12 @@ class actiongroupModel extends model {
         return $this;
     }
 
-    public function findOneById($value) {
-        $result = $this->db->findOneByParam('id', $value, 'actiongroup');
-        $this->fillActiongroup($result);
-        return $this;
-    }
-
     public function getName() {
         return $this->name;
     }
 
     public function setName($name) {
         $this->name = $name;
-        return $this;
-    }
-
-    public function findOneByName($value) {
-        $result = $this->db->findOneByParam('name', $value, 'actiongroup');
-        $this->fillActiongroup($result);
         return $this;
     }
 
@@ -51,12 +39,6 @@ class actiongroupModel extends model {
         return $this;
     }
 
-    public function findOneByDescription($value) {
-        $result = $this->db->findOneByParam('description', $value, 'actiongroup');
-        $this->fillActiongroup($result);
-        return $this;
-    }
-
     public function getAction() {
         return $this->action;
     }
@@ -66,12 +48,7 @@ class actiongroupModel extends model {
         return $this;
     }
 
-    public function findOneByAction($value) {
-        $result = $this->db->findOneByParam('action', $value, 'actiongroup');
-        $this->fillActiongroup($result);
-        return $this;
-    }
-
+    
     public function getSection() {
         return $this->section;
     }
@@ -80,15 +57,19 @@ class actiongroupModel extends model {
         $this->section = $section;
         return $this;
     }
-
-    public function findOneBySection($value) {
-        $result = $this->db->findOneByParam('section', $value, 'actiongroup');
+    
+    public function findOneBy($ident, $value) {
+        $result = $this->db->findOneByParam($ident, $value, 'actiongroup');
         $this->fillActiongroup($result);
         return $this;
     }
 
     public function findAll() {
         return $this->db->findAll('actiongroup');
+    }
+    
+    public function findAllBy($ident, $identVal, $orderBy = null, $orderDirection = 'ASC', $limit=null) {
+        return $this->db->findAllByParam($ident, $identVal, 'actiongroup', $orderBy, $orderDirection, $limit);
     }
 
     public function flush($sqlDump = 0) {
