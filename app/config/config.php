@@ -31,18 +31,18 @@ class config {
     }
     
     public function includeJquery() {
-        echo "<link rel='stylesheet' href='" . URL_ROOT . "/libs/jquery-3.4.1/jquery-ui.css'>";
-        echo "<script type='text/javascript' src='" . URL_ROOT . "/libs/jquery-3.4.1/jquery.js'></script>";
-        echo "<script type='text/javascript' src='" . URL_ROOT . "/libs/jquery-3.4.1/jquery-ui.js'></script>";
+        echo "<link rel='stylesheet' href='" . URL . "public/default/custom/jquery-3.4.1/jquery-ui.css'>";
+        echo "<script type='text/javascript' src='" . URL . "public/default/custom/jquery-3.4.1/jquery.js'></script>";
+        echo "<script type='text/javascript' src='" . URL . "public/default/custom/jquery-3.4.1/jquery-ui.js'></script>";
     }
     
     public function includeBootstrap() {
-        echo "<link rel='stylesheet' href='" . URL_ROOT . "/libs/bootstrap-4.3.1/css/bootstrap.min.css'>";
-        echo "<script type='text/javascript' src='" . URL_ROOT . "/libs/bootstrap-4.3.1/js/bootstrap.min.js'></script>";
+        echo "<link rel='stylesheet' href='" . URL . "public/default/custom/bootstrap-4.3.1/css/bootstrap.min.css'>";
+        echo "<script type='text/javascript' src='" . URL . "public/default/custom/bootstrap-4.3.1/js/bootstrap.min.js'></script>";
     }
     
     public function includeFontawesome() {
-        echo "<link rel='stylesheet' href='" . URL_ROOT . "/libs/fontawesome-free-5.12.0-web/css/all.css'>";
+        echo "<link rel='stylesheet' href='" . URL . "public/default/custom/fontawesome-free-5.12.0-web/css/all.css'>";
     }
     
     public function includeFontawesomeCustom() {
@@ -50,18 +50,18 @@ class config {
     }
     
     public function includeTimeline() {
-        echo "<script type='text/javascript' src='" . URL_ROOT . "/libs/timeline/timeline.min.js'></script>";
-        echo "<script type='text/javascript' src='" . URL_ROOT . "/libs/timeline/tether.min.js'></script>";
-        echo "<link rel='stylesheet' href='" . URL_ROOT . "/libs/timeline/jquery.timeline.min.css'>";
+        echo "<script type='text/javascript' src='" . URL . "public/default/custom/timeline/timeline.min.js'></script>";
+        echo "<script type='text/javascript' src='" . URL . "public/default/custom/timeline/tether.min.js'></script>";
+        echo "<link rel='stylesheet' href='" . URL . "public/default/custom/timeline/jquery.timeline.min.css'>";
     }
     
     public function includeEasyeditor() {
-        echo "<script type='text/javascript' src='" . URL_ROOT . "/libs/easyeditor/jquery.easyeditor.js'></script>";
-        echo "<link rel='stylesheet' href='" . URL_ROOT . "/libs/easyeditor/easyeditor.css'>";
-        echo "<link rel='stylesheet' href='" . URL_ROOT . "/libs/easyeditor/easyeditor-modal.css'>";
+        echo "<script type='text/javascript' src='" . URL . "public/default/custom/easyeditor/jquery.easyeditor.js'></script>";
+        echo "<link rel='stylesheet' href='" . URL . "public/default/custom/easyeditor/easyeditor.css'>";
+        echo "<link rel='stylesheet' href='" . URL . "public/default/custom/easyeditor/easyeditor-modal.css'>";
     }
     
     public function includeLibsFont($fontname) {
-        echo "<link rel='stylesheet' href='" . URL_ROOT . "/libs/fonts/fonts-" . $fontname .".css'>";
+        echo "<link rel='stylesheet' href='" . URL . "public/default/custom/fonts/fonts-" . $fontname .".css'>";
     }
 }
