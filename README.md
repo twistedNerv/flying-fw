@@ -18,5 +18,5 @@ Module builder:
 If all options selected there should be created table in db/sql schema file, controller, model, index view, update view, views added to menu
 
 Workflow:  
-- Controller, module, view for module goes into app/content. Front-end in public folder.  
+- Controller, model, view for module goes into app/content. Front-end in public folder.  
 - Custom module Board is added for example in app/content/ folder.
