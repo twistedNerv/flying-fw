@@ -151,7 +151,7 @@ class logsModel extends model {
                 u.name as user_name,
                 u.surname as user_surname
                 FROM logs AS l
-                INNER JOIN user as u 
+                LEFT JOIN user as u 
                 ON l.userid = u.id
                 WHERE 1 = 1 ";
         if (isset($condition['search']) && $condition['search'] && $condition['search'] != "") {
