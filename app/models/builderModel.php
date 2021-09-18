@@ -9,12 +9,12 @@ class builderModel extends model {
     public function addToMenu($table, $filename, $position) {
         switch($filename) {
             case 'index':
-                $displayActionName = 'Prikaži';
-                $displayActionDesc = 'Prikazovanje';
+                $displayActionName = 'View';
+                $displayActionDesc = 'Here you can view';
                 break;
             case 'update':
-                $displayActionName = 'Uredi';
-                $displayActionDesc = 'Urejanje';
+                $displayActionName = 'Edit';
+                $displayActionDesc = 'Here you can edit';
                 break;
         }
         $sql = "INSERT INTO `menu` (`title`, `description`, `url`, `level`, `position`, `parent`, `active`, `admin`) VALUES ";

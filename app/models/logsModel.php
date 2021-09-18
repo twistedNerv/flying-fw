@@ -83,8 +83,8 @@ class logsModel extends model {
         return $this;
     }
 
-    public function findAll() {
-        return $this->db->findAll('logs');
+    public function findAll($orderBy = null, $order = null, $limit = null) {
+        return $this->db->findAll($orderBy, $order, $limit, 'logs');
     }
     
     public function findAllBy($ident, $identVal, $orderBy = null, $orderDirection = 'ASC', $limit=null) {
