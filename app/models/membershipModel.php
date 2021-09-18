@@ -19,24 +19,12 @@ class membershipModel extends model {
         return $this;
     }
 
-    public function findOneById($value) {
-        $result = $this->db->findOneByParam('id', $value, 'membership');
-        $this->fillMembership($result);
-        return $this;
-    }
-
     public function getUser_id() {
         return $this->user_id;
     }
 
     public function setUser_id($user_id) {
         $this->user_id = $user_id;
-        return $this;
-    }
-
-    public function findOneByUser_id($value) {
-        $result = $this->db->findOneByParam('user_id', $value, 'membership');
-        $this->fillMembership($result);
         return $this;
     }
 
@@ -49,14 +37,18 @@ class membershipModel extends model {
         return $this;
     }
 
-    public function findOneByActiongroup_id($value) {
-        $result = $this->db->findOneByParam('actiongroup_id', $value, 'membership');
+    public function findOneBy($ident, $value) {
+        $result = $this->db->findOneByParam($ident, $value, 'membership');
         $this->fillMembership($result);
         return $this;
     }
 
-    public function findAll() {
-        return $this->db->findAll('membership');
+    public function findAll($orderBy = null, $order = null, $limit = null) {
+        return $this->db->findAll($orderBy, $order, $limit, 'membership');
+    }
+    
+    public function findAllBy($ident, $identVal, $orderBy = null, $orderDirection = 'ASC', $limit=null) {
+        return $this->db->findAllByParam($ident, $identVal, 'membership', $orderBy, $orderDirection, $limit);
     }
 
     public function flush($sqlDump = 0) {
@@ -75,10 +67,6 @@ class membershipModel extends model {
         return $this;
     }
 
-    public function findAllBy($ident, $identVal, $orderBy = null, $orderDirection = 'ASC') {
-        return $this->db->findAllByParam($ident, $identVal, 'membership', $orderBy, $orderDirection);
-    }
-    
     public function findOneByUserAndGroup($userId, $actiongroupId) {
         $checkSql = "SELECT id FROM membership WHERE user_id = " . $userId . " AND actiongroup_id = " . $actiongroupId;
         return $this->db->selectResult($checkSql);

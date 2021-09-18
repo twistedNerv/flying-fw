@@ -36,21 +36,31 @@ class db extends PDO {
         return $result;
     }
     
-    public function findAll($table) {
+    public function findAll($orderBy, $orderDirection, $limit, $table) {
         $columns = $this->getTableColumns($table);
-        $sql = "SELECT " . implode(", ", $columns) . " FROM " . $table . ";";
+        $sql = "SELECT " . implode(", ", $columns) . " FROM " . $table;
+        if ($orderBy && $orderDirection) {
+            $sql .= " ORDER BY " . $orderBy . " " . $orderDirection;
+        }
+        if ($limit) {
+            $sql .= " LIMIT " . $limit;
+        }
+        $sql .= ";";
         $this->result = $this->prepare($sql);
         $this->result->execute();
         //echo "<pre>";$this->result->debugDumpParams();die;
         return $this->result->fetchAll(PDO::FETCH_ASSOC);
     }
     
-    public function findAllByParam($ident, $identValue, $table, $orderby=null, $orderDirection="ASC") {
+    public function findAllByParam($ident, $identValue, $table, $orderby=null, $orderDirection="ASC", $limit=null) {
         $columns = $this->getTableColumns($table);
         $val = $identValue;
         $sql = "SELECT " . implode(", ", $columns) . " FROM " . $table . " WHERE " . $ident . " = :" . $ident;
         if ($orderby) {
             $sql .= " ORDER BY " . $orderby . " " . $orderDirection;
+        }
+        if ($limit) {
+            $sql .= " LIMIT " . $limit;
         }
         $sql .= ";";
         $this->result = $this->prepare($sql);
@@ -59,15 +69,6 @@ class db extends PDO {
         $result = $this->result->fetchAll(PDO::FETCH_ASSOC);
         //echo "<pre>";$this->result->debugDumpParams();die;
         return $result;
-    }
-    
-    public function findAllSortedLimited($table, $orderBy, $order, $limit) {
-        $columns = $this->getTableColumns($table);
-        $sql = "SELECT " . implode(", ", $columns) . " FROM " . $table . " ORDER BY " . $orderBy . " " . $order . " LIMIT " . $limit . ";";
-        $this->result = $this->prepare($sql);
-        $this->result->execute();
-        //echo "<pre>";$this->result->debugDumpParams();die;
-        return $this->result->fetchAll(PDO::FETCH_ASSOC);
     }
     
     public function delete(&$object, $table) {

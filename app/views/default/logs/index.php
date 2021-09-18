@@ -17,11 +17,11 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <strong>From:</strong>
-                                <input type="date" class="form-control" name="filter-condition-logs_datetime-from" value="<?php echo ($_POST['filter-condition-logs_datetime-from']) ? date('Y-m-d', strtotime($_POST['filter-condition-logs_datetime-from'])) : ""; ?>" min="01/01/1900" max="31/12/2020">
+                                <input type="date" class="form-control" name="filter-condition-logs_datetime-from" value="<?php echo (isset($_POST['filter-condition-logs_datetime-from']) && $_POST['filter-condition-logs_datetime-from']) ? date('Y-m-d', strtotime($_POST['filter-condition-logs_datetime-from'])) : ""; ?>" min="01/01/1900" max="31/12/2020">
                             </div>  
                             <div class="col-sm-6">
                                 <strong>To:</strong>
-                                <input type="date" class="form-control" name="filter-condition-logs_datetime-to" value="<?php echo ($_POST['filter-condition-logs_datetime-to']) ? date('Y-m-d', strtotime($_POST['filter-condition-logs_datetime-to'])) : ""; ?>" min="01/01/1900" max="31/12/2020">
+                                <input type="date" class="form-control" name="filter-condition-logs_datetime-to" value="<?php echo (isset($_POST['filter-condition-logs_datetime-to']) && $_POST['filter-condition-logs_datetime-to']) ? date('Y-m-d', strtotime($_POST['filter-condition-logs_datetime-to'])) : ""; ?>" min="01/01/1900" max="31/12/2020">
                             </div>  
                         </div>  
                     </div>  

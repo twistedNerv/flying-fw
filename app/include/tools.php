@@ -25,7 +25,7 @@ class tools {
         require_once 'app/models/actiongroupModel.php';
         require_once 'app/models/membershipModel.php';
         $actiongroupModel = new actiongroupModel();
-        $actiongroup = $actiongroupModel->findOneByAction($classMethod);
+        $actiongroup = $actiongroupModel->findOneBy('action', $classMethod);
         if ($actiongroup->id) {
             $membershipModel = new membershipModel();
             $isMember = $membershipModel->findOneByUserAndGroup($this->session->get('activeUser')['id'], $actiongroup->id);

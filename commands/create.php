@@ -145,7 +145,7 @@ class createModel extends db{
         $fileString .= 'if($id != 0) {';
         $fileString .= "\n";
         $fileString .= "\t\t\t";
-        $fileString .= '$' . $this->name . 'Model->findOneById($id);';
+        $fileString .= '$' . $this->name . 'Model->findOneBy("id", $id);';
         $fileString .= "\n";
         $fileString .= "\t\t";
         $fileString .= "}";
@@ -179,7 +179,7 @@ class createModel extends db{
         $fileString .= "\n\t\t\t";
         $fileString .= '$' . $this->name . 'Model = $this->loadModel("' . $this->name . '");';
         $fileString .= "\n\t\t\t";
-        $fileString .= '$' . $this->name . 'Model->findOneById($id);';
+        $fileString .= '$' . $this->name . 'Model->findOneBy("id", $id);';
         $fileString .= "\n\t\t\t";
         $fileString .= '$' . $this->name . 'Model->remove();';
         $fileString .= "\n\t\t\t";
@@ -221,7 +221,7 @@ class createModel extends db{
             $fileString .= "\t\t$" . "this->" . $singleColumn . " = $" . $singleColumn . ";\n";
             $fileString .= "\t\treturn $". "this;\n";
             $fileString .= "\t}\n\n";
-            $fileString .= "\tpublic function findOneBy" . ucfirst($singleColumn) . "($" . "value) {\n";
+            $fileString .= "\tpublic function findOneBy('" . $singleColumn . "('. $" . "value) {\n";
             $fileString .= "\t\t$" . "result = $" . "this->db->findOneByParam('" . $singleColumn . "', $" . "value, '" . $this->name . "');\n";
             $fileString .= "\t\t$" . "this->fill" . ucfirst($this->name) . "($" . "result);\n";
             $fileString .= "\t\treturn $" . "this;\n";

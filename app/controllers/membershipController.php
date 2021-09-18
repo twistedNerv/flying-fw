@@ -31,7 +31,7 @@ class membershipController extends controller {
         $this->tools->checkPageRights(4);
         if ($userId) {
             $userModel = $this->loadModel('membership');
-            $userModel->findOneById($id);
+            $userModel->findOneBy('id', $id);
             $userModel->remove();
             $this->tools->log('membership', "Membership with id: $id removed.");
             $this->tools->redirect(URL . 'user/update/' . $userId);

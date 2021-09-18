@@ -8,7 +8,7 @@ class boardController extends controller {
     
     public function indexAction() {
         $boardModel = $this->loadModel('board');
-        $allItems   = $boardModel->findAllSortedBy('id', 'desc', 4);
+        $allItems   = $boardModel->findAll('id', 'desc', 4);
         $this->view->assign('items', $allItems);
         $this->view->render("board/index");
     }
@@ -16,7 +16,7 @@ class boardController extends controller {
     public function updateAction($id = 0) {
         $boardModel = $this->loadModel("board");
         if ($id != 0) {
-            $boardModel->findOneById($id);
+            $boardModel->findOneBy('id', $id);
         }
         if (isset($_POST["action"]) && $_POST["action"] == "handleboard") {
             $boardModel->setTitle($this->tools->sanitizePost($_POST["board-title"]));
@@ -28,7 +28,7 @@ class boardController extends controller {
             $this->tools->notification("Board element dodan/urejen.", "primary");
             $this->tools->log("board", $action);
         }
-        $allItems = $boardModel->findAllSortedBy('id', 'desc', 20);
+        $allItems = $boardModel->findAll('id', 'desc', 20);
         $this->view->assign('items', $allItems);
         $this->view->assign('selectedBoard', $boardModel);
         $this->view->render("board/update");
@@ -37,7 +37,7 @@ class boardController extends controller {
     public function removeAction($id) {
         if ($id) {
             $boardModel = $this->loadModel("board");
-            $boardModel->findOneById($id);
+            $boardModel->findOneBy('id', $id);
             $boardModel->remove();
             $this->tools->log("board", "Board element with id: $id removed.");
             $this->tools->redirect(URL . "board/update");

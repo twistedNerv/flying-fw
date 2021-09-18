@@ -23,24 +23,12 @@ class logsModel extends model {
         return $this;
     }
 
-    public function findOneById($value) {
-        $result = $this->db->findOneByParam('id', $value, 'logs');
-        $this->fillLogs($result);
-        return $this;
-    }
-
     public function getType() {
         return $this->type;
     }
 
     public function setType($type) {
         $this->type = $type;
-        return $this;
-    }
-
-    public function findOneByType($value) {
-        $result = $this->db->findOneByParam('type', $value, 'logs');
-        $this->fillLogs($result);
         return $this;
     }
 
@@ -53,24 +41,12 @@ class logsModel extends model {
         return $this;
     }
 
-    public function findOneByLog($value) {
-        $result = $this->db->findOneByParam('log', $value, 'logs');
-        $this->fillLogs($result);
-        return $this;
-    }
-
     public function getDatetime() {
         return $this->datetime;
     }
 
     public function setDatetime($datetime) {
         $this->datetime = $datetime;
-        return $this;
-    }
-
-    public function findOneByDatetime($value) {
-        $result = $this->db->findOneByParam('datetime', $value, 'logs');
-        $this->fillLogs($result);
         return $this;
     }
 
@@ -83,24 +59,12 @@ class logsModel extends model {
         return $this;
     }
 
-    public function findOneByUserid($value) {
-        $result = $this->db->findOneByParam('userid', $value, 'logs');
-        $this->fillLogs($result);
-        return $this;
-    }
-
     public function getUserip() {
         return $this->userip;
     }
 
     public function setUserip($userip) {
         $this->userip = $userip;
-        return $this;
-    }
-
-    public function findOneByUserip($value) {
-        $result = $this->db->findOneByParam('userip', $value, 'logs');
-        $this->fillLogs($result);
         return $this;
     }
 
@@ -113,14 +77,18 @@ class logsModel extends model {
         return $this;
     }
 
-    public function findOneByUseragent($value) {
-        $result = $this->db->findOneByParam('useragent', $value, 'logs');
+    public function findOneBy($ident, $value) {
+        $result = $this->db->findOneByParam($ident, $value, 'logs');
         $this->fillLogs($result);
         return $this;
     }
 
-    public function findAll() {
-        return $this->db->findAll('logs');
+    public function findAll($orderBy = null, $order = null, $limit = null) {
+        return $this->db->findAll($orderBy, $order, $limit, 'logs');
+    }
+    
+    public function findAllBy($ident, $identVal, $orderBy = null, $orderDirection = 'ASC', $limit=null) {
+        return $this->db->findAllByParam($ident, $identVal, 'logs', $orderBy, $orderDirection, $limit);
     }
 
     public function flush($sqlDump = 0) {

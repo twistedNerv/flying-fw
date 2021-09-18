@@ -31,24 +31,12 @@ class userModel extends model {
         return $this;
     }
 
-    public function findOneById($value) {
-        $result = $this->db->findOneByParam('id', $value, 'user');
-        $this->fillUser($result);
-        return $this;
-    }
-
     public function getName() {
         return $this->name;
     }
 
     public function setName($name) {
         $this->name = $name;
-        return $this;
-    }
-
-    public function findOneByName($value) {
-        $result = $this->db->findOneByParam('name', $value, 'user');
-        $this->fillUser($result);
         return $this;
     }
 
@@ -61,24 +49,12 @@ class userModel extends model {
         return $this;
     }
 
-    public function findOneBySurname($value) {
-        $result = $this->db->findOneByParam('surname', $value, 'user');
-        $this->fillUser($result);
-        return $this;
-    }
-
     public function getUsername() {
         return $this->username;
     }
 
     public function setUsername($username) {
         $this->username = $username;
-        return $this;
-    }
-
-    public function findOneByUsername($value) {
-        $result = $this->db->findOneByParam('username', $value, 'user');
-        $this->fillUser($result);
         return $this;
     }
 
@@ -91,24 +67,12 @@ class userModel extends model {
         return $this;
     }
 
-    public function findOneByPassword($value) {
-        $result = $this->db->findOneByParam('password', $value, 'user');
-        $this->fillUser($result);
-        return $this;
-    }
-
     public function getEmail() {
         return $this->email;
     }
 
     public function setEmail($email) {
         $this->email = $email;
-        return $this;
-    }
-
-    public function findOneByEmail($value) {
-        $result = $this->db->findOneByParam('email', $value, 'user');
-        $this->fillUser($result);
         return $this;
     }
 
@@ -121,24 +85,12 @@ class userModel extends model {
         return $this;
     }
 
-    public function findOneByLocation($value) {
-        $result = $this->db->findOneByParam('location', $value, 'user');
-        $this->fillUser($result);
-        return $this;
-    }
-
     public function getDescription() {
         return $this->description;
     }
 
     public function setDescription($description) {
         $this->description = $description;
-        return $this;
-    }
-
-    public function findOneByDescription($value) {
-        $result = $this->db->findOneByParam('description', $value, 'user');
-        $this->fillUser($result);
         return $this;
     }
 
@@ -151,24 +103,12 @@ class userModel extends model {
         return $this;
     }
 
-    public function findOneByLevel($value) {
-        $result = $this->db->findOneByParam('level', $value, 'user');
-        $this->fillUser($result);
-        return $this;
-    }
-
     public function getActive() {
         return $this->active;
     }
 
     public function setActive($active) {
         $this->active = $active;
-        return $this;
-    }
-
-    public function findOneByActive($value) {
-        $result = $this->db->findOneByParam('active', $value, 'user');
-        $this->fillUser($result);
         return $this;
     }
 
@@ -181,24 +121,12 @@ class userModel extends model {
         return $this;
     }
 
-    public function findOneByLastloginDT($value) {
-        $result = $this->db->findOneByParam('lastloginDT', $value, 'user');
-        $this->fillUser($result);
-        return $this;
-    }
-
     public function getLastloginIP() {
         return $this->lastloginIP;
     }
 
     public function setLastloginIP($lastloginIP) {
         $this->lastloginIP = $lastloginIP;
-        return $this;
-    }
-
-    public function findOneByLastloginIP($value) {
-        $result = $this->db->findOneByParam('lastloginIP', $value, 'user');
-        $this->fillUser($result);
         return $this;
     }
 
@@ -211,24 +139,12 @@ class userModel extends model {
         return $this;
     }
 
-    public function findOneByCreatedDT($value) {
-        $result = $this->db->findOneByParam('createdDT', $value, 'user');
-        $this->fillUser($result);
-        return $this;
-    }
-
     public function getCreatedIP() {
         return $this->createdIP;
     }
 
     public function setCreatedIP($createdIP) {
         $this->createdIP = $createdIP;
-        return $this;
-    }
-
-    public function findOneByCreatedIP($value) {
-        $result = $this->db->findOneByParam('createdIP', $value, 'user');
-        $this->fillUser($result);
         return $this;
     }
 
@@ -241,14 +157,18 @@ class userModel extends model {
         return $this;
     }
 
-    public function findOneByTheme($value) {
-        $result = $this->db->findOneByParam('theme', $value, 'user');
+    public function findOneBy($ident, $value) {
+        $result = $this->db->findOneByParam($ident, $value, 'user');
         $this->fillUser($result);
         return $this;
     }
 
-    public function findAll() {
-        return $this->db->findAll('user');
+    public function findAll($orderBy = null, $order = null, $limit = null) {
+        return $this->db->findAll($orderBy, $order, $limit, 'user');
+    }
+    
+    public function findAllBy($ident, $identVal, $orderBy = null, $orderDirection = 'ASC', $limit=null) {
+        return $this->db->findAllByParam($ident, $identVal, 'user', $orderBy, $orderDirection, $limit);
     }
 
     public function flush($sqlDump=0) {

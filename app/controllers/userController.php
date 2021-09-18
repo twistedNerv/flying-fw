@@ -18,7 +18,7 @@ class userController extends controller {
         $userMemberships = [];
         
         if($userId) {
-            $userModel->findOneById($userId);
+            $userModel->findOneBy('id', $userId);
             $allActiongroups = $actiongroupModel->findAll();
             $userMemberships = $membershipModel->findAllUsersMemberships($userId);
         }
@@ -50,7 +50,7 @@ class userController extends controller {
         $this->tools->checkPageRights(4);
         if ($userId) {
             $userModel = $this->loadModel('user');
-            $userModel->findOneById($userId);
+            $userModel->findOneBy('id', $userId);
             $userModel->remove();
             $this->tools->log('user', "User with id: $userId removed.");
             $this->tools->redirect(URL . 'user/update');
