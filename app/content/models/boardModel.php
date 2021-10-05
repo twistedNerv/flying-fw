@@ -73,11 +73,11 @@ class boardModel extends model {
         return $this;
     }
 
-    public function findAll() {
-        return $this->db->findAll('board');
+    public function findAll($orderBy = null, $order = null, $limit = null) {
+        return $this->db->findAll($orderBy, $order, $limit, 'board');
     }
 
-    public function findAllBy($ident, $identVal, $orderBy = null, $orderDirection = 'ASC', $limit=null) {
+    public function findAllBy($ident, $identVal, $orderBy = null, $orderDirection = 'ASC', $limit = null) {
         return $this->db->findAllByParam($ident, $identVal, 'board', $orderBy, $orderDirection, $limit);
     }
 
@@ -96,9 +96,4 @@ class boardModel extends model {
         }
         return $this;
     }
-
-    public function findAllSortedBy($orderBy, $order, $limit = 10) {
-        return $this->db->findAllSortedLimited('board', $orderBy, $order, $limit);
-    }
-
 }

@@ -64,8 +64,8 @@ class actiongroupModel extends model {
         return $this;
     }
 
-    public function findAll() {
-        return $this->db->findAll('actiongroup');
+    public function findAll($orderBy = null, $order = null, $limit = null) {
+        return $this->db->findAll($orderBy, $order, $limit, 'actiongroup');
     }
     
     public function findAllBy($ident, $identVal, $orderBy = null, $orderDirection = 'ASC', $limit=null) {
