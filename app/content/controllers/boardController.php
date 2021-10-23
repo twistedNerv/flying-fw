@@ -4,6 +4,7 @@ class boardController extends controller {
 
     public function __construct() {
         parent::__construct();
+        $this->tools->checkPageRights(1);
     }
     
     public function indexAction() {
@@ -14,8 +15,9 @@ class boardController extends controller {
     }
 
     public function updateAction($id = 0) {
+        $this->tools->checkPageRights(3);
         $boardModel = $this->loadModel("board");
-        if ($id != 0) {
+        if ($id) {
             $boardModel->findOneBy('id', $id);
         }
         if (isset($_POST["action"]) && $_POST["action"] == "handleboard") {

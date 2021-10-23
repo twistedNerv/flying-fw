@@ -9,7 +9,7 @@
                     <div class="col-sm-2">
                         <div class="row">
                             <div class="col-sm-12">
-                                <strong>Search log:</strong><input type="text" class="form-control filter-condition-search" id="person-surname" name="filter-condition-search" placeholder="Vnesi niz..." value="<?php echo (isset($_POST['filter-condition-search'])) ? $_POST['filter-condition-search'] : ""; ?>">
+                                <strong>Search log:</strong><input type="text" class="form-control filter-condition-search" id="person-surname" name="filter-condition-search" placeholder="Insert string..." value="<?php echo (isset($_POST['filter-condition-search'])) ? $_POST['filter-condition-search'] : ""; ?>">
                             </div>
                         </div>
                     </div>
