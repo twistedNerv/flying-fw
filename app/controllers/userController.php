@@ -18,9 +18,9 @@ class userController extends controller {
         $userMemberships = [];
         
         if($userId) {
-            $userModel->findOneBy('id', $userId);
-            $allActiongroups = $actiongroupModel->findAll();
-            $userMemberships = $membershipModel->findAllUsersMemberships($userId);
+            $userModel->getOneBy('id', $userId);
+            $allActiongroups = $actiongroupModel->getAll();
+            $userMemberships = $membershipModel->getAllUsersMemberships($userId);
         }
         
         if(isset($_POST['action']) && $_POST['action'] == 'handleuser') {
@@ -37,7 +37,7 @@ class userController extends controller {
             $this->tools->notification("Uporabnik urejen.", "primary");
             $this->tools->log('user', "User: " . $userModel->getEmail() . " successfully added.");
         }
-        $allUsers = $userModel->findAll();
+        $allUsers = $userModel->getAll();
         $this->view->assign('allUsers', $allUsers);
         $this->view->assign('allActiongroups', $allActiongroups);
         $this->view->assign('userMemberships', $userMemberships);
@@ -50,7 +50,7 @@ class userController extends controller {
         $this->tools->checkPageRights(4);
         if ($userId) {
             $userModel = $this->loadModel('user');
-            $userModel->findOneBy('id', $userId);
+            $userModel->getOneBy('id', $userId);
             $userModel->remove();
             $this->tools->log('user', "User with id: $userId removed.");
             $this->tools->redirect(URL . 'user/update');

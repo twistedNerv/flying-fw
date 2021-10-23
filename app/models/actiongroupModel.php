@@ -58,18 +58,18 @@ class actiongroupModel extends model {
         return $this;
     }
     
-    public function findOneBy($ident, $value) {
-        $result = $this->db->findOneByParam($ident, $value, 'actiongroup');
+    public function getOneBy($ident, $value) {
+        $result = $this->db->getOneByParam($ident, $value, 'actiongroup');
         $this->fillActiongroup($result);
         return $this;
     }
 
-    public function findAll($orderBy = null, $order = null, $limit = null) {
-        return $this->db->findAll($orderBy, $order, $limit, 'actiongroup');
+    public function getAll($orderBy = null, $order = null, $limit = null) {
+        return $this->db->getAll($orderBy, $order, $limit, 'actiongroup');
     }
     
-    public function findAllBy($ident, $identVal, $orderBy = null, $orderDirection = 'ASC', $limit=null) {
-        return $this->db->findAllByParam($ident, $identVal, 'actiongroup', $orderBy, $orderDirection, $limit);
+    public function getAllBy($ident, $identVal, $orderBy = null, $orderDirection = 'ASC', $limit=null) {
+        return $this->db->getAllByParam($ident, $identVal, 'actiongroup', $orderBy, $orderDirection, $limit);
     }
 
     public function flush($sqlDump = 0) {

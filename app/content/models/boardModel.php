@@ -67,18 +67,18 @@ class boardModel extends model {
         return $this;
     }
 
-    public function findOneBy($ident, $value) {
-        $result = $this->db->findOneByParam($ident, $value, 'board');
+    public function getOneBy($ident, $value) {
+        $result = $this->db->getOneByParam($ident, $value, 'board');
         $this->fillBoard($result);
         return $this;
     }
 
-    public function findAll($orderBy = null, $order = null, $limit = null) {
-        return $this->db->findAll($orderBy, $order, $limit, 'board');
+    public function getAll($orderBy = null, $order = null, $limit = null) {
+        return $this->db->getAll($orderBy, $order, $limit, 'board');
     }
 
-    public function findAllBy($ident, $identVal, $orderBy = null, $orderDirection = 'ASC', $limit = null) {
-        return $this->db->findAllByParam($ident, $identVal, 'board', $orderBy, $orderDirection, $limit);
+    public function getAllBy($ident, $identVal, $orderBy = null, $orderDirection = 'ASC', $limit = null) {
+        return $this->db->getAllByParam($ident, $identVal, 'board', $orderBy, $orderDirection, $limit);
     }
 
     public function flush($sqlDump = 0) {

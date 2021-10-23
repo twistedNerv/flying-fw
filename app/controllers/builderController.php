@@ -119,16 +119,16 @@ class builderController extends controller {
                 $fileString .= "\t\treturn $". "this;\n";
                 $fileString .= "\t}\n\n";
             }
-            $fileString .= "\tpublic function findOneBy($" . "ident, $" . "value) {\n";
-            $fileString .= "\t\t$" . "result = $" . "this->db->findOneByParam($" . "ident, $" . "value, '" . $table . "');\n";
+            $fileString .= "\tpublic function getOneBy($" . "ident, $" . "value) {\n";
+            $fileString .= "\t\t$" . "result = $" . "this->db->getOneByParam($" . "ident, $" . "value, '" . $table . "');\n";
             $fileString .= "\t\t$" . "this->fill" . ucfirst($table) . "($" . "result);\n";
             $fileString .= "\t\treturn $". "this;\n";
             $fileString .= "\t}\n\n";
-            $fileString .= "\tpublic function findAll($" . "orderBy = null, $" . "order = null, $" . "limit = null) {\n";
-            $fileString .= "\t\treturn $" . "this->db->findAll($" . "orderBy, $" . "order, $" . "limit, '" . $table . "');\n";
+            $fileString .= "\tpublic function getAll($" . "orderBy = null, $" . "order = null, $" . "limit = null) {\n";
+            $fileString .= "\t\treturn $" . "this->db->getAll($" . "orderBy, $" . "order, $" . "limit, '" . $table . "');\n";
             $fileString .= "\t}\n\n";
-            $fileString .= "public function findAllBy($" . "ident, $" . "identVal, $" . "orderBy = null, $" . "orderDirection = 'ASC', $" . "limit=null) {\n";
-            $fileString .= "return $" . "this->db->findAllByParam($" . "ident, $" . "identVal, '" . $table . "', $" . "orderBy, $" . "orderDirection, $" . "limit);\n";
+            $fileString .= "public function getAllBy($" . "ident, $" . "identVal, $" . "orderBy = null, $" . "orderDirection = 'ASC', $" . "limit=null) {\n";
+            $fileString .= "return $" . "this->db->getAllByParam($" . "ident, $" . "identVal, '" . $table . "', $" . "orderBy, $" . "orderDirection, $" . "limit);\n";
             $fileString .= "\t}\n\n";
             $fileString .= "\tpublic function flush($" . "sqlDump=0) {\n";
             $fileString .= "\t\t$" . "this->db->flush($" . "this, '" . $table . "', $" . "sqlDump);\n";
@@ -164,7 +164,7 @@ class builderController extends controller {
             $fileString .= "$" . $table . "Model = $" . "this->loadModel('" . $table . "');";
             $fileString .= "\n";
             $fileString .= "\t\t";
-            $fileString .= "$" . $table . "Obj = $" . $table . "Model->findAll();";
+            $fileString .= "$" . $table . "Obj = $" . $table . "Model->getAll();";
             $fileString .= "\n";
             $fileString .= "\t\t";
             $fileString .= "$" . "this->view->assign('vars', get_class_vars('" . $table . "Model'));";
@@ -189,7 +189,7 @@ class builderController extends controller {
             $fileString .= 'if($id != 0) {';
             $fileString .= "\n";
             $fileString .= "\t\t\t";
-            $fileString .= '$' . $table . 'Model->findOneBy("id", $id);';
+            $fileString .= '$' . $table . 'Model->getOneBy("id", $id);';
             $fileString .= "\n";
             $fileString .= "\t\t";
             $fileString .= "}";
@@ -217,7 +217,7 @@ class builderController extends controller {
             $fileString .= "\n\t\t";
             $fileString .= "}";
             $fileString .= "\n\t\t";
-            $fileString .= '$allItems = $' . $table . 'Model->findAll();';
+            $fileString .= '$allItems = $' . $table . 'Model->getAll();';
             $fileString .= "\n\t\t";
             $fileString .= '$this->view->assign("items", $allItems);';
             $fileString .= "\n\t\t";
@@ -233,7 +233,7 @@ class builderController extends controller {
             $fileString .= "\n\t\t\t";
             $fileString .= '$' . $table . 'Model = $this->loadModel("' . $table . '");';
             $fileString .= "\n\t\t\t";
-            $fileString .= '$' . $table . 'Model->findOneBy("id", $id);';
+            $fileString .= '$' . $table . 'Model->getOneBy("id", $id);';
             $fileString .= "\n\t\t\t";
             $fileString .= '$' . $table . 'Model->remove();';
             $fileString .= "\n\t\t\t";

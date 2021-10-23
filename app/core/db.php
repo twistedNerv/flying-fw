@@ -1,42 +1,44 @@
 <?php
+
 class db extends PDO {
+
     public $link;
     public $result;
     public $numRows;
-    
+
     function __construct() {
         parent::__construct(DB_DSN, DB_USERNAME, DB_PASSWORD, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
     }
-    
+
     public function selectResult($sql) {
         $this->result = $this->prepare($sql);
         $this->result->execute();
         return $this->result->fetch(PDO::FETCH_ASSOC);
     }
-    
+
     public function selectAllResults($sql) {
         $this->result = $this->prepare($sql);
         $this->result->execute();
         return $this->result->fetchAll(PDO::FETCH_ASSOC);
     }
-    
+
     public function execute($sql) {
         $this->result = $this->prepare($sql);
         $this->result->execute();
     }
-    
-    public function findOneByParam($ident, $identValue, $table) {
+
+    public function getOneByParam($ident, $identValue, $table) {
         $columns = $this->getTableColumns($table);
         $val = $identValue;
         $sql = "SELECT " . implode(", ", $columns) . " FROM " . $table . " WHERE " . $ident . " = :" . $ident . ";";
         $this->result = $this->prepare($sql);
-        $this->result->bindParam(':'.$ident, $val);
+        $this->result->bindParam(':' . $ident, $val);
         $this->result->execute();
         $result = $this->result->fetch(PDO::FETCH_ASSOC);
         return $result;
     }
-    
-    public function findAll($orderBy, $orderDirection, $limit, $table) {
+
+    public function getAll($orderBy, $orderDirection, $limit, $table) {
         $columns = $this->getTableColumns($table);
         $sql = "SELECT " . implode(", ", $columns) . " FROM " . $table;
         if ($orderBy && $orderDirection) {
@@ -51,8 +53,8 @@ class db extends PDO {
         //echo "<pre>";$this->result->debugDumpParams();die;
         return $this->result->fetchAll(PDO::FETCH_ASSOC);
     }
-    
-    public function findAllByParam($ident, $identValue, $table, $orderby=null, $orderDirection="ASC", $limit=null) {
+
+    public function getAllByParam($ident, $identValue, $table, $orderby = null, $orderDirection = "ASC", $limit = null) {
         $columns = $this->getTableColumns($table);
         $val = $identValue;
         $sql = "SELECT " . implode(", ", $columns) . " FROM " . $table . " WHERE " . $ident . " = :" . $ident;
@@ -64,15 +66,15 @@ class db extends PDO {
         }
         $sql .= ";";
         $this->result = $this->prepare($sql);
-        $this->result->bindParam(':'.$ident, $val);
+        $this->result->bindParam(':' . $ident, $val);
         $this->result->execute();
         $result = $this->result->fetchAll(PDO::FETCH_ASSOC);
         //echo "<pre>";$this->result->debugDumpParams();die;
         return $result;
     }
-    
+
     public function delete(&$object, $table) {
-        if($id = $object->id) {
+        if ($id = $object->id) {
             $sql = "DELETE FROM " . $table . " WHERE id = :id";
             $this->result = $this->prepare($sql);
             $this->result->bindParam(':id', $object->id);
@@ -80,67 +82,70 @@ class db extends PDO {
             $object->id = "";
         }
     }
-    
-    public function flush($object, $table, $sqlDump=0) {
+
+    public function flush($object, $table, $sqlDump = 0) {
         $columns = $this->getTableColumns($table);
         $updArray = [];
-        if(!$object->id) {
+        if (!$object->id) {
             unset($columns[0]);
             $sql = "INSERT INTO " . $table . " (" . implode(", ", $columns) . ") VALUES (:" . implode(", :", $columns) . ")";
             $this->result = $this->prepare($sql);
-            foreach($columns as $key => $value){
-                if($value != "id") {
-                    $updArray[':'.$value] = $object->$value;
+            foreach ($columns as $key => $value) {
+                if ($value != "id") {
+                    $updArray[':' . $value] = $object->$value;
                 }
             }
         } else {
             $sql = "UPDATE " . $table . " SET ";
-            foreach($columns as $value){
+            foreach ($columns as $value) {
                 $sql .= ($value != 'id') ? $value . " = :" . $value . ", " : "";
             }
             $sql = rtrim($sql, ", ");
             $sql .= " WHERE id = :id;";
             $this->result = $this->prepare($sql);
-            foreach($columns as $key => $value){
-                $updArray[':'.$value] = $object->$value;
+            foreach ($columns as $key => $value) {
+                $updArray[':' . $value] = $object->$value;
             }
         }
         $this->result->execute($updArray);
         if ($sqlDump == 1) {
-            echo "<pre>";$this->result->debugDumpParams();die;
+            echo "<pre>";
+            $this->result->debugDumpParams();
+            die;
         }
     }
-    
+
     public function createTable($table) {
         $sql = file_get_contents("app/dbschemas/" . $table . ".sql");
         $this->execute($sql);
     }
-    
+
     public function createSqlDump($table) {
         $sql = "SHOW CREATE TABLE " . $table . ";";
         $result = $this->selectResult($sql);
         file_put_contents("app/dbschemas/" . $table . ".sql", $result['Create Table']);
     }
-    
+
     public function tableExists($table) {
         $sql = "DESCRIBE " . $table . ";";
         return ($this->selectResult($sql)) ? 1 : 0;
     }
-    
+
     public function getTables() {
         $sql = "SHOW TABLES;";
         $this->result = $this->selectAllResults($sql);
-        return array_column($this->result, "Tables_in_" . APP_NAME); 
+        return array_column($this->result, "Tables_in_" . APP_NAME);
     }
-    
-    public function getTableColumns($table, $details=false) {
+
+    public function getTableColumns($table, $details = false) {
         $sql = "SELECT COLUMN_NAME, COLUMN_TYPE
                 FROM INFORMATION_SCHEMA.COLUMNS
                 WHERE TABLE_SCHEMA = '" . DB_DATABASE . "' AND TABLE_NAME = '" . $table . "';";
         $this->result = $this->selectAllResults($sql);
         if (!$details) {
             return array_column($this->result, "COLUMN_NAME");
-        } 
+        }
         return $this->result;
     }
+
 }

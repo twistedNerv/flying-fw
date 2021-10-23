@@ -16,9 +16,9 @@ class actiongroupController extends controller {
         $actiongroupUsers = [];
         
         if ($id != 0) {
-            $actiongroupModel->findOneBy('id', $id);
+            $actiongroupModel->getOneBy('id', $id);
             $membershipModel = $this->loadModel('membership');
-            $actiongroupUsers = $membershipModel->findAllActiongroupUsers($id);
+            $actiongroupUsers = $membershipModel->getAllActiongroupUsers($id);
         }
         
         if (isset($_POST["action"]) && $_POST["action"] == "handleactiongroup") {
@@ -31,7 +31,7 @@ class actiongroupController extends controller {
             $this->tools->notification("actiongroup element dodan/urejen.", "primary");
             $this->tools->log("actiongroup", $action);
         }
-        $allItems = $actiongroupModel->findAll();
+        $allItems = $actiongroupModel->getAll();
         $this->view->assign("items", $allItems);
         $this->view->assign("selectedActiongroup", $actiongroupModel);
         $this->view->assign("actiongroupUsers", $actiongroupUsers);
@@ -41,7 +41,7 @@ class actiongroupController extends controller {
     public function removeAction($id) {
         if ($id) {
             $actiongroupModel = $this->loadModel("actiongroup");
-            $actiongroupModel->findOneBy('id', $id);
+            $actiongroupModel->getOneBy('id', $id);
             $actiongroupModel->remove();
             $this->tools->log("actiongroup", "Actiongroup element with id: $id removed.");
             $this->tools->redirect(URL . "actiongroup/update");

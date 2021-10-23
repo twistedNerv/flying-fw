@@ -14,7 +14,7 @@ class membershipController extends controller {
         $this->tools->checkPageRights(4);
         $membershipModel = $this->loadModel('membership');
         if ($userId && isset($_POST['action']) && $_POST['action'] == 'handleactiongroup') {
-            $membnershipExist = $membershipModel->findOneByUserAndGroup($userId, $_POST['membership-group_id']);
+            $membnershipExist = $membershipModel->getOneByUserAndGroup($userId, $_POST['membership-group_id']);
             if (!$membnershipExist['id']) {
                 $membershipModel->setUser_id($userId);
                 $membershipModel->setActiongroup_id($_POST['membership-group_id']);
@@ -31,7 +31,7 @@ class membershipController extends controller {
         $this->tools->checkPageRights(4);
         if ($userId) {
             $userModel = $this->loadModel('membership');
-            $userModel->findOneBy('id', $id);
+            $userModel->getOneBy('id', $id);
             $userModel->remove();
             $this->tools->log('membership', "Membership with id: $id removed.");
             $this->tools->redirect(URL . 'user/update/' . $userId);
