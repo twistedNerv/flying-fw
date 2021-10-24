@@ -13,19 +13,18 @@ class menuController extends controller {
             $newMenuItem->getOneBy('id', $menuId);
         }
         if (isset($_POST['action']) && $_POST['action'] == 'addmenuitem') {
-            $newMenuItem->setTitle($this->tools->sanitizePost($_POST['menu-title']));
-            $newMenuItem->setDescription($this->tools->sanitizePost($_POST['menu-description']));
-            $newMenuItem->setUrl($this->tools->sanitizePost($_POST['menu-url']));
-            $newMenuItem->setLevel($this->tools->sanitizePost($_POST['menu-level']));
+            $newMenuItem->setTitle($this->tools->getPost('menu-title']));
+            $newMenuItem->setDescription($this->tools->getPost('menu-description'));
+            $newMenuItem->setUrl($this->tools->getPost('menu-url'));
+            $newMenuItem->setLevel($this->tools->getPost('menu-level'));
             if (!$menuId) {
                 $position = $newMenuItem->getNextPosition($_POST['menu-admin'], $_POST['menu-parent'])['position'] + 1;
                 $newMenuItem->setPosition($position);
             }
-            $newMenuItem->setParent($this->tools->sanitizePost($_POST['menu-parent']));
-            $newMenuItem->setActive($this->tools->sanitizePost($_POST['menu-active']));
-            $newMenuItem->setAdmin($this->tools->sanitizePost($_POST['menu-admin']));
+            $newMenuItem->setParent($this->tools->getPost('menu-parent'));
+            $newMenuItem->setActive($this->tools->getPost('menu-active'));
+            $newMenuItem->setAdmin($this->tools->getPost('menu-admin'));
             $newMenuItem->flush();
-            $this->tools->notification("Dodan element v menu.", "primary");
             $this->tools->log('menu', "New menu element $newMenuItem->title added");
         }
         $menuModel = $this->loadModel('menu');

@@ -21,7 +21,7 @@ class membershipController extends controller {
                 $membershipModel->flush();
                 $this->tools->log('membership', "User with id " . $userId . " and group with id" . $_POST['membership-group_id'] . " added.");
             } else {
-                $this->tools->notification("Ni dodano. Že predhodno vpisano.", "primary");
+                echo "Not added. Already in.";
             }
         }
         $this->tools->redirect(URL . 'user/update/' . $userId);

@@ -49,12 +49,6 @@ class config {
         echo "<link rel='stylesheet' href='" . URL . "public/" . $this->getParam('template') . "/custom/fontawesome-free-5.12.0-web/css/all.css'>";
     }
     
-    public function includeTimeline() {
-        echo "<script type='text/javascript' src='" . URL . "public/" . $this->getParam('template') . "/custom/timeline/timeline.min.js'></script>";
-        echo "<script type='text/javascript' src='" . URL . "public/" . $this->getParam('template') . "/custom/timeline/tether.min.js'></script>";
-        echo "<link rel='stylesheet' href='" . URL . "public/" . $this->getParam('template') . "/custom/timeline/jquery.timeline.min.css'>";
-    }
-    
     public function includeEasyeditor() {
         echo "<script type='text/javascript' src='" . URL . "public/" . $this->getParam('template') . "/custom/easyeditor/jquery.easyeditor.js'></script>";
         echo "<link rel='stylesheet' href='" . URL . "public/" . $this->getParam('template') . "/custom/easyeditor/easyeditor.css'>";

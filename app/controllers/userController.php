@@ -24,17 +24,16 @@ class userController extends controller {
         }
         
         if(isset($_POST['action']) && $_POST['action'] == 'handleuser') {
-            $userModel->setName($this->tools->sanitizePost($_POST['user-name']));
-            $userModel->setSurname($this->tools->sanitizePost($_POST['user-surname']));
-            $userModel->setUsername($this->tools->sanitizePost($_POST['user-email']));
-            $userModel->setEmail($this->tools->sanitizePost($_POST['user-email']));
+            $userModel->setName($this->tools->getPost('user-name'));
+            $userModel->setSurname($this->tools->getPost('user-surname'));
+            $userModel->setUsername($this->tools->getPost('user-email'));
+            $userModel->setEmail($this->tools->getPost('user-email'));
             if(!$userModel->getId()) {
-                $userModel->setPassword(md5($this->tools->sanitizePost($_POST['user-password'])));
+                $userModel->setPassword(md5($this->tools->getPost('user-password')));
             }
-            $userModel->setLevel($this->tools->sanitizePost($_POST['user-level']));
+            $userModel->setLevel($this->tools->getPost('user-level'));
             $userModel->setActive(1);
             $userModel->flush();
-            $this->tools->notification("Uporabnik urejen.", "primary");
             $this->tools->log('user', "User: " . $userModel->getEmail() . " successfully added.");
         }
         $allUsers = $userModel->getAll();

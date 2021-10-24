@@ -50,42 +50,9 @@ class tools {
         return false;
     }
     
-
-    public function sanitizePost($postData) {
-        $result = (isset($postData) && $postData != "") ? filter_var($postData, FILTER_SANITIZE_STRING) : "";
-        return $result;
-    }
-    
     public function getPost($post_name) {
         $result = (isset($_POST[$post_name]) && $_POST[$post_name] != "") ? filter_var($_POST[$post_name], FILTER_SANITIZE_STRING) : "";
         return $result;
-    }
-
-    public function genericPostToObj($object, $class, $postData) {
-        foreach ($postData as $key => $value) {
-            if ($key != "action") {
-                $setMethod = "set" . ucfirst(str_replace($class . "-", "", $this->sanitizePost($key)));
-                $object->$setMethod($value);
-            }
-        }
-        return $object;
-    }
-
-    /*
-     * nText - text to be displayed
-     * nType - type of notification. Posibilities: primary, success, alert, warning, info
-     */
-
-    public function notification($nText, $nType = 'primary') {
-        $notificationDisplay = "<div class='notification-wrapper' id='notification-wrapper' style='display:none;'>";
-        $notificationDisplay .= "<div class='notification-frame'>";
-        $notificationDisplay .= "<div class='notification-text'>";
-        $notificationDisplay .= $nText;
-        $notificationDisplay .= "</div>";
-        $notificationDisplay .= "<button class='notification-button btn btn-$nType'>OK</button>";
-        $notificationDisplay .= "</div>";
-        $notificationDisplay .= "</div>";
-        echo $notificationDisplay;
     }
 
     public function log($logtype, $log) {

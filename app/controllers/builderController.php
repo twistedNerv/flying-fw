@@ -199,15 +199,13 @@ class builderController extends controller {
             foreach($columns as $singleColumn) {
                 if ($singleColumn != 'id') {
                     $fileString .= "\n\t\t\t";
-                    $fileString .= '$' . $table . 'Model->set' . ucfirst($singleColumn) . '($this->tools->sanitizePost($_POST["' . $table . '-' . $singleColumn . '"]));';
+                    $fileString .= '$' . $table . 'Model->set' . ucfirst($singleColumn) . '($this->tools->getPost("' . $table . '-' . $singleColumn . '"));';
                 }
             }
             $fileString .= "\n\t\t\t";
             $fileString .= '$' . $table . 'Model->flush();';
             $fileString .= "\n\t\t\t";
             $fileString .= '$action = ($id != 0) ? "' . ucfirst($table) . ' element with id: $id updated successfully." : "' . $table . ' successfully added.";';
-            $fileString .= "\n\t\t\t";
-            $fileString .= '$this->tools->notification("' . $table . ' element dodan/urejen.", "primary");';
             $fileString .= "\n\t\t\t";
             $fileString .= '$this->tools->log("' . $table . '", $action);';
             $fileString .= "\n\t\t\t";

@@ -7,12 +7,10 @@
         <?php $this->config->includeBootstrap();?>
         <?php $this->config->includeFontawesomeCustom();?>
         <?php $this->config->includeEasyeditor();?>
-        <?php $this->config->includeStyle('notification.css');?>
         <?php //$this->config->includeStyle('jquery-ui.css');?>
         <?php $this->config->includeStyle('fonts/fonts.css');?>
         <?php $this->config->includeStyle('default.css');?>
         <?php $this->config->includeScript('default.js');?>
-        <?php $this->config->includeScript('notification.js');?>
         <script>var URL = "<?=URL?>";</script>
         <?php $this->config->includeScript('ajax.js');?>
         <link href="<?=URL?>public/<?=TEMPLATE?>/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />

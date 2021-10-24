@@ -22,13 +22,12 @@ class actiongroupController extends controller {
         }
         
         if (isset($_POST["action"]) && $_POST["action"] == "handleactiongroup") {
-            $actiongroupModel->setName($this->tools->sanitizePost($_POST["actiongroup-name"]));
-            $actiongroupModel->setDescription($this->tools->sanitizePost($_POST["actiongroup-description"]));
-            $actiongroupModel->setAction($this->tools->sanitizePost($_POST["actiongroup-action"]));
-            $actiongroupModel->setSection($this->tools->sanitizePost($_POST["actiongroup-section"]));
+            $actiongroupModel->setName($this->tools->getPost("actiongroup-name"));
+            $actiongroupModel->setDescription($this->tools->getPost("actiongroup-description"));
+            $actiongroupModel->setAction($this->tools->getPost("actiongroup-action"));
+            $actiongroupModel->setSection($this->tools->getPost("actiongroup-section"));
             $actiongroupModel->flush();
             $action = ($id != 0) ? "Actiongroup element with id: $id updated successfully." : "actiongroup successfully added.";
-            $this->tools->notification("actiongroup element dodan/urejen.", "primary");
             $this->tools->log("actiongroup", $action);
         }
         $allItems = $actiongroupModel->getAll();
