@@ -187,20 +187,22 @@ class userModel extends model {
     }
 
     public function login() {
+        $session = new session();
         $user_mail = $this->tools->getPost('login-email');
-        $crypt_pass = md5($this->tools->getPost('login-password'));
-        $this->db->result = $this->db->prepare("SELECT * FROM user WHERE email = :email AND password = :password;");
+        $user_pass = $this->tools->getPost('login-password');
+        $this->db->result = $this->db->prepare("SELECT * FROM user WHERE email = :email;");
         $this->db->result->bindParam(':email', $user_mail);
-        $this->db->result->bindParam(':password', $crypt_pass);
         $this->db->result->execute();
-        $tools = new tools; //$this->loadModel('tools');
         if ($this->db->result->rowCount() == 1) {
-            $_SESSION[APP_NAME . "_" . 'activeUser'] = $this->db->result->fetch(PDO::FETCH_ASSOC);
-            $session = new session();
-            $tools->log("login", "Logged in: userid: " . $session->get('activeUser')['id'] . " / mail: " . $this->tools->getPost('login-email'));
-            $tools->redirect(URL . 'index');
-        } else {
-            $tools->log("login", "Failed for userid: " . $this->tools->getPost('login-email') . " / pass: " . $this->tools->getPost('login-password') . ").");
+            $temp_user = $this->db->result->fetch(PDO::FETCH_ASSOC);
+             if (password_verify($user_pass, $temp_user['password'])) {
+                $session->set('activeUser', $temp_user);
+                $this->tools->log("login", "Logged in with userid: " . $session->get('activeUser')['id'] . " / mail: " . $this->tools->getPost('login-email'));
+                return true;    
+            } else {
+                $this->tools->log("login", "Failed for user: " . $this->tools->getPost('login-email') . " / pass: " . $this->tools->getPost('login-password') . ").");
+            }
         }
+        return false;
     }
 }

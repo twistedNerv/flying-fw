@@ -1,6 +1,7 @@
-/*$(document).ready(function () {
-
-    URL = "http://localhost:8080/mvc/";
+/*
+//Example 
+ 
+$(document).ready(function () {
 
     $("#[search-id]").on('keyup', delay(function () {
         search_string = $("#[search-id]").val();

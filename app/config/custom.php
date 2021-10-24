@@ -15,5 +15,8 @@ $mainSettings = [
     'DB_DATABASE' => 'mvc',
     //options
     'DISPLAY_ERRORS' => true,
-    'DISPLAY_PAGE_HEADER' => true
+    'DISPLAY_PAGE_HEADER' => true,
+    'LIMIT_LOGIN_ATTEMPTS' => false,
+    'MAX_LOGIN_ATTEMPTS' => 2,
+    'LOGIN_PENALTY_DURATION' => 20
 ];

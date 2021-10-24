@@ -1,10 +1,10 @@
 <div class="col-sm-12 text-center"> 
-    <h2>Logs review</h2>
+    <h2>Log review</h2>
 </div>
 <div class="col-sm-12"> 
     <div class="raow">
         <form action="<?= URL ?>logs/index" method="post">
-            <div class="col-sm-12 k-filter">
+            <div class="col-sm-12 filter-bg">
                 <div class="row">
                     <div class="col-sm-2">
                         <div class="row">
@@ -51,7 +51,7 @@
                                     <option value=""> - - - </option>
                                     <option value="type" <?= ($this->tools->getPost('filter-order-by') == 'type') ? 'selected' : ''; ?>>class</option>
                                     <option value="logdatetime" <?= ($this->tools->getPost('filter-order-by') == 'logdatetime') ? 'selected' : ''; ?>>date</option>
-                                    <option value="userid" <?= (isset($this->tools->getPost('filter-order-by') == 'userid') ? 'selected' : ''; ?>>user</option>
+                                    <option value="userid" <?= ($this->tools->getPost('filter-order-by') == 'userid') ? 'selected' : ''; ?>>user</option>
                                 </select>
                             </div>
                             <div class="col-sm-4">

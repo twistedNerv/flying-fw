@@ -3,8 +3,8 @@ CREATE TABLE `user` (
   `name` varchar(45) NOT NULL,
   `surname` varchar(45) NOT NULL,
   `username` varchar(45) NOT NULL,
-  `password` varchar(45) NOT NULL,
-  `email` varchar(45) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
   `location` varchar(45) DEFAULT NULL,
   `description` longtext,
   `level` int(11) NOT NULL DEFAULT '2',
@@ -18,4 +18,4 @@ CREATE TABLE `user` (
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 INSERT INTO `user` (`name`, `surname`, `username`, `password`, `email`, `level`, `active`, `theme`) VALUES 
-("Flying", "Framework", "ffw", "098f6bcd4621d373cade4e832627b4f6", "test@test.test", 5, 1, "default");
+("Flying", "Framework", "ffw", "$2y$10$FmSqt6i683A5uKtNXZMSmuvpYtMN4e7.1N3D2n0Nf.aLmLhWnsTeK", "test@test.test", 5, 1, "default");
