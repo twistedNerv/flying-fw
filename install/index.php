@@ -6,26 +6,26 @@ error_reporting(E_ALL);
 class installer {
 
     public function run() {
-        if (isset ($_POST['action']) && $_POST['action'] == 'install_start') {
-            $url_root_local = $this->getPost('url_root_local');
-            $url_root_public= $this->getPost('url_root_public');
-            $app_name       = $this->getPost('app_name');
-            $template       = $this->getPost('template');
-            $organization   = $this->getPost('organization');
-            $title          = $this->getPost('title');
-            $header_title   = $this->getPost('header_title');
+        if ($this->tools->getPost('action') == 'install_start') {
+            $url_root_local = $this->tools->getPost('url_root_local');
+            $url_root_public= $this->tools->getPost('url_root_public');
+            $app_name       = $this->tools->getPost('app_name');
+            $template       = $this->tools->getPost('template');
+            $organization   = $this->tools->getPost('organization');
+            $title          = $this->tools->getPost('title');
+            $header_title   = $this->tools->getPost('header_title');
             
-            $create_config  = (isset($_POST['create_config'])) ? $_POST['create_config'] : false;
-            $create_db      = (isset($_POST['create_db'])) ? $_POST['create_db'] : false;
-            $create_tables  = (isset($_POST['create_tables'])) ? $_POST['create_tables'] : false;
+            $create_config  = $this->tools->getPost('create_config');
+            $create_db      = $this->tools->getPost('create_db');
+            $create_tables  = $this->tools->getPost('create_tables');
             
-            $db_host        = $this->getPost('db_host');
-            $db_username    = $this->getPost('db_username');
-            $db_password    = (isset($_POST['db_password'])) ? $_POST['db_password'] : "";
-            $db_database    = $this->getPost('db_database');
+            $db_host        = $this->tools->getPost('db_host');
+            $db_username    = $this->tools->getPost('db_username');
+            $db_password    = $this->tools->getPost('db_password');
+            $db_database    = $this->tools->getPost('db_database');
             
-            $display_errors = $this->getPost('display_errors');
-            $display_page_header = $this->getPost('display_page_header');
+            $display_errors = $this->tools->getPost('display_errors');
+            $display_page_header = $this->tools->getPost('display_page_header');
 if ($create_config) {
 $custom_file = "<?php
 $" . "mainSettings = [
@@ -84,15 +84,6 @@ $" . "mainSettings = [
             . "In case it doesn't redirect automatically, click here: <a href='" . $url_root_local . $app_name . "'>Local</a>";
         } else {
             require_once 'form.php';
-        }
-    }
-    
-    private function getPost($post_var) {
-        if (isset($_POST[$post_var]) && $_POST[$post_var] != "") {
-            return $_POST[$post_var];
-        } else {
-            echo "POST or it's value missing: " . $post_var . "<br>";
-            die;
         }
     }
 }

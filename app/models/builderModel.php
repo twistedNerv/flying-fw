@@ -18,7 +18,12 @@ class builderModel extends model {
                 break;
         }
         $sql = "INSERT INTO `menu` (`title`, `description`, `url`, `level`, `position`, `parent`, `active`, `admin`) VALUES ";
-        $sql .= "('" . $displayActionName . " " . $table . "', '" . $displayActionDesc . " " . $table . "', '" . $table . "/" . $filename . "', 2, " . $position . ", 0, 1, 0);";
-        $this->db->execute($sql);
+        $sql .= "(:title, :description, :url, 2, :position, 0, 1, 0);";
+        $this->db->result = $this->db->prepare($sql);
+        $this->db->result->bindParam(':title', $displayActionName . " " . $table);
+        $this->db->result->bindParam(':description', $displayActionDesc . " " . $table);
+        $this->db->result->bindParam(':url', $table . "/" . $filename);
+        $this->db->result->bindParam(':position', $position);
+        $this->db->result->execute();
     }
 }

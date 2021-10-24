@@ -20,7 +20,7 @@ class boardController extends controller {
         if ($id) {
             $boardModel->getOneBy('id', $id);
         }
-        if (isset($_POST["action"]) && $_POST["action"] == "handleboard") {
+        if ($this->tools->getPost("action") == "handleboard") {
             $boardModel->setTitle($this->tools->getPost("board-title"));
             $boardModel->setContent($this->tools->getPost("board-content"));
             $boardModel->setPostdate(date('d.m.Y H:i:s'));

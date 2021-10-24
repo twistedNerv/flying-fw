@@ -12,13 +12,13 @@ class menuController extends controller {
         if($menuId) {
             $newMenuItem->getOneBy('id', $menuId);
         }
-        if (isset($_POST['action']) && $_POST['action'] == 'addmenuitem') {
-            $newMenuItem->setTitle($this->tools->getPost('menu-title']));
+        if ($this->tools->getPost('action')== 'addmenuitem') {
+            $newMenuItem->setTitle($this->tools->getPost('menu-title'));
             $newMenuItem->setDescription($this->tools->getPost('menu-description'));
             $newMenuItem->setUrl($this->tools->getPost('menu-url'));
             $newMenuItem->setLevel($this->tools->getPost('menu-level'));
             if (!$menuId) {
-                $position = $newMenuItem->getNextPosition($_POST['menu-admin'], $_POST['menu-parent'])['position'] + 1;
+                $position = $newMenuItem->getNextPosition($this->tools->getPost('menu-admin'), $this->tools->getPost('menu-parent'))['position'] + 1;
                 $newMenuItem->setPosition($position);
             }
             $newMenuItem->setParent($this->tools->getPost('menu-parent'));

@@ -10,21 +10,21 @@ class builderController extends controller {
         $builderModel = $this->loadModel('builder');
         $allSchemas = array_values(array_diff(scandir('app/dbschemas/'), ['.', '..', 'logs.sql', 'user.sql', 'menu.sql', 'actiongroup.sql', 'membership.sql']));
         $allTables = array_values(array_diff($builderModel->db->getTables(), ['logs', 'user', 'menu', 'actiongroup', 'membership']));
-        $type = (isset($_POST['type']) && $_POST['type'] != "") ? $_POST['type'] : "";
+        $type = ($this->tools->getPost('type')) ? $this->tools->getPost('type') : "";
         $status_desc = "";
         $table_name = "";
         
-        if (isset($_POST['action']) && $_POST['action'] == "build" && $type) {
+        if ($this->tools->getPost('action') == "build" && $type) {
             if ($type == "create") {
-                $table_name = (isset($_POST['create'])) ? $_POST['create'] : null;
+                $table_name = $this->tools->getPost('create');
                 $status_desc .= "Table $table_name created<br>";
             } else {
                 if ($type == "table") {
-                    $table_name = (isset($_POST['tables'])) ? $_POST['tables'] : null;
+                    $table_name = $this->tools->getPost('tables');
                     $builderModel->db->createSqlDump($table_name);
                     $status_desc .= "Schema $table_name created<br>";
                 } else if ($type == "schema") {
-                    $table_name = (isset($_POST['schemas'])) ? $_POST['schemas'] : null;
+                    $table_name = $this->tools->getPost('schemas');
                     $table_name = str_replace('.sql', '', $table_name);
                     $builderModel->db->createTable($table_name);
                     $status_desc .= "Table $table_name created<br>";
@@ -34,22 +34,22 @@ class builderController extends controller {
                 }
             }
             $columns = $builderModel->db->getTableColumns($table_name);
-            if (isset($_POST['wish-model']) && $_POST['wish-model'] == "1") {
+            if ($this->tools->getPost('wish-model') == "1") {
                 $this->createModel($table_name, $columns, $type);
                 $status_desc .= "Class " . $table_name . "Model created<br>";
             }
-            if (isset($_POST['wish-controller']) && $_POST['wish-controller'] == "1") {
+            if ($this->tools->getPost('wish-controller') == "1") {
                 $this->createController($table_name, $columns, $type);
                 $status_desc .= "Class " . $table_name . "Controller created<br>";
             }
-            if (isset($_POST['wish-view-index']) && $_POST['wish-view-index'] == "1") {
+            if ($this->tools->getPost('wish-view-index') == "1") {
                 $this->createViewIndex($table_name);
                 $builderModel->addToMenu($table_name, 'index', 1);
                 $status_desc .= "View " . $table_name . "Update created and added in menu<br>";
             }
-            if (isset($_POST['wish-view-update']) && $_POST['wish-view-update'] == "1") {
+            if ($this->tools->getPost('wish-view-update') == "1") {
                 $this->createViewUpdate($table_name, $columns);
-                $position = (isset($_POST['wish-view-index']) && $_POST['wish-view-index'] == "1") ? 2 : 1;
+                $position = ($this->tools->getPost('wish-view-index') == "1") ? 2 : 1;
                 $builderModel->addToMenu($table_name, 'update', $position);
                 $status_desc .= "View " . $table_name . "Update created and added in menu<br>";
             }
@@ -195,7 +195,7 @@ class builderController extends controller {
             $fileString .= "}";
             $fileString .= "\n";
             $fileString .= "\t\t";
-            $fileString .= 'if(isset($_POST["action"]) && $_POST["action"] == "handle' . $table . '") {';
+            $fileString .= 'if($this->tools->getPost("action") == "handle' . $table . '") {';
             foreach($columns as $singleColumn) {
                 if ($singleColumn != 'id') {
                     $fileString .= "\n\t\t\t";

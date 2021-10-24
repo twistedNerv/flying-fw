@@ -10,7 +10,7 @@
                     <form action="login" method="post">
                         <input type="hidden" name="login-action" value="login"><br>
                         <div class="form-group">
-                            <input type="text" class="form-control" name="login-email" placeholder="e-mail" required value="<?php echo (isset($_POST['login-email'])) ? $_POST['login-email'] : ""; ?>"><br>
+                            <input type="text" class="form-control" name="login-email" placeholder="e-mail" required value="<?php echo $this->tools->getPost('login-email') ?>"><br>
                         </div>
                         <div class="form-group">
                             <input type="password" class="form-control" name="login-password" placeholder="password" required><br>

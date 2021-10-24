@@ -68,8 +68,11 @@ class membershipModel extends model {
     }
 
     public function getOneByUserAndGroup($userId, $actiongroupId) {
-        $checkSql = "SELECT id FROM membership WHERE user_id = " . $userId . " AND actiongroup_id = " . $actiongroupId;
-        return $this->db->selectResult($checkSql);
+        $checkSql = "SELECT id FROM membership WHERE user_id = :user_id AND actiongroup_id = :actiongroup_id ";
+        $this->db->result->bindParam(':user_id', $userId);
+        $this->db->result->bindParam(':actiongroup_id', $actiongroupId);
+        $this->db->result->execute();
+        return $this->db->result->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function getAllUsersMemberships($userId) {

@@ -10,23 +10,6 @@ class db extends PDO {
         parent::__construct(DB_DSN, DB_USERNAME, DB_PASSWORD, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
     }
 
-    public function selectResult($sql) {
-        $this->result = $this->prepare($sql);
-        $this->result->execute();
-        return $this->result->fetch(PDO::FETCH_ASSOC);
-    }
-
-    public function selectAllResults($sql) {
-        $this->result = $this->prepare($sql);
-        $this->result->execute();
-        return $this->result->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-    public function execute($sql) {
-        $this->result = $this->prepare($sql);
-        $this->result->execute();
-    }
-
     public function getOneByParam($ident, $identValue, $table) {
         $columns = $this->getTableColumns($table);
         $val = $identValue;
@@ -117,33 +100,43 @@ class db extends PDO {
 
     public function createTable($table) {
         $sql = file_get_contents("app/dbschemas/" . $table . ".sql");
-        $this->execute($sql);
+        $this->result = $this->prepare($sql);
+        $this->result->execute();
     }
 
     public function createSqlDump($table) {
-        $sql = "SHOW CREATE TABLE " . $table . ";";
-        $result = $this->selectResult($sql);
+        $sql = "SHOW CREATE TABLE :table";
+        $this->result = $this->prepare($sql);
+        $this->result->bindParam(':table', $table);
+        $this->result->execute();
+        $result = $this->result->fetch(PDO::FETCH_ASSOC);
         file_put_contents("app/dbschemas/" . $table . ".sql", $result['Create Table']);
     }
 
     public function tableExists($table) {
-        $sql = "DESCRIBE " . $table . ";";
-        return ($this->selectResult($sql)) ? 1 : 0;
+        $sql = "DESCRIBE :table";
+        $this->result = $this->prepare($sql);
+        $this->result->bindParam(':table', $table);
+        $this->result->execute();
+        $result = $this->result->fetch(PDO::FETCH_ASSOC);
+        return ($result) ? 1 : 0;
     }
 
     public function getTables() {
         $sql = "SHOW TABLES;";
-        $this->result = $this->selectAllResults($sql);
-        return array_column($this->result, "Tables_in_" . APP_NAME);
+        $this->result = $this->prepare($sql);
+        $this->result->execute();
+        return array_column($this->result->fetchAll(PDO::FETCH_ASSOC), "Tables_in_" . APP_NAME);
     }
 
     public function getTableColumns($table, $details = false) {
         $sql = "SELECT COLUMN_NAME, COLUMN_TYPE
                 FROM INFORMATION_SCHEMA.COLUMNS
                 WHERE TABLE_SCHEMA = '" . DB_DATABASE . "' AND TABLE_NAME = '" . $table . "';";
-        $this->result = $this->selectAllResults($sql);
+        $this->result = $this->prepare($sql);
+        $this->result->execute();
         if (!$details) {
-            return array_column($this->result, "COLUMN_NAME");
+            return array_column($this->result->fetchAll(PDO::FETCH_ASSOC), "COLUMN_NAME");
         }
         return $this->result;
     }

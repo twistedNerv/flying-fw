@@ -21,7 +21,7 @@ class actiongroupController extends controller {
             $actiongroupUsers = $membershipModel->getAllActiongroupUsers($id);
         }
         
-        if (isset($_POST["action"]) && $_POST["action"] == "handleactiongroup") {
+        if ($this->tools->getPost("action") == "handleactiongroup") {
             $actiongroupModel->setName($this->tools->getPost("actiongroup-name"));
             $actiongroupModel->setDescription($this->tools->getPost("actiongroup-description"));
             $actiongroupModel->setAction($this->tools->getPost("actiongroup-action"));

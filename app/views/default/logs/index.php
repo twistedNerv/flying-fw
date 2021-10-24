@@ -9,7 +9,7 @@
                     <div class="col-sm-2">
                         <div class="row">
                             <div class="col-sm-12">
-                                <strong>Search log:</strong><input type="text" class="form-control filter-condition-search" id="person-surname" name="filter-condition-search" placeholder="Insert string..." value="<?php echo (isset($_POST['filter-condition-search'])) ? $_POST['filter-condition-search'] : ""; ?>">
+                                <strong>Search log:</strong><input type="text" class="form-control filter-condition-search" id="person-surname" name="filter-condition-search" placeholder="Insert string..." value="<?php echo $this->tools->getPost('filter-condition-search') ?>">
                             </div>
                         </div>
                     </div>
@@ -17,11 +17,11 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <strong>From:</strong>
-                                <input type="date" class="form-control" name="filter-condition-logs_datetime-from" value="<?php echo (isset($_POST['filter-condition-logs_datetime-from']) && $_POST['filter-condition-logs_datetime-from']) ? date('Y-m-d', strtotime($_POST['filter-condition-logs_datetime-from'])) : ""; ?>" min="01/01/1900" max="31/12/2020">
+                                <input type="date" class="form-control" name="filter-condition-logs_datetime-from" value="<?php echo ($this->tools->getPost('filter-condition-logs_datetime-from')) ? date('Y-m-d', strtotime($this->tools->getPost('filter-condition-logs_datetime-from'))) : ""; ?>" min="01/01/1900" max="31/12/2020">
                             </div>  
                             <div class="col-sm-6">
                                 <strong>To:</strong>
-                                <input type="date" class="form-control" name="filter-condition-logs_datetime-to" value="<?php echo (isset($_POST['filter-condition-logs_datetime-to']) && $_POST['filter-condition-logs_datetime-to']) ? date('Y-m-d', strtotime($_POST['filter-condition-logs_datetime-to'])) : ""; ?>" min="01/01/1900" max="31/12/2020">
+                                <input type="date" class="form-control" name="filter-condition-logs_datetime-to" value="<?php echo ($this->tools->getPost('filter-condition-logs_datetime-to')) ? date('Y-m-d', strtotime($this->tools->getPost('filter-condition-logs_datetime-to'))) : ""; ?>" min="01/01/1900" max="31/12/2020">
                             </div>  
                         </div>  
                     </div>  
@@ -30,7 +30,7 @@
                         <select name="filter-condition-type" class="form-control">
                             <option value=""> - - - </option>
                             <?php foreach ($data['typeset'] as $singleType) { ?>
-                                <option value="<?=$singleType['type']?>" <?= (isset($_POST['filter-condition-type']) && $_POST['filter-condition-type'] == $singleType['type']) ? 'selected' : ''; ?>><?=$singleType['type']?></option>
+                                <option value="<?=$singleType['type']?>" <?= ($this->tools->getPost('filter-condition-type') == $singleType['type']) ? 'selected' : ''; ?>><?=$singleType['type']?></option>
                             <?php } ?>
                         </select>
                     </div>
@@ -39,7 +39,7 @@
                         <select name="filter-condition-user" class="form-control">
                             <option value=""> - - - </option>
                             <?php foreach ($data['userset'] as $singleUser) { ?>
-                                <option value="<?=$singleUser['uid']?>" <?= (isset($_POST['filter-condition-user']) && $_POST['filter-condition-user'] == $singleUser['uid']) ? 'selected' : ''; ?>><?=$singleUser['uname']?> <?=$singleUser['usurname']?></option>
+                                <option value="<?=$singleUser['uid']?>" <?= ($this->tools->getPost('filter-condition-user') == $singleUser['uid']) ? 'selected' : ''; ?>><?=$singleUser['uname']?> <?=$singleUser['usurname']?></option>
                             <?php } ?>
                         </select>
                     </div>
@@ -49,28 +49,28 @@
                                 <strong>Order by:</strong>
                                 <select name="filter-order-by" class="form-control">
                                     <option value=""> - - - </option>
-                                    <option value="type" <?= (isset($_POST['filter-order-by']) && $_POST['filter-order-by'] == 'type') ? 'selected' : ''; ?>>class</option>
-                                    <option value="logdatetime" <?= (isset($_POST['filter-order-by']) && $_POST['filter-order-by'] == 'logdatetime') ? 'selected' : ''; ?>>date</option>
-                                    <option value="userid" <?= (isset($_POST['filter-order-by']) && $_POST['filter-order-by'] == 'userid') ? 'selected' : ''; ?>>user</option>
+                                    <option value="type" <?= ($this->tools->getPost('filter-order-by') == 'type') ? 'selected' : ''; ?>>class</option>
+                                    <option value="logdatetime" <?= ($this->tools->getPost('filter-order-by') == 'logdatetime') ? 'selected' : ''; ?>>date</option>
+                                    <option value="userid" <?= (isset($this->tools->getPost('filter-order-by') == 'userid') ? 'selected' : ''; ?>>user</option>
                                 </select>
                             </div>
                             <div class="col-sm-4">
                                 <strong>Direction:</strong>
                                 <select name="filter-order-direction" class="form-control">
                                     <option value=""> - - - </option>
-                                    <option value="DESC" <?= (isset($_POST['filter-order-direction']) && $_POST['filter-order-direction'] == 'DESC') ? 'selected' : ''; ?>>Descending</option>
-                                    <option value="ASC" <?= (isset($_POST['filter-order-direction']) && $_POST['filter-order-direction'] == 'ASC') ? 'selected' : ''; ?>>Ascending</option>
+                                    <option value="DESC" <?= ($this->tools->getPost('filter-order-direction') == 'DESC') ? 'selected' : ''; ?>>Descending</option>
+                                    <option value="ASC" <?= ($this->tools->getPost('filter-order-direction') == 'ASC') ? 'selected' : ''; ?>>Ascending</option>
                                 </select>
                             </div>
                             <div class="col-sm-4">
                                 <strong>Limit:</strong>
                                 <select name="filter-limit-limit" class="form-control">
-                                    <option value="25" <?= (isset($_POST['filter-limit-limit']) && $_POST['filter-limit-limit'] == '25') ? 'selected' : ''; ?>>25</option>
-                                    <option value="50" <?= (isset($_POST['filter-limit-limit']) && $_POST['filter-limit-limit'] == '50') ? 'selected' : ''; ?>>50</option>
-                                    <option value="100" <?= (isset($_POST['filter-limit-limit']) && $_POST['filter-limit-limit'] == '100') ? 'selected' : ''; ?>>100</option>
-                                    <option value="200" <?= (isset($_POST['filter-limit-limit']) && $_POST['filter-limit-limit'] == '200') ? 'selected' : ''; ?>>200</option>
-                                    <option value="500" <?= (isset($_POST['filter-limit-limit']) && $_POST['filter-limit-limit'] == '500') ? 'selected' : ''; ?>>500</option>
-                                    <option value="1000" <?= (isset($_POST['filter-limit-limit']) && $_POST['filter-limit-limit'] == '1000') ? 'selected' : ''; ?>>1000</option>
+                                    <option value="25" <?= ($this->tools->getPost('filter-limit-limit') == '25') ? 'selected' : ''; ?>>25</option>
+                                    <option value="50" <?= ($this->tools->getPost('filter-limit-limit') == '50') ? 'selected' : ''; ?>>50</option>
+                                    <option value="100" <?= ($this->tools->getPost('filter-limit-limit') == '100') ? 'selected' : ''; ?>>100</option>
+                                    <option value="200" <?= ($this->tools->getPost('filter-limit-limit') == '200') ? 'selected' : ''; ?>>200</option>
+                                    <option value="500" <?= ($this->tools->getPost('filter-limit-limit') == '500') ? 'selected' : ''; ?>>500</option>
+                                    <option value="1000" <?= ($this->tools->getPost('filter-limit-limit') == '1000') ? 'selected' : ''; ?>>1000</option>
                                 </select>
                             </div>  
                         </div>

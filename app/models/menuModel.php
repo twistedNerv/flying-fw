@@ -179,15 +179,23 @@ class menuModel extends model {
             $way = "ASC";
         }
         $sql = "SELECT * FROM menu 
-            WHERE active = 1 AND admin = " . $admin . " AND parent = " . $parent . " AND position " . $direction . " " . $currentPosition . "
+            WHERE active = 1 AND admin = :admin AND parent = :parent AND position " . $direction . " " . $currentPosition . "
             ORDER BY position " . $way . " LIMIT 1;";
-        return $this->db->selectResult($sql);
+        $this->db->result = $this->db->prepare($sql);
+        $this->db->result->bindParam(':admin', $admin);
+        $this->db->result->bindParam(':parent', $parent);
+        $this->db->result->execute();
+        return $this->db->result->fetch(PDO::FETCH_ASSOC);
     }
 
     public function getNextPosition($admin, $parent) {
         $parent = (!$parent) ? "0" : $parent;
         $sql = "SELECT position FROM menu WHERE active = 1 AND admin = " . $admin . " AND parent = " . $parent . " ORDER BY position DESC LIMIT 1";
-        return $this->db->selectResult($sql);
+        $this->db->result = $this->db->prepare($sql);
+        $this->db->result->bindParam(':admin', $admin);
+        $this->db->result->bindParam(':parent', $parent);
+        $this->db->result->execute();
+        return $this->db->result->fetch(PDO::FETCH_ASSOC);
     }
 
     private function in_array_r($needle, $haystack, $strict = false) {

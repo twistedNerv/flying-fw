@@ -23,7 +23,7 @@ class userController extends controller {
             $userMemberships = $membershipModel->getAllUsersMemberships($userId);
         }
         
-        if(isset($_POST['action']) && $_POST['action'] == 'handleuser') {
+        if($this->tools->getPost('action') == 'handleuser') {
             $userModel->setName($this->tools->getPost('user-name'));
             $userModel->setSurname($this->tools->getPost('user-surname'));
             $userModel->setUsername($this->tools->getPost('user-email'));
@@ -59,8 +59,8 @@ class userController extends controller {
     }
     
     public function loginAction() {
-        if (isset($_POST["login-action"])) {
-            if ($_POST["login-action"] == "login" && $_POST['login-email'] != "" && $_POST['login-password'] != "") {
+        if ($this->tools->getPost("login-action")) {
+            if ($this->tools->getPost("login-action") == "login" && $this->tools->getPost('login-email') != "" && $this->tools->getPost('login-password') != "") {
                 $this->userModel->login();
             }
         }
