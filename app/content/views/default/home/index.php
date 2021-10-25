@@ -8,10 +8,10 @@
         <div class="col-sm-8"> 
             <div class="row">
                 <div class=" text-center"><h5>
-                        Nice to see you flying in the framework :)<br><br>
+                        Nice to see you flying in the framework :)<br><br><br>
                         If you are running this project for the first time, you have to run install first!<br>
-                        You can find it here: <a href="install/">INSTALL</a><br><br>
-                        CAUTION: before live deployment you MUST remove <u>install folder</u> because it has no security done!
+                        You can find it here: <a href="install/">INSTALL</a><br><br><br>
+                        CAUTION: before live deployment make sure you have set settings NOT to be public!
                     </h5>
                 </div>
             </div>

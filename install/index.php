@@ -1,8 +1,9 @@
 <?php
+session_start(); 
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
-
+require_once '../app/config/custom.php';
 class installer {
 
     public function run() {
@@ -26,6 +27,7 @@ class installer {
             
             $display_errors         = $this->getPost('display_errors');
             $display_page_header    = $this->getPost('display_page_header');
+            $public_settings        = $this->getPost('public_settings');
             
             $limit_login_attempts   = $this->getPost('limit_login_attempts');
             $max_login_attempts     = $this->getPost('max_login_attempts');
@@ -50,6 +52,7 @@ $" . "mainSettings = [
     //options
     'DISPLAY_ERRORS' => " . $display_errors . ",
     'DISPLAY_PAGE_HEADER' => " . $display_page_header . ",
+    'PUBLIC_SETTINGS' => " . $public_settings . ",
     'LIMIT_LOGIN_ATTEMPTS' => " . $limit_login_attempts . ",
     'MAX_LOGIN_ATTEMPTS' => " . $max_login_attempts . ",
     'LOGIN_PENALTY_DURATION' => " . $login_penalty_duration . "
@@ -91,11 +94,11 @@ $" . "mainSettings = [
                     die("DB Error: " . $e->getMessage());
                 }
             }
-            echo "<meta http-equiv='refresh' content='5; url=" . $url_root_local . $app_name . "' />";
+            echo "<meta http-equiv='refresh' content='4; url=" . $url_root_local . $app_name . "' />";
             echo "Installation finished. You will be redirected to main page in a few moments.<br><br>"
             . "In case it doesn't redirect automatically, click here: <a href='" . $url_root_local . $app_name . "'>Local</a>";
         } else {
-            require_once '../app/config/custom.php';
+            require '../app/config/custom.php';
             require_once 'form.php';
         }
     }
@@ -105,6 +108,11 @@ $" . "mainSettings = [
         return $result;
     }
 }
-
-$obj = new installer();
-$obj->run();
+//var_dump($_SESSION[$mainSettings['APP_NAME'] . '_activeUser']);
+if ($mainSettings['PUBLIC_SETTINGS'] || (isset($_SESSION[$mainSettings['APP_NAME'] . '_activeUser']) && $_SESSION[$mainSettings['APP_NAME'] . '_activeUser']['level'] == 5)) {
+    $obj = new installer();
+    $obj->run();
+} else {
+    echo "<meta http-equiv='refresh' content='2; url=../user/login' />";
+    echo "Not permited!";
+}

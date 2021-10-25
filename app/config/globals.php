@@ -15,6 +15,7 @@ define('TEMPLATE', $mainSettings['TEMPLATE']);
 define('TITLE', $mainSettings['TITLE']);
 define('HEADER_TITLE', $mainSettings['HEADER_TITLE']);
 define('DISPLAY_PAGE_HEADER', $mainSettings['DISPLAY_PAGE_HEADER']);
+define('PUBLIC_SETTINGS', $mainSettings['PUBLIC_SETTINGS']);
 define('DB_HOST', $mainSettings['DB_HOST']);
 define('DB_USERNAME', $mainSettings['DB_USERNAME']);
 define('DB_PASSWORD', $mainSettings['DB_PASSWORD']);

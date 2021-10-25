@@ -98,13 +98,4 @@ class userController extends controller {
         session_destroy();
         $this->tools->redirect(URL);
     }
-
-    public function testAction() {
-        $user = $this->loadModel('user')->getOneBy('id', 2);
-        $hash = password_hash('test', PASSWORD_DEFAULT);
-        echo $hash;
-        $user->setPassword($hash);
-        $user->flush();
-    }
-
 }
