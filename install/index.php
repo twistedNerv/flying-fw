@@ -83,9 +83,9 @@ $" . "mainSettings = [
                     }
                     foreach ($files as $file) {
                         $table_name = str_replace(".sql", "", $file);
-                        $sql = "DESCRIBE $table_name";
-                        $exist = $pdo->query($sql);
-                        if (!$exist->fetch(PDO::FETCH_ASSOC)) {
+                        $sql = "SHOW TABLES LIKE '" . $table_name . "';";
+                        $table_desc = $pdo->query($sql)->rowCount();
+                        if ($table_desc < 1) {
                             $sql = file_get_contents("../app/dbschemas/" . $file);
                             $pdo->exec($sql);
                         }
