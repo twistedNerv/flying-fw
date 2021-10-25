@@ -7,36 +7,25 @@
         <?php $this->config->includeBootstrap();?>
         <?php $this->config->includeFontawesomeCustom();?>
         <?php $this->config->includeEasyeditor();?>
-        <?php $this->config->includeStyle('notification.css');?>
         <?php //$this->config->includeStyle('jquery-ui.css');?>
         <?php $this->config->includeStyle('fonts/fonts.css');?>
         <?php $this->config->includeStyle('default.css');?>
         <?php $this->config->includeScript('default.js');?>
-        <?php $this->config->includeScript('notification.js');?>
         <script>var URL = "<?=URL?>";</script>
         <?php $this->config->includeScript('ajax.js');?>
-        <link href="<?=URL?>public/<?=TEMPLATE?>/images/faviconukc.ico" rel="shortcut icon" type="image/x-icon" />
-        <script>
-            $(function() {
-                $(".pick-a-date").datepicker({
-                    showAnim: "slideDown",
-                    dateFormat: "dd.mm.yy",
-                    firstDay: 1
-                });
-            });
-        </script>
-    </head>
+        <link href="<?=URL?>public/<?=TEMPLATE?>/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+   </head>
     <body>
         <div class="col-sm-2"></div>
         <div class="container col-sm-8">
             <div class="col-sm-12 header no-print">
                 <div class="header-content">
                     <div class="col-sm-4 float-left">
-                        <img src='<?= URL ?>public/<?= TEMPLATE ?>/images/logo.png' class="header-logo">
+                        <img src="<?= $this->template->getImage("logo.png")?>" class="header-logo">
                     </div>
                     <div class="col-sm-8 header-right">
                         <span class="float-left"><h1 class="header-title"><?=$this->config->getParam('header_title')?></h1></span>
-                        <span class="float-right"><img src="<?= URL ?>public/<?= TEMPLATE ?>/images/img-right.png"></span>
+                        <span class="float-right"><img src="<?= $this->template->getImage("img-right.png")?>"></span>
                     </div>
                 </div>
             </div>

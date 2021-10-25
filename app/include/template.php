@@ -11,9 +11,26 @@ class template {
         return  'value="' . $value . '"';
     }
     
-    public function setUpdateSelectValue($value, $condition1, $condition2) {
+    public function setUpdateTextareaValue($value) {
+        $value = (isset($value) && $value) ? $value : "";
+        return  $value;
+    }
+    
+    public function setUpdateSelectValue($value, $condition1, $condition2="") {
+        $condition2 = ($condition2) ? $condition2 : $value;
         $selected = ($condition1 == $condition2) ? "selected" : "";
         return 'value="' . $value . '" ' . $selected;
+    }
+    
+    public function setUpdateSelectOption($value, $condition1, $condition2="") {
+        $condition2 = ($condition2) ? $condition2 : $value;
+        $selected = ($condition1 == $condition2) ? "selected" : "";
+        //echo '<option value="' . $value . '" ' . $selected . '>' . $value . '</option>';
+        return '<option value="' . $value . '" ' . $selected . '>' . $value . '</option>';
+    }
+    
+    public function getImage($file) {
+        return  URL . "public/" . TEMPLATE . "/images/" . $file;
     }
     
     public function progressBar($percent, $title, $bar_color, $bg_color, $status_index=0) {

@@ -17,6 +17,7 @@ INSERT INTO `menu` (`title`, `description`, `url`, `level`, `position`, `parent`
 ("Groups", "Editing action groups", "actiongroup/update", 4, 2, 0, 1, 1),
 ("Logs", "View logs", "logs/index", 4, 3, 0, 1, 1),
 ("Builder", "Creating modules", "builder/index", 5, 4, 0, 1, 1),
+("Settings", "Basic settings", "install", 5, 5, 0, 1, 1),
 ("Board", "Board - main menu group", "board", 2, 1, 0, 1, 0),
 ("View posts", "View last board posts", "board/index", 2, 2, 6, 1, 0),
 ("Edit posts", "Edit board posts", "board/update", 2, 3, 6, 1, 0);

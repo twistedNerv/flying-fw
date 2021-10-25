@@ -205,6 +205,14 @@ table td {
     box-shadow: 0 0 5px grey;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1), 0 0 20px rgba(0, 0, 0, 0.1) inset;
 }
+.filter-bg {
+    background-color: #dfd3c3;
+    box-shadow: 0 5px 7px -6px #777, 0 0 20px rgba(0.3, 0.3, 0.3, 0.1) inset;
+    border: 1px solid #bbb;
+    margin-bottom: 7px;
+    padding: 10px;
+    border-radius: 5px;
+}
 .logs-table td {
     padding: 5px !important;
     margin: 5px;

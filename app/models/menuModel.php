@@ -97,18 +97,18 @@ class menuModel extends model {
         return $this;
     }
 
-    public function findOneBy($ident, $value) {
-        $result = $this->db->findOneByParam($ident, $value, 'menu');
+    public function getOneBy($ident, $value) {
+        $result = $this->db->getOneByParam($ident, $value, 'menu');
         $this->fillMenu($result);
         return $this;
     }
 
-    public function findAll($orderBy = null, $order = null, $limit = null) {
-        return $this->db->findAll($orderBy, $order, $limit, 'menu');
+    public function getAll($orderBy = null, $order = null, $limit = null) {
+        return $this->db->getAll($orderBy, $order, $limit, 'menu');
     }
     
-    public function findAllBy($ident, $identVal, $orderBy = null, $orderDirection = 'ASC', $limit=null) {
-        return $this->db->findAllByParam($ident, $identVal, 'menu', $orderBy, $orderDirection, $limit);
+    public function getAllBy($ident, $identVal, $orderBy = null, $orderDirection = 'ASC', $limit=null) {
+        return $this->db->getAllByParam($ident, $identVal, 'menu', $orderBy, $orderDirection, $limit);
     }
 
     public function flush($sqlDump = 0) {
@@ -127,11 +127,11 @@ class menuModel extends model {
         return $this;
     }
 
-    public function findAllByParent($parent) {
-        return $this->db->findAllByParam('parent', $parent, 'menu');
+    public function getAllByParent($parent) {
+        return $this->db->getAllByParam('parent', $parent, 'menu');
     }
 
-    public function findMenuItems($admin = false, $active = true, $parent = '0') {
+    public function getMenuItems($admin = false, $active = true, $parent = '0') {
         $adminCondition = ($admin) ? "AND menu.admin = 1" : "AND menu.admin = 0";
         $activeCondition = ($active) ? "AND menu.active = 1" : "";
         $parentCondition = ($parent == 'all') ? "" : "AND menu.parent = " . $parent;
@@ -157,10 +157,10 @@ class menuModel extends model {
         if ($session->get('activeUser') && $session->get('activeUser')['level'] < 5 && $admin == false) {
             $membershipModel = new membershipModel;
             $actiongroupModel = new actiongroupModel;
-            $allActionGroups = $actiongroupModel->findAll();
+            $allActionGroups = $actiongroupModel->getAll();
             foreach ($menuItems as $key => $singleItem) {
                 if ($this->in_array_r($singleItem['url'], $allActionGroups)) {
-                    $userMember = $membershipModel->findOneByUserAndGroup($session->get('activeUser')['id'], $actiongroupModel->findOneByAction($singleItem['url'])->id);
+                    $userMember = $membershipModel->getOneByUserAndGroup($session->get('activeUser')['id'], $actiongroupModel->getOneByAction($singleItem['url'])->id);
                     if (!$userMember) {
                         unset($menuItems[$key]);
                     }
@@ -170,7 +170,7 @@ class menuModel extends model {
         return $menuItems;
     }
 
-    public function findNextItem($direction, $admin, $parent, $currentPosition) {
+    public function getNextItem($direction, $admin, $parent, $currentPosition) {
         if ($direction == "up") {
             $direction = "<";
             $way = "DESC";
@@ -179,15 +179,23 @@ class menuModel extends model {
             $way = "ASC";
         }
         $sql = "SELECT * FROM menu 
-            WHERE active = 1 AND admin = " . $admin . " AND parent = " . $parent . " AND position " . $direction . " " . $currentPosition . "
+            WHERE active = 1 AND admin = :admin AND parent = :parent AND position " . $direction . " " . $currentPosition . "
             ORDER BY position " . $way . " LIMIT 1;";
-        return $this->db->selectResult($sql);
+        $this->db->result = $this->db->prepare($sql);
+        $this->db->result->bindParam(':admin', $admin);
+        $this->db->result->bindParam(':parent', $parent);
+        $this->db->result->execute();
+        return $this->db->result->fetch(PDO::FETCH_ASSOC);
     }
 
     public function getNextPosition($admin, $parent) {
         $parent = (!$parent) ? "0" : $parent;
         $sql = "SELECT position FROM menu WHERE active = 1 AND admin = " . $admin . " AND parent = " . $parent . " ORDER BY position DESC LIMIT 1";
-        return $this->db->selectResult($sql);
+        $this->db->result = $this->db->prepare($sql);
+        $this->db->result->bindParam(':admin', $admin);
+        $this->db->result->bindParam(':parent', $parent);
+        $this->db->result->execute();
+        return $this->db->result->fetch(PDO::FETCH_ASSOC);
     }
 
     private function in_array_r($needle, $haystack, $strict = false) {

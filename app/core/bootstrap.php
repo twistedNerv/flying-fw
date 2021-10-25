@@ -8,7 +8,7 @@ class bootstrap {
     protected $contentPath = "content/";
 
     public function __construct() {
-        $url = $this->parseUrl();
+        $url = (isset($_GET['url'])) ? explode('/', filter_var(rtrim($_GET['url'], '/'), FILTER_SANITIZE_URL)) : false;
         if(isset($url[0]) && file_exists('app/controllers/' . $url[0] . 'Controller.php')) {
             $this->controller = $url[0] . "Controller";
             $this->contentPath = "";
@@ -32,12 +32,4 @@ class bootstrap {
         $this->params = $url ? array_values($url) : [];
         call_user_func_array([$this->controller, $this->method], $this->params);
     }
-    
-    public function parseUrl() {
-        if(isset($_GET['url'])) {
-            return explode('/', filter_var(rtrim($_GET['url'], '/'), FILTER_SANITIZE_URL));
-        }
-        return null;
-    }
-    
 }

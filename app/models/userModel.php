@@ -157,18 +157,18 @@ class userModel extends model {
         return $this;
     }
 
-    public function findOneBy($ident, $value) {
-        $result = $this->db->findOneByParam($ident, $value, 'user');
+    public function getOneBy($ident, $value) {
+        $result = $this->db->getOneByParam($ident, $value, 'user');
         $this->fillUser($result);
         return $this;
     }
 
-    public function findAll($orderBy = null, $order = null, $limit = null) {
-        return $this->db->findAll($orderBy, $order, $limit, 'user');
+    public function getAll($orderBy = null, $order = null, $limit = null) {
+        return $this->db->getAll($orderBy, $order, $limit, 'user');
     }
     
-    public function findAllBy($ident, $identVal, $orderBy = null, $orderDirection = 'ASC', $limit=null) {
-        return $this->db->findAllByParam($ident, $identVal, 'user', $orderBy, $orderDirection, $limit);
+    public function getAllBy($ident, $identVal, $orderBy = null, $orderDirection = 'ASC', $limit=null) {
+        return $this->db->getAllByParam($ident, $identVal, 'user', $orderBy, $orderDirection, $limit);
     }
 
     public function flush($sqlDump=0) {
@@ -187,21 +187,22 @@ class userModel extends model {
     }
 
     public function login() {
-        $cryptPass = md5($_POST['login-password']);
-        $this->db->result = $this->db->prepare("SELECT * FROM user WHERE email = :email AND password = :password;");
-        $this->db->result->bindParam(':email', $_POST['login-email']);
-        $this->db->result->bindParam(':password', $cryptPass);
+        $session = new session();
+        $user_mail = $this->tools->getPost('login-email');
+        $user_pass = $this->tools->getPost('login-password');
+        $this->db->result = $this->db->prepare("SELECT * FROM user WHERE email = :email;");
+        $this->db->result->bindParam(':email', $user_mail);
         $this->db->result->execute();
-        $tools = new tools; //$this->loadModel('tools');
         if ($this->db->result->rowCount() == 1) {
-            $_SESSION[APP_NAME . "_" . 'activeUser'] = $this->db->result->fetch(PDO::FETCH_ASSOC);
-            $session = new session();
-            $tools->log("login", "Logged in: userid: " . $session->get('activeUser')['id'] . " / mail: " . $_POST['login-email']);
-            //header('location: index');
-            
-            $tools->redirect(URL . 'index');
-        } else {
-            $tools->log("login", "Failed for userid: " . $_POST['login-email'] . " / pass: " . $_POST['login-password'] . ").");
+            $temp_user = $this->db->result->fetch(PDO::FETCH_ASSOC);
+             if (password_verify($user_pass, $temp_user['password'])) {
+                $session->set('activeUser', $temp_user);
+                $this->tools->log("login", "Logged in with userid: " . $session->get('activeUser')['id'] . " / mail: " . $this->tools->getPost('login-email'));
+                return true;    
+            } else {
+                $this->tools->log("login", "Failed for user: " . $this->tools->getPost('login-email') . " / pass: " . $this->tools->getPost('login-password') . ").");
+            }
         }
+        return false;
     }
 }

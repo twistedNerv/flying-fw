@@ -10,21 +10,21 @@ class builderController extends controller {
         $builderModel = $this->loadModel('builder');
         $allSchemas = array_values(array_diff(scandir('app/dbschemas/'), ['.', '..', 'logs.sql', 'user.sql', 'menu.sql', 'actiongroup.sql', 'membership.sql']));
         $allTables = array_values(array_diff($builderModel->db->getTables(), ['logs', 'user', 'menu', 'actiongroup', 'membership']));
-        $type = (isset($_POST['type']) && $_POST['type'] != "") ? $_POST['type'] : "";
+        $type = ($this->tools->getPost('type')) ? $this->tools->getPost('type') : "";
         $status_desc = "";
         $table_name = "";
         
-        if (isset($_POST['action']) && $_POST['action'] == "build" && $type) {
+        if ($this->tools->getPost('action') == "build" && $type) {
             if ($type == "create") {
-                $table_name = (isset($_POST['create'])) ? $_POST['create'] : null;
+                $table_name = $this->tools->getPost('create');
                 $status_desc .= "Table $table_name created<br>";
             } else {
                 if ($type == "table") {
-                    $table_name = (isset($_POST['tables'])) ? $_POST['tables'] : null;
+                    $table_name = $this->tools->getPost('tables');
                     $builderModel->db->createSqlDump($table_name);
                     $status_desc .= "Schema $table_name created<br>";
                 } else if ($type == "schema") {
-                    $table_name = (isset($_POST['schemas'])) ? $_POST['schemas'] : null;
+                    $table_name = $this->tools->getPost('schemas');
                     $table_name = str_replace('.sql', '', $table_name);
                     $builderModel->db->createTable($table_name);
                     $status_desc .= "Table $table_name created<br>";
@@ -34,22 +34,22 @@ class builderController extends controller {
                 }
             }
             $columns = $builderModel->db->getTableColumns($table_name);
-            if (isset($_POST['wish-model']) && $_POST['wish-model'] == "1") {
+            if ($this->tools->getPost('wish-model') == "1") {
                 $this->createModel($table_name, $columns, $type);
                 $status_desc .= "Class " . $table_name . "Model created<br>";
             }
-            if (isset($_POST['wish-controller']) && $_POST['wish-controller'] == "1") {
+            if ($this->tools->getPost('wish-controller') == "1") {
                 $this->createController($table_name, $columns, $type);
                 $status_desc .= "Class " . $table_name . "Controller created<br>";
             }
-            if (isset($_POST['wish-view-index']) && $_POST['wish-view-index'] == "1") {
+            if ($this->tools->getPost('wish-view-index') == "1") {
                 $this->createViewIndex($table_name);
                 $builderModel->addToMenu($table_name, 'index', 1);
                 $status_desc .= "View " . $table_name . "Update created and added in menu<br>";
             }
-            if (isset($_POST['wish-view-update']) && $_POST['wish-view-update'] == "1") {
+            if ($this->tools->getPost('wish-view-update') == "1") {
                 $this->createViewUpdate($table_name, $columns);
-                $position = (isset($_POST['wish-view-index']) && $_POST['wish-view-index'] == "1") ? 2 : 1;
+                $position = ($this->tools->getPost('wish-view-index') == "1") ? 2 : 1;
                 $builderModel->addToMenu($table_name, 'update', $position);
                 $status_desc .= "View " . $table_name . "Update created and added in menu<br>";
             }
@@ -119,16 +119,16 @@ class builderController extends controller {
                 $fileString .= "\t\treturn $". "this;\n";
                 $fileString .= "\t}\n\n";
             }
-            $fileString .= "\tpublic function findOneBy($" . "ident, $" . "value) {\n";
-            $fileString .= "\t\t$" . "result = $" . "this->db->findOneByParam($" . "ident, $" . "value, '" . $table . "');\n";
+            $fileString .= "\tpublic function getOneBy($" . "ident, $" . "value) {\n";
+            $fileString .= "\t\t$" . "result = $" . "this->db->getOneByParam($" . "ident, $" . "value, '" . $table . "');\n";
             $fileString .= "\t\t$" . "this->fill" . ucfirst($table) . "($" . "result);\n";
             $fileString .= "\t\treturn $". "this;\n";
             $fileString .= "\t}\n\n";
-            $fileString .= "\tpublic function findAll($" . "orderBy = null, $" . "order = null, $" . "limit = null) {\n";
-            $fileString .= "\t\treturn $" . "this->db->findAll($" . "orderBy, $" . "order, $" . "limit, '" . $table . "');\n";
+            $fileString .= "\tpublic function getAll($" . "orderBy = null, $" . "order = null, $" . "limit = null) {\n";
+            $fileString .= "\t\treturn $" . "this->db->getAll($" . "orderBy, $" . "order, $" . "limit, '" . $table . "');\n";
             $fileString .= "\t}\n\n";
-            $fileString .= "public function findAllBy($" . "ident, $" . "identVal, $" . "orderBy = null, $" . "orderDirection = 'ASC', $" . "limit=null) {\n";
-            $fileString .= "return $" . "this->db->findAllByParam($" . "ident, $" . "identVal, '" . $table . "', $" . "orderBy, $" . "orderDirection, $" . "limit);\n";
+            $fileString .= "public function getAllBy($" . "ident, $" . "identVal, $" . "orderBy = null, $" . "orderDirection = 'ASC', $" . "limit=null) {\n";
+            $fileString .= "return $" . "this->db->getAllByParam($" . "ident, $" . "identVal, '" . $table . "', $" . "orderBy, $" . "orderDirection, $" . "limit);\n";
             $fileString .= "\t}\n\n";
             $fileString .= "\tpublic function flush($" . "sqlDump=0) {\n";
             $fileString .= "\t\t$" . "this->db->flush($" . "this, '" . $table . "', $" . "sqlDump);\n";
@@ -158,24 +158,24 @@ class builderController extends controller {
         $fileString .= "\t\tparent::__construct();";
         $fileString .= "\n\t}";
         $fileString .= "\n\n\t";
-        $fileString .= 'public function indexAction($id=0) {';
-        $fileString .= "\n\t\t";
-        $fileString .= "$" . $table . "Model = $" . "this->loadModel('" . $table . "');";
-        $fileString .= "\n";
-        $fileString .= "\t\t";
-        $fileString .= "$" . $table . "Obj = $" . $table . "Model->findAll();";
-        $fileString .= "\n";
-        $fileString .= "\t\t";
-        $fileString .= "$" . "this->view->assign('vars', get_class_vars('" . $table . "Model'));";
-        $fileString .= "\n";
-        $fileString .= "\t\t";
-        $fileString .= "$" . "this->view->assign('items', $" . $table . "Obj);";
-        $fileString .= "\n";
-        $fileString .= "\t\t";
-        $fileString .= '$this->view->render("' . $table . '/index");';
-        $fileString .= "\n\t";
-        $fileString .= '}';
         if ($type != 'create') {
+            $fileString .= 'public function indexAction($id=0) {';
+            $fileString .= "\n\t\t";
+            $fileString .= "$" . $table . "Model = $" . "this->loadModel('" . $table . "');";
+            $fileString .= "\n";
+            $fileString .= "\t\t";
+            $fileString .= "$" . $table . "Obj = $" . $table . "Model->getAll();";
+            $fileString .= "\n";
+            $fileString .= "\t\t";
+            $fileString .= "$" . "this->view->assign('vars', get_class_vars('" . $table . "Model'));";
+            $fileString .= "\n";
+            $fileString .= "\t\t";
+            $fileString .= "$" . "this->view->assign('items', $" . $table . "Obj);";
+            $fileString .= "\n";
+            $fileString .= "\t\t";
+            $fileString .= '$this->view->render("' . $table . '/index");';
+            $fileString .= "\n\t";
+            $fileString .= '}';
             $fileString .= "\n\n\t";
             $fileString .= 'public function updateAction($id=0) {';
             $fileString .= "\n";
@@ -189,25 +189,23 @@ class builderController extends controller {
             $fileString .= 'if($id != 0) {';
             $fileString .= "\n";
             $fileString .= "\t\t\t";
-            $fileString .= '$' . $table . 'Model->findOneBy("id", $id);';
+            $fileString .= '$' . $table . 'Model->getOneBy("id", $id);';
             $fileString .= "\n";
             $fileString .= "\t\t";
             $fileString .= "}";
             $fileString .= "\n";
             $fileString .= "\t\t";
-            $fileString .= 'if(isset($_POST["action"]) && $_POST["action"] == "handle' . $table . '") {';
+            $fileString .= 'if($this->tools->getPost("action") == "handle' . $table . '") {';
             foreach($columns as $singleColumn) {
                 if ($singleColumn != 'id') {
                     $fileString .= "\n\t\t\t";
-                    $fileString .= '$' . $table . 'Model->set' . ucfirst($singleColumn) . '($this->tools->sanitizePost($_POST["' . $table . '-' . $singleColumn . '"]));';
+                    $fileString .= '$' . $table . 'Model->set' . ucfirst($singleColumn) . '($this->tools->getPost("' . $table . '-' . $singleColumn . '"));';
                 }
             }
             $fileString .= "\n\t\t\t";
             $fileString .= '$' . $table . 'Model->flush();';
             $fileString .= "\n\t\t\t";
             $fileString .= '$action = ($id != 0) ? "' . ucfirst($table) . ' element with id: $id updated successfully." : "' . $table . ' successfully added.";';
-            $fileString .= "\n\t\t\t";
-            $fileString .= '$this->tools->notification("' . $table . ' element dodan/urejen.", "primary");';
             $fileString .= "\n\t\t\t";
             $fileString .= '$this->tools->log("' . $table . '", $action);';
             $fileString .= "\n\t\t\t";
@@ -217,7 +215,7 @@ class builderController extends controller {
             $fileString .= "\n\t\t";
             $fileString .= "}";
             $fileString .= "\n\t\t";
-            $fileString .= '$allItems = $' . $table . 'Model->findAll();';
+            $fileString .= '$allItems = $' . $table . 'Model->getAll();';
             $fileString .= "\n\t\t";
             $fileString .= '$this->view->assign("items", $allItems);';
             $fileString .= "\n\t\t";
@@ -233,7 +231,7 @@ class builderController extends controller {
             $fileString .= "\n\t\t\t";
             $fileString .= '$' . $table . 'Model = $this->loadModel("' . $table . '");';
             $fileString .= "\n\t\t\t";
-            $fileString .= '$' . $table . 'Model->findOneBy("id", $id);';
+            $fileString .= '$' . $table . 'Model->getOneBy("id", $id);';
             $fileString .= "\n\t\t\t";
             $fileString .= '$' . $table . 'Model->remove();';
             $fileString .= "\n\t\t\t";

@@ -75,7 +75,7 @@
             <div class="col-sm-6 text-left">
             </div>
             <div class="col-sm-6">
-                Create view: grid
+                <strike>Create view: grid</strike>
                 <input type="hidden" name="wish-view-grid" value="0">
                 <input type="checkbox" class="form-control" name="wish-view-grid" id="wish-view-grid" value="1">
             </div>

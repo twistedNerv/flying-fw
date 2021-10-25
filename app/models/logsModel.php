@@ -77,18 +77,18 @@ class logsModel extends model {
         return $this;
     }
 
-    public function findOneBy($ident, $value) {
-        $result = $this->db->findOneByParam($ident, $value, 'logs');
+    public function getOneBy($ident, $value) {
+        $result = $this->db->getOneByParam($ident, $value, 'logs');
         $this->fillLogs($result);
         return $this;
     }
 
-    public function findAll($orderBy = null, $order = null, $limit = null) {
-        return $this->db->findAll($orderBy, $order, $limit, 'logs');
+    public function getAll($orderBy = null, $order = null, $limit = null) {
+        return $this->db->getAll($orderBy, $order, $limit, 'logs');
     }
     
-    public function findAllBy($ident, $identVal, $orderBy = null, $orderDirection = 'ASC', $limit=null) {
-        return $this->db->findAllByParam($ident, $identVal, 'logs', $orderBy, $orderDirection, $limit);
+    public function getAllBy($ident, $identVal, $orderBy = null, $orderDirection = 'ASC', $limit=null) {
+        return $this->db->getAllByParam($ident, $identVal, 'logs', $orderBy, $orderDirection, $limit);
     }
 
     public function flush($sqlDump = 0) {
@@ -119,7 +119,7 @@ class logsModel extends model {
                 u.name as user_name,
                 u.surname as user_surname
                 FROM logs AS l
-                INNER JOIN user as u 
+                LEFT JOIN user as u 
                 ON l.userid = u.id
                 WHERE 1 = 1 ";
         if (isset($condition['search']) && $condition['search'] && $condition['search'] != "") {

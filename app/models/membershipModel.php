@@ -37,18 +37,18 @@ class membershipModel extends model {
         return $this;
     }
 
-    public function findOneBy($ident, $value) {
-        $result = $this->db->findOneByParam($ident, $value, 'membership');
+    public function getOneBy($ident, $value) {
+        $result = $this->db->getOneByParam($ident, $value, 'membership');
         $this->fillMembership($result);
         return $this;
     }
 
-    public function findAll($orderBy = null, $order = null, $limit = null) {
-        return $this->db->findAll($orderBy, $order, $limit, 'membership');
+    public function getAll($orderBy = null, $order = null, $limit = null) {
+        return $this->db->getAll($orderBy, $order, $limit, 'membership');
     }
     
-    public function findAllBy($ident, $identVal, $orderBy = null, $orderDirection = 'ASC', $limit=null) {
-        return $this->db->findAllByParam($ident, $identVal, 'membership', $orderBy, $orderDirection, $limit);
+    public function getAllBy($ident, $identVal, $orderBy = null, $orderDirection = 'ASC', $limit=null) {
+        return $this->db->getAllByParam($ident, $identVal, 'membership', $orderBy, $orderDirection, $limit);
     }
 
     public function flush($sqlDump = 0) {
@@ -67,12 +67,15 @@ class membershipModel extends model {
         return $this;
     }
 
-    public function findOneByUserAndGroup($userId, $actiongroupId) {
-        $checkSql = "SELECT id FROM membership WHERE user_id = " . $userId . " AND actiongroup_id = " . $actiongroupId;
-        return $this->db->selectResult($checkSql);
+    public function getOneByUserAndGroup($userId, $actiongroupId) {
+        $checkSql = "SELECT id FROM membership WHERE user_id = :user_id AND actiongroup_id = :actiongroup_id ";
+        $this->db->result->bindParam(':user_id', $userId);
+        $this->db->result->bindParam(':actiongroup_id', $actiongroupId);
+        $this->db->result->execute();
+        return $this->db->result->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function findAllUsersMemberships($userId) {
+    public function getAllUsersMemberships($userId) {
         $this->db->result = $this->db->prepare("
             SELECT m.id as mid, ag.name as name, ag.action as action, ag.section as section
             FROM membership as m 
@@ -84,7 +87,7 @@ class membershipModel extends model {
         return $this->db->result->fetchAll(PDO::FETCH_ASSOC);
     }
     
-    public function findAllActiongroupUsers($actiongroupId) {
+    public function getAllActiongroupUsers($actiongroupId) {
         $this->db->result = $this->db->prepare("
             SELECT u.id as id, u.name as name, u.surname as surname
             FROM membership as m 

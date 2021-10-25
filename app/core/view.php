@@ -37,9 +37,9 @@ class view {
     private function displayHead() {
         require_once 'app/models/menuModel.php';
         $menuModel = new menuModel;
-        $allMenuItems = $menuModel->findMenuItems(false, true, 'all');
-        $allAdminMenuItems = $menuModel->findMenuItems(true, true, 'all');
-        $parentGroups = $menuModel->findMenuItems(false, true, '0');
+        $allMenuItems = $menuModel->getMenuItems(false, true, 'all');
+        $allAdminMenuItems = $menuModel->getMenuItems(true, true, 'all');
+        $parentGroups = $menuModel->getMenuItems(false, true, '0');
         require_once 'app/views/' . $this->config->getParam('template') . '/basic/head.php';
     }
 }
