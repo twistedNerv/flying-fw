@@ -229,6 +229,20 @@ table td {
     margin: 5px;
     margin-left: 0;
 }
+.alert-podium {
+    color: #dbd26e;
+    border: 3px solid #dbd26e;
+    margin: 5px 0;
+    background-color: #d96230;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2), 0 0 20px rgba(0, 0, 0, 0.1) inset;
+}
+.settings-home {
+    font-size: 60px;
+    padding-top: 30px;
+    color: #797a7e;
+}
+.settings-home:hover {
+    color: #000;
 /* easyeditor */
 .easyeditor:focus {
     color: #495057;
