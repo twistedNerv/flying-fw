@@ -1,7 +1,5 @@
 # flying-fw
-**Custom light PHP MVC framework** *(could be that it is slowly evolving in some sort of CMS)*
-
-**Including:**
+**Custom light PHP MVC framework** *(could be that it is slowly evolving in some sort of CMS) including:*
 - installation wizzard
 - module builder wizzard
 - user and user-groups management 
