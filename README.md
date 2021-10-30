@@ -1,5 +1,5 @@
 # flying-fw
-**Custom light PHP MVC framework** including
+**Custom light PHP MVC framework including**
 *(could be that it is slowly evolving in some sort of CMS)*
 
 - installation wizzard
