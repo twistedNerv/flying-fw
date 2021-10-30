@@ -3,12 +3,12 @@
 
 Including: 
 - installation wizzard
-- module builder 
+- module builder wizzard
 - user and user-groups management 
 - user rights system integrated
 - logging with logs viewer
 - menu management
-- board module
+- board module (sample)
 - default theme
 - ...
 
@@ -20,8 +20,8 @@ Why yet another framework? Because I had time and it was fun :)
 
 Installation:
 1. Clone or copy code on server
-2. Run http://yourBaseUrl/install
-3. Fill form and press Install. After install you'll be redirected to main/login page
+2. Go to http://yourBaseUrl/install
+3. Fill the form and confirm. After you'll be redirected to the main/login page
 4. Default super-admin login: test@test.test / test
 
 ------------------------------------------
@@ -38,21 +38,21 @@ When all options selected it will be created:
 - SQL schema file *(if doesn't exist)*
 - controller file *(including basic code)*
 - model file *(including basic code)*
-- index view *(including start code)*
+- index view *(including basic code)*
 - update view *(including basic code)*
 - add record in the menu DB table
 
 ------------------------------------------
 
 [TODO -> workflow description] 
-- Controllers, models, views for module are in folder app/content/*[ controller, model, view ]*/*[module name]*
+- Controllers, models, views for the module are in folder app/content/*[ controller, model, view ]*/*[module name]*
 - Assets are in public folder
 - Config data can be manually set or reset in app/config/custom.php  
-- Module Board is added as example in folders app/content/*[ controller, model, view ]*/board 
+- Module "Board" is added as an example located in folders app/content/*[ controller, model, view ]*/board 
 
 ------------------------------------------
 
-Other libs used:
+Other libs included:
 - jQuery
 - Bootstrap
 - Fontawesome
