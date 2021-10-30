@@ -1,7 +1,7 @@
 # flying-fw
 **Custom light PHP MVC framework** *(could be that it is slowly evolving in some sort of CMS)*
 
-Including: 
+**Including: **
 - installation wizzard
 - module builder wizzard
 - user and user-groups management 
@@ -18,7 +18,7 @@ Why yet another framework? Because I had time and it was fun :)
 
 ------------------------------------------
 
-Installation:
+**Installation:**
 1. Clone or copy code on server
 2. Go to http://[yourBaseUrl]/install
 3. Fill the form and confirm. After you'll be redirected to the main/login page
@@ -26,7 +26,7 @@ Installation:
 
 ------------------------------------------
 
-Module builder:
+**Module builder:**
 1. Open builder/index
 2. Set source destination (db table / schema file / create new - write a name)
 3. Choose options to be created
