@@ -15,7 +15,13 @@
         <div class="container col-sm-8">
             <div id="content" class="content row text-center">
                 <div class="col-sm-12"> 
-                    <h2>Settings</h2>
+                    <div class="col-sm-12"> 
+                        <div class="row"> 
+                            <div class="col-sm-2"><a href="../" title="Go home"><i class="fas fa-home settings-home"></i></a></div>
+                            <div class="col-sm-8 text-center"><h2>Settings</h2></div>
+                            <div class="col-sm-2"></div>
+                        </div>
+                    </div>
                     <form action="" method="post">
                         <input type="hidden" name="action" value="install_start"><br>
                         <div class="row text-left"> 
@@ -71,9 +77,9 @@
                                                     <input type="checkbox" class="form-control" name="limit_login_attempts" value="true" <?= ($mainSettings['LIMIT_LOGIN_ATTEMPTS']) ? "checked" : "" ?>>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-3 text-right board-section" style="background-color: burlywood">
+                                            <div class="col-sm-3 text-right <?= ($mainSettings['PUBLIC_SETTINGS']) ? 'alert-podium' : '' ?>">
                                                 <div class="form-group text-center">
-                                                    <strong>Public access to settings</strong> <br>
+                                                    Public access to settings<br>
                                                     <input type="hidden" name="public_settings" value="false">
                                                     <input type="checkbox" class="form-control" name="public_settings" value="true" <?= ($mainSettings['PUBLIC_SETTINGS']) ? "checked" : "" ?>>
                                                 </div>
