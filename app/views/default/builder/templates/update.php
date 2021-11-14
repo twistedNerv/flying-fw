@@ -8,14 +8,14 @@
         </div>
         <div class="col-sm-12">
             <?php
-            foreach ($data['items'] as $singleItem) {
-                $selected[f[tablename_capital]f]Class = ($data['selected[f[tablename_capital]f]']->id == $singleItem['id']) ? "font-weight-bold" : "";
-                echo "<div>
-                        <span class='" . $selected[f[tablename_capital]f]Class . "'>" . $singleItem['id'] . "</span> | 
-                        <a href='" . URL . "[f[tablename]f]/update/" . $singleItem['id'] . "' title='Edit [f[tablename]f]'><i class='far fa-edit'></i></a> |
-                        <a href='" . URL . "[f[tablename]f]/remove/" . $singleItem['id'] . "' title='Delete [f[tablename]f]' onclick='return confirm(&#34;Really want to delete?&#34;);'><i class='fas fa-times' title='Delete [f[tablename]f]'></i></a>
-                      </div>";
-            }
+            foreach ($data['items'] as $singleItem) { 
+                $selected[f[tablename_capital]f]Class = ($data['selected[f[tablename_capital]f]']->id == $singleItem['id']) ? "font-weight-bold" : ""; ?>
+                <div>
+                    <span class='<?=$selected[f[tablename_capital]f]Class?>'><?=$singleItem['id']?></span> | 
+                    <a href='<?=URL?>[f[tablename]f]/update/<?=$singleItem['id']?>' title='Edit [f[tablename]f]'><i class='far fa-edit'></i></a> |
+                    <a href='<?=URL?>[f[tablename]f]/remove/<?=$singleItem['id']?>' title='Delete [f[tablename]f]' onclick='return confirm("Really want to delete?");'><i class='fas fa-times'></i></a>
+                </div>
+            <?php }
             ?>
         </div>
     </div>
@@ -34,4 +34,5 @@
             <a class='btn btn-danger' href="<?= URL ?>[f[tablename]f]/update">Cancel</a>
         </form>
     </div>
+    [f[js_editor]f]
 </div>

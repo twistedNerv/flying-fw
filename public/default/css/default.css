@@ -243,6 +243,13 @@ table td {
 }
 .settings-home:hover {
     color: #000;
+}
+.builder td {
+    padding: 4px !important;
+}
+.builder tr:nth-child(even) {
+    background-color: #ddd;
+}
 /* easyeditor */
 .easyeditor:focus {
     color: #495057;

@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-sm-4">
                 <h4>DB table</h4>
-                <select name="tables" class="form-control">
+                <select name="tables" id="tables" class="form-control" disabled="disabled">
                     <?php
                     echo "<option value='' style='font-style: italic;' disabled selected>Choose table from db</option>";
                     foreach ($data['tables'] as $singleTable) {
@@ -24,7 +24,7 @@
             </div>
             <div class="col-sm-4">
                 <h4>SQL dump file</h4>
-                <select name="schemas" class="form-control">
+                <select name="schemas" id="schemas" class="form-control" disabled="disabled">
                     <?php
                     echo "<option value='' style='font-style: italic;' disabled selected>Choose file from dbschemas folder</option>";
                     foreach ($data['schemas'] as $singleSchema) {
@@ -41,7 +41,7 @@
             <div class="col-sm-4">
                 <h4>Create new</h4>
                 <div class="col-sm-12">
-                    <input type="text" class="form-control" name="create" placeholder="Insert module name">
+                    <input type="text" class="form-control" name="create" id="create" placeholder="Insert module name" disabled="disabled">
                 </div>
                 <label style="font-style: italic;color:grey;">Only basic code in files will be created</label>
                 <br>

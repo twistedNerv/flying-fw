@@ -1,13 +1,26 @@
 $(document).ready(function () {
-    $("#type-table, #type-schema").on('click', function () {
-        $("#wish-view-update").attr("disabled", false);
-        $("#wish-view-grid").attr("disabled", false);
+    $("#wish-view-grid").prop("disabled", true);
+        
+    $('#type-table').on('click', function(){
+        $('#tables').prop('disabled', false);
+        $('#schemas').prop('disabled', true);
+        $('#create').prop('disabled', true);
+        
+        $("#wish-view-update").prop("disabled", false);
     });
-    
-    $("#type-create").on('click', function () {
-        $("#wish-view-update").prop('checked',false);
-        $("#wish-view-grid").prop('checked',false);
-        $("#wish-view-update").attr("disabled", true);
-        $("#wish-view-grid").attr("disabled", true);
+    $('#type-schema').on('click', function(){
+        $('#tables').prop('disabled', true);
+        $('#schemas').prop('disabled', false);
+        $('#create').prop('disabled', true);
+        
+        $("#wish-view-update").prop("disabled", false);
+    });
+    $('#type-create').on('click', function(){
+        $('#tables').prop('disabled', true);
+        $('#schemas').prop('disabled', true);
+        $('#create').prop('disabled', false);
+        console.log($('#schemas').prop('disabled'));
+        
+        $("#wish-view-update").prop('checked',false).prop("disabled", true);
     });
 });
