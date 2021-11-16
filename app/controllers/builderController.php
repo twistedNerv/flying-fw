@@ -53,7 +53,7 @@ class builderController extends controller {
                 $builderModel->addToMenu($table_name, $table_name . ' update', $position);
                 $status_desc .= "View " . $table_name . "Update created and added in menu<br>";
             }
-            if ($this->tools->getPost('wish-view-update') == "1") {
+            if ($this->tools->getPost('wish-view-pack') == "1") {
                 $this->createViewUpdate($table_name, $columns);
                 $position = $this->tools->getPost('wish-view-index') + $this->tools->getPost('wish-view-update') + 1;
                 $builderModel->addToMenu($table_name, $table_name . ' update', $position);
@@ -147,7 +147,10 @@ class builderController extends controller {
                 }
             }
             file_put_contents($structure . 'update.php', $filestring);
-            $builderModel->addToMenu($table, $table . ' update', $menu_position);
+            if ($this->tools->getPost('add-to-menu')) {
+                //echo "menu";
+                $builderModel->addToMenu($table, $table . ' update', $menu_position);
+            }
         }
 
         $this->view->assign('table', $table);

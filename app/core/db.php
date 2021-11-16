@@ -105,9 +105,8 @@ class db extends PDO {
     }
 
     public function createSqlDump($table) {
-        $sql = "SHOW CREATE TABLE :table";
+        $sql = "SHOW CREATE TABLE " . $table;
         $this->result = $this->prepare($sql);
-        $this->result->bindParam(':table', $table);
         $this->result->execute();
         $result = $this->result->fetch(PDO::FETCH_ASSOC);
         file_put_contents("app/dbschemas/" . $table . ".sql", $result['Create Table']);

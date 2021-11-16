@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-sm-4">
                 <h4>DB table</h4>
-                <select name="tables" id="tables" class="form-control" disabled="disabled">
+                <select name="tables" id="tables" class="form-control" disabled="disabled" required>
                     <?php
                     echo "<option value='' style='font-style: italic;' disabled selected>Choose table from db</option>";
                     foreach ($data['tables'] as $singleTable) {
@@ -24,7 +24,7 @@
             </div>
             <div class="col-sm-4">
                 <h4>SQL dump file</h4>
-                <select name="schemas" id="schemas" class="form-control" disabled="disabled">
+                <select name="schemas" id="schemas" class="form-control" disabled="disabled" required>
                     <?php
                     echo "<option value='' style='font-style: italic;' disabled selected>Choose file from dbschemas folder</option>";
                     foreach ($data['schemas'] as $singleSchema) {
