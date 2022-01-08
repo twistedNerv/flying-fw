@@ -99,7 +99,7 @@ class menuModel extends model {
 
     public function getOneBy($ident, $value) {
         $result = $this->db->getOneByParam($ident, $value, 'menu');
-        $this->fillMenu($result);
+        $this->fillObject('menu', $result);
         return $this;
     }
 
@@ -117,14 +117,6 @@ class menuModel extends model {
 
     public function remove() {
         $this->db->delete($this, 'menu');
-    }
-
-    public function fillMenu($data) {
-        $columns = $this->db->getTableColumns('menu');
-        foreach ($data as $key => $value) {
-            $this->$key = $value;
-        }
-        return $this;
     }
 
     public function getAllByParent($parent) {

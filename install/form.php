@@ -18,7 +18,7 @@
                     <div class="col-sm-12"> 
                         <div class="row"> 
                             <div class="col-sm-2"><a href="../" title="Go home"><i class="fas fa-home settings-home"></i></a></div>
-                            <div class="col-sm-8 text-center"><h2>Settings</h2></div>
+                            <div class="col-sm-8 text-center"><h2>Configuration</h2></div>
                             <div class="col-sm-2"></div>
                         </div>
                     </div>

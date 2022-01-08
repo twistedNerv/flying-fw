@@ -99,4 +99,11 @@ class template {
         }
     }
     
+    public function drawChecker($value = false) {
+        if ($value == 1 || $value == true) {
+            return '<i class="fas fa-check"> </i> exist';
+        } else {
+            return '<i class="fas fa-times"> </i> not exist';
+        }
+    }
 }

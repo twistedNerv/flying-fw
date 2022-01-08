@@ -69,7 +69,7 @@ class boardModel extends model {
 
     public function getOneBy($ident, $value) {
         $result = $this->db->getOneByParam($ident, $value, 'board');
-        $this->fillBoard($result);
+        $this->fillObject('board', $result);
         return $this;
     }
 
@@ -87,13 +87,5 @@ class boardModel extends model {
 
     public function remove() {
         $this->db->delete($this, 'board');
-    }
-
-    public function fillBoard($data) {
-        $columns = $this->db->getTableColumns('board');
-        foreach ($data as $key => $value) {
-            $this->$key = $value;
-        }
-        return $this;
     }
 }

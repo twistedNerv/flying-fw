@@ -79,7 +79,7 @@ class logsModel extends model {
 
     public function getOneBy($ident, $value) {
         $result = $this->db->getOneByParam($ident, $value, 'logs');
-        $this->fillLogs($result);
+        $this->fillObject('logs', $result);
         return $this;
     }
 
@@ -97,14 +97,6 @@ class logsModel extends model {
 
     public function remove() {
         $this->db->delete($this, 'logs');
-    }
-
-    public function fillLogs($data) {
-        $columns = $this->db->getTableColumns('logs');
-        foreach ($data as $key => $value) {
-            $this->$key = $value;
-        }
-        return $this;
     }
 
     public function getAllLogsByParams($condition = [], $order = [], $limit = []) {

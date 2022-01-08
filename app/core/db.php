@@ -66,7 +66,7 @@ class db extends PDO {
         }
     }
 
-    public function flush($object, $table, $sqlDump = 0) {
+    public function flush($object, $table, $sqlDump) {
         $columns = $this->getTableColumns($table);
         $updArray = [];
         if (!$object->id) {

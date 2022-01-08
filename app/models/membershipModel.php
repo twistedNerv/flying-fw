@@ -39,7 +39,7 @@ class membershipModel extends model {
 
     public function getOneBy($ident, $value) {
         $result = $this->db->getOneByParam($ident, $value, 'membership');
-        $this->fillMembership($result);
+        $this->fillObject('membership', $result);
         return $this;
     }
 
@@ -57,14 +57,6 @@ class membershipModel extends model {
 
     public function remove() {
         $this->db->delete($this, 'membership');
-    }
-
-    public function fillMembership($data) {
-        $columns = $this->db->getTableColumns('membership');
-        foreach ($data as $key => $value) {
-            $this->$key = $value;
-        }
-        return $this;
     }
 
     public function getOneByUserAndGroup($userId, $actiongroupId) {

@@ -6,10 +6,6 @@ class membershipController extends controller {
         parent::__construct();
     }
 
-    public function indexAction($id = 0) {
-        $this->view->render("actiongroup/index");
-    }
-
     public function updateAction($userId = 0) {
         $this->tools->checkPageRights(4);
         $membershipModel = $this->loadModel('membership');

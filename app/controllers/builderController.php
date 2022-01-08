@@ -4,12 +4,17 @@ class builderController extends controller {
 
     public function __construct() {
         parent::__construct();
+        $this->tools->checkPageRights(4);
+    }
+    
+    private function getAvailableTables($object) {
+        return array_values(array_diff($object->db->getTables(), ['logs', 'user', 'menu', 'actiongroup', 'membership']));
     }
 
     public function indexAction() {
         $builderModel = $this->loadModel('builder');
         $allSchemas = array_values(array_diff(scandir('app/dbschemas/'), ['.', '..', 'logs.sql', 'user.sql', 'menu.sql', 'actiongroup.sql', 'membership.sql']));
-        $allTables = array_values(array_diff($builderModel->db->getTables(), ['logs', 'user', 'menu', 'actiongroup', 'membership']));
+        $allTables = $this->getAvailableTables($builderModel);
         $type = ($this->tools->getPost('type')) ? $this->tools->getPost('type') : "";
         $status_desc = "";
         $table_name = "";
@@ -65,8 +70,32 @@ class builderController extends controller {
         $this->view->assign('status', $status_desc);
         $this->view->render('builder/index');
     }
+    
+    public function formAction($table = null) {
+        if ($table) {
+            $this->createViewUpdateCustom($table);
+        } else {
+            $this->chooseTableToCreateForm();
+        }
+    }
+    
+    private function chooseTableToCreateForm() {
+        $builderModel = $this->loadModel('builder');
+        $columns = $this->getAvailableTables($builderModel);
+        $collection = [];
+        foreach ($columns as $single_column) {
+            $menuModel = $this->loadModel('menu');
+            $collection[$single_column]['controller'] = (file_exists('app/content/controllers/' . $single_column . 'Controller.php')) ? true : false;
+            $collection[$single_column]['model'] = (file_exists('app/content/models/' . $single_column . 'Model.php')) ? true : false;
+            $collection[$single_column]['view'] = (file_exists('app/content/views/' . TEMPLATE . '/' . $single_column . '/update.php')) ? true : false;
+            $collection[$single_column]['menu'] = ($menuModel->getOneBy('url', $single_column . '/update')->url) ? true : false;
+        }
+        $this->view->assign('collection', $collection);
+        $this->view->render('builder/chooseTableToCreateForm');
+        //var_dump($collection);
+    }
 
-    public function createViewUpdateCustomAction($table, $menu_position) {
+    private function createViewUpdateCustom($table) {
         $builderModel = $this->loadModel('builder');
         $columns = $builderModel->db->getTableColumns($table);
 
@@ -147,20 +176,14 @@ class builderController extends controller {
                 }
             }
             file_put_contents($structure . 'update.php', $filestring);
-            if ($this->tools->getPost('add-to-menu')) {
-                //echo "menu";
-                $builderModel->addToMenu($table, $table . ' update', $menu_position);
-            }
         }
 
         $this->view->assign('table', $table);
         $this->view->assign('columns', $columns);
-        $this->view->assign('menu_position', $menu_position);
         $this->view->render('builder/createViewUpdateCustom', $columns);
     }
 
     private function createViewUpdate($table, $columns = []) {
-        //echo "bčla";die;
         $structure = 'app/content/views/' . TEMPLATE . '/' . $table . "/";
         $filestring = file_get_contents('app/views/' . TEMPLATE . '/builder/templates/update.php');
         $inputs = "";
@@ -220,7 +243,7 @@ class builderController extends controller {
             }
             $fileString .= "\tpublic function getOneBy($" . "ident, $" . "value) {\n";
             $fileString .= "\t\t$" . "result = $" . "this->db->getOneByParam($" . "ident, $" . "value, '" . $table . "');\n";
-            $fileString .= "\t\t$" . "this->fill" . ucfirst($table) . "($" . "result);\n";
+            $fileString .= "\t\t$" . "this->fillObject('" . $table . "', $" . "result);\n";
             $fileString .= "\t\treturn $" . "this;\n";
             $fileString .= "\t}\n\n";
             $fileString .= "\tpublic function getAll($" . "orderBy = null, $" . "order = null, $" . "limit = null) {\n";
@@ -235,13 +258,6 @@ class builderController extends controller {
             $fileString .= "\tpublic function remove() {\n";
             $fileString .= "\t\t$" . "this->db->delete($" . "this, '" . $table . "');\n";
             $fileString .= "\t}\n\n";
-            $fileString .= "\tpublic function fill" . ucfirst($table) . "($" . "data) {\n";
-            $fileString .= "\t\t$" . "columns = $" . "this->db->getTableColumns('" . $table . "');\n";
-            $fileString .= "\t\tforeach($" . "data as $" . "key => $" . "value) {\n";
-            $fileString .= "\t\t\t$" . "this->$" . "key = $" . "value;\n";
-            $fileString .= "\t\t}\n";
-            $fileString .= "\t\treturn $" . "this;\n";
-            $fileString .= "\t}";
         }
         $fileString .= "\n}";
         file_put_contents("app/content/models/" . $table . "Model.php", $fileString);

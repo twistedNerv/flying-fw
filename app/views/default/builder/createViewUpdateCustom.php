@@ -1,9 +1,10 @@
 <?php $this->config->includeScript('builder.js');?>
 <div class="col-sm-12 text-center">
     <h2>Module builder - create input form</h2>
+    <h3><?=$data['table']?></h3>
 </div>
 <div class="col-sm-12 text-center builder">
-    <form action="<?= URL ?>builder/createViewUpdateCustom/<?=$data['table']?>/<?=$data['menu_position']?>" method="post">
+    <form action="<?= URL ?>builder/createViewUpdateCustom/<?=$data['table']?>" method="post">
         <input type="hidden" name="action" value="create-view-update-custom">
         <div class="row">
             <div class="col-sm-12">
@@ -59,13 +60,10 @@
                 <?php 
                     }
                 } ?>
-                        <tr class="filter-bg">
-                            <td colspan="1">Dodam v menu?</td>
-                            <td colspan="1">
-                                <input type="hidden" name="add-to-menu" value="0">
-                                <input type="checkbox" class="form-control" name="add-to-menu" value="1">
-                            </td>
-                            <td colspan="5"></td>
+                    <tr class="filter-bg text-left">
+                        <td colspan="3">If view file already exist it will be overwritten!!!</td>
+                        <td colspan="4"></td>
+                    </tr>
                 </table>
             </div>
             <div class="col-sm-12"><br>

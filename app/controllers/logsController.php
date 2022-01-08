@@ -7,6 +7,7 @@ class logsController extends controller {
     }
 
     public function indexAction($id = 0) {
+        $this->tools->checkPageRights(4);
         $logsModel = $this->loadModel('logs');
         $condition = [
             'search'        => $this->tools->getPost('filter-condition-search'),

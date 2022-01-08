@@ -159,7 +159,7 @@ class userModel extends model {
 
     public function getOneBy($ident, $value) {
         $result = $this->db->getOneByParam($ident, $value, 'user');
-        $this->fillUser($result);
+        $this->fillObject('user', $result);
         return $this;
     }
 
@@ -177,13 +177,6 @@ class userModel extends model {
 
     public function remove() {
         $this->db->delete($this, 'user');
-    }
-
-    public function fillUser($data) {
-        foreach ($data as $key => $value) {
-            $this->$key = $value;
-        }
-        return $this;
     }
 
     public function login() {

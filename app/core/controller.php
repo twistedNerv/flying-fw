@@ -32,8 +32,10 @@ class controller {
     }
 
     public function checkUserMembershipSite() {
-        if(!$this->tools->checkUserMembershipActiongroup()) {
-            $this->tools->redirect(URL . 'home/index');
+        if ($this->session->get('activeUser')) {
+            if(!$this->tools->checkUserMembershipActiongroup() ) {
+                $this->tools->redirect(URL . 'home/index');
+            }
         }
     }
 }

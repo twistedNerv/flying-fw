@@ -60,7 +60,7 @@ class actiongroupModel extends model {
     
     public function getOneBy($ident, $value) {
         $result = $this->db->getOneByParam($ident, $value, 'actiongroup');
-        $this->fillActiongroup($result);
+        $this->fillObject('actiongroup', $result);
         return $this;
     }
 
@@ -78,14 +78,5 @@ class actiongroupModel extends model {
 
     public function remove() {
         $this->db->delete($this, 'actiongroup');
-    }
-
-    public function fillActiongroup($data) {
-        if (is_array($data) || is_object($data)) {
-            foreach ($data as $key => $value) {
-                $this->$key = $value;
-            }
-            return $this;
-        }
     }
 }
