@@ -44,6 +44,14 @@ When all options selected it will be created:
 
 ------------------------------------------
 
+**Form builder:**
+- Open builder/form
+- Select link from (Re)build edit form
+- Set the parameters
+- Submit
+(update and index files will be created
+------------------------------------------
+
 [TODO -> workflow description] 
 - Controllers, models, views for the module are in folder app/content/*[ controller, model, view ]*/*[module name]*
 - Assets are in public folder
