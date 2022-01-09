@@ -4,7 +4,7 @@
     <h3><?=$data['table']?></h3>
 </div>
 <div class="col-sm-12 text-center builder">
-    <form action="<?= URL ?>builder/createViewUpdateCustom/<?=$data['table']?>" method="post">
+    <form action="<?= URL ?>builder/form/<?=$data['table']?>" method="post">
         <input type="hidden" name="action" value="create-view-update-custom">
         <div class="row">
             <div class="col-sm-12">
@@ -12,11 +12,12 @@
                     <thead class="text-center filter-bg">
                         <td><h5c>Column</h5c></td>
                         <td><h5c>Type</h5c></td>
-                        <td width="40%"><h5c>Label</h5c></td>
+                        <td width="30%"><h5c>Label</h5c></td>
                         <td><h5c>Placeholder</h5c></td>
                         <td><h5c>Required</h5c></td>
                         <td><h5c>Readonly</h5c></td>
                         <td><h5c>Disabled</h5c></td>
+                        <td><h5c>View display</h5c></td>
                     </thead>
                 <?php foreach($data['columns'] as $singleColumn) { 
                     if ($singleColumn != 'id') { ?>
@@ -56,18 +57,23 @@
                                 <input type="hidden" name="<?=$data['table']?>-<?=$singleColumn?>-disabled" value="0">
                                 <input type="checkbox" class="form-control" name="<?=$data['table']?>-<?=$singleColumn?>-disabled" id="<?=$data['table']?>-<?=$singleColumn?>-disabled" value="1">
                             </td>
+                            <td>
+                                <input type="hidden" name="<?=$data['table']?>-<?=$singleColumn?>-viewdisplay" value="0">
+                                <input type="checkbox" class="form-control" name="<?=$data['table']?>-<?=$singleColumn?>-viewdisplay" id="<?=$data['table']?>-<?=$singleColumn?>-viewdisplay" value="1">
+                            </td>
                         </tr>
                 <?php 
                     }
                 } ?>
                     <tr class="filter-bg text-left">
-                        <td colspan="3">If view file already exist it will be overwritten!!!</td>
-                        <td colspan="4"></td>
+                        <td colspan="3">If the view file already exists it will be overwritten!!!</td>
+                        <td colspan="5"></td>
                     </tr>
                 </table>
             </div>
             <div class="col-sm-12"><br>
                 <button type="submit" class="btn btn-primary">Create view</button>
+                <a class='btn btn-danger' href='<?=URL?>builder/form'>Cancel</a>
             </div>
         </div>
     </form>

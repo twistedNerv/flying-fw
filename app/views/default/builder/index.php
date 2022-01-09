@@ -81,6 +81,7 @@
             </div>
             <div class="col-sm-12">
                 <button type="submit" class="btn btn-primary">Submit</button>
+                <a class='btn btn-danger' href='<?=URL?>builder/form'>Cancel</a>
             </div>
         </div>
     </form>

@@ -87,6 +87,7 @@ class builderController extends controller {
             $menuModel = $this->loadModel('menu');
             $collection[$single_column]['controller'] = (file_exists('app/content/controllers/' . $single_column . 'Controller.php')) ? true : false;
             $collection[$single_column]['model'] = (file_exists('app/content/models/' . $single_column . 'Model.php')) ? true : false;
+            $collection[$single_column]['view_index'] = (file_exists('app/content/views/' . TEMPLATE . '/' . $single_column . '/index.php')) ? true : false;
             $collection[$single_column]['view'] = (file_exists('app/content/views/' . TEMPLATE . '/' . $single_column . '/update.php')) ? true : false;
             $collection[$single_column]['menu'] = ($menuModel->getOneBy('url', $single_column . '/update')->url) ? true : false;
         }
@@ -98,7 +99,6 @@ class builderController extends controller {
     private function createViewUpdateCustom($table) {
         $builderModel = $this->loadModel('builder');
         $columns = $builderModel->db->getTableColumns($table);
-
         if ($this->tools->getPost('action') == "create-view-update-custom") {
             $structure = 'app/content/views/' . TEMPLATE . '/' . $table . "/";
             $filestring = file_get_contents('app/views/' . TEMPLATE . '/builder/templates/update.php');
@@ -175,7 +175,8 @@ class builderController extends controller {
                     echo "Failed to create folder...";
                 }
             }
-            file_put_contents($structure . 'update.php', $filestring);
+            //file_put_contents($structure . 'update.php', $filestring);
+            $this->createViewIndexCustom($table);
         }
 
         $this->view->assign('table', $table);
@@ -205,6 +206,32 @@ class builderController extends controller {
         file_put_contents($structure . 'update.php', $filestring);
     }
 
+    private function createViewIndexCustom($table) {
+        $builderModel = $this->loadModel('builder');
+        $columns = $builderModel->db->getTableColumns($table);
+        
+        $structure = 'app/content/views/' . TEMPLATE . '/' . $table . "/";
+        $filestring = file_get_contents('app/views/' . TEMPLATE . '/builder/templates/index.php');
+        $head_inputs = "";
+        $inputs = "";
+        foreach ($columns as $singleColumn) {
+            $name_root = $table . "-" . $singleColumn;
+            if ($this->tools->getPost($name_root . "-viewdisplay") == 1) {
+                $head_inputs .= "\n\t\t<td><h5c>" . $singleColumn . "</h5c></td>";
+                $inputs .= "\n\t\t<td><?= $" . "singleItem['" . $singleColumn . "'] ?></td>";
+            }
+        }
+        $filestring = str_replace('[f[tablename_capital]f]', ucfirst($table), $filestring);
+        $filestring = str_replace('[f[head_inputs]f]', $head_inputs, $filestring);
+        $filestring = str_replace('[f[inputs]f]', $inputs, $filestring);
+        if (!is_dir($structure)) {
+            if (!mkdir($structure, 0777, true)) {
+                echo "Failed to create folder...";
+            }
+        }
+        file_put_contents($structure . "index.php", $filestring);
+    }
+    
     private function createViewIndex($table) {
         $structure = 'app/content/views/' . TEMPLATE . '/' . $table . "/";
         $filestring = file_get_contents('app/views/' . TEMPLATE . '/builder/templates/index.php');
