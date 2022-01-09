@@ -7,12 +7,13 @@ class builderModel extends model {
     }
     
     public function addToMenu($table, $filename, $position) {
+        echo $filename;
         switch($filename) {
             case 'index':
                 $displayActionName = 'View';
                 $displayActionDesc = 'Here you can view';
                 break;
-            case 'update':
+            default:
                 $displayActionName = 'Edit';
                 $displayActionDesc = 'Here you can edit';
                 break;
