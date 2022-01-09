@@ -7,7 +7,6 @@ class builderModel extends model {
     }
     
     public function addToMenu($table, $filename, $position) {
-        echo $filename;
         switch($filename) {
             case 'index':
                 $displayActionName = 'View';
