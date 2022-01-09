@@ -55,13 +55,13 @@ class builderController extends controller {
             if ($this->tools->getPost('wish-view-update') == "1") {
                 $this->createViewUpdate($table_name, $columns);
                 $position = ($this->tools->getPost('wish-view-index') == "1") ? 2 : 1;
-                $builderModel->addToMenu($table_name, $table_name . ' update', $position);
+                $builderModel->addToMenu($table_name, 'update', $position);
                 $status_desc .= "View " . $table_name . "Update created and added in menu<br>";
             }
             if ($this->tools->getPost('wish-view-pack') == "1") {
                 $this->createViewUpdate($table_name, $columns);
                 $position = $this->tools->getPost('wish-view-index') + $this->tools->getPost('wish-view-update') + 1;
-                $builderModel->addToMenu($table_name, $table_name . ' update', $position);
+                $builderModel->addToMenu($table_name, 'update', $position);
                 $status_desc .= "View " . $table_name . "Update created and added in menu<br>";
             }
         }

@@ -65,9 +65,8 @@
                 <?php 
                     }
                 } ?>
-                    <tr class="filter-bg text-left">
-                        <td colspan="3">If the view file already exists it will be overwritten!!!</td>
-                        <td colspan="5"></td>
+                    <tr class="filter-bg text-center">
+                        <td colspan="8"><strong>If the view files index.php and update.php already exist they will be overwritten!!!</strong></td>
                     </tr>
                 </table>
             </div>
