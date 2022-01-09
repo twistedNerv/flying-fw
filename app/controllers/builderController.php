@@ -175,7 +175,7 @@ class builderController extends controller {
                     echo "Failed to create folder...";
                 }
             }
-            //file_put_contents($structure . 'update.php', $filestring);
+            file_put_contents($structure . 'update.php', $filestring);
             $this->createViewIndexCustom($table);
         }
 
