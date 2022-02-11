@@ -51,7 +51,7 @@ class tools {
     }
     
     public function getPost($post_name) {
-        $result = (isset($_POST[$post_name]) && $_POST[$post_name] != "") ? filter_var($_POST[$post_name], FILTER_SANITIZE_STRING) : "";
+        $result = (isset($_POST[$post_name]) && $_POST[$post_name] != "") ? htmlspecialchars($_POST[$post_name]) : "";
         return $result;
     }
 
