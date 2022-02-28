@@ -10,10 +10,11 @@
             <?php
             foreach ($data['parentGroups'] as $singleParent) {
                 $notActive = ($singleParent['active']) ? "" : "<span style='color:red'>NA</span>";
+                $selectedMenuClass = ($data['selectedItem']->id == $singleParent['id']) ? "font-weight-bold" : "";
                 echo "<hr>
                     <div>
                         $notActive
-                        <strong>" . $singleParent['title'] . " (" . $singleParent['level'] . ")</strong> | 
+                        <u><span class='$selectedMenuClass'>" . $singleParent['title'] . " (" . $singleParent['level'] . ")</span></u> | 
                         <a href='" . URL . "menu/index/" . $singleParent['id'] . "' title='Edit element'>
                             <i class='far fa-edit'></i>
                         </a> | 
@@ -33,10 +34,11 @@
                 foreach ($data['pageMenuItems'] as $singleItem) {
                     if ($singleItem['parent'] == $singleParent['id']) {
                         $notActive = ($singleItem['active']) ? "" : "<span style='color:red'>NA</span>";
+                        $selectedMenuClass = ($data['selectedItem']->id == $singleItem['id']) ? "font-weight-bold" : "";
                         echo "<div>
                                 $notActive
-                                " . $singleItem['title'] . " (" . $singleItem['level'] . ") | 
-                                <a href='" . URL . "menu/index/" . $singleItem['id'] . "' title='Edit element'>
+                                <span class='$selectedMenuClass'>" . $singleItem['title'] . " (" . $singleItem['level'] . ")</span> | 
+                               <a href='" . URL . "menu/index/" . $singleItem['id'] . "' title='Edit element'>
                                     <i class='far fa-edit'></i>
                                 </a> |
                                 <a href='" . URL . $singleItem['url'] . "' title='Open link' target=”_blank”>
@@ -67,9 +69,10 @@
                 <?php
                 foreach ($data['adminMenuItems'] as $singleItem) {
                     $notActive = ($singleItem['active']) ? "" : "<span style='color:red'>NA</span>";
+                    $selectedMenuClass = ($data['selectedItem']->id == $singleItem['id']) ? "font-weight-bold" : "";
                     echo "<div>
                             $notActive
-                            " . $singleItem['title'] . " (" . $singleItem['level'] . ") | 
+                            <span class='$selectedMenuClass'>" . $singleItem['title'] . " (" . $singleItem['level'] . ")</span> | 
                             <a href='" . URL . "menu/index/" . $singleItem['id'] . "' title='Edit element'>
                                 <i class='far fa-edit'></i>
                             </a> |
