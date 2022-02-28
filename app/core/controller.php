@@ -38,4 +38,10 @@ class controller {
             }
         }
     }
+    
+    public function vardump($variable) {
+        echo "<pre>";
+        var_dump($variable);
+        echo "</pre>";
+    }
 }
