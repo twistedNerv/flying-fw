@@ -61,7 +61,7 @@ class menuController extends controller {
         $menuItem = $menuModel->getOneBy('id', $id);
         $current_position = $menuItem->position;
         $nearItem = $menuModel->getNextItem($direction, $menuItem->admin, $menuItem->parent, $current_position);
-        if ($nearItem['position'] > 0 && $menuItem->position > 0) {
+        if (isset($nearItem['position']) && $nearItem['position'] > 0 && $menuItem->position > 0) {
             $menuItem->setPosition($nearItem['position']);
             $menuItem->flush();
             $swapItem = $menuModel->getOneBy('id', $nearItem['id']);
