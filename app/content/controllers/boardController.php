@@ -5,25 +5,25 @@ class boardController extends controller {
     public function __construct() {
         //load all from parent controller class
         parent::__construct();
-        //prevent unauthorized access and set level of users to access
+        //prevent unauthorized access and set access level 
         $this->tools->checkPageRights(1);
     }
     
     public function indexAction() {
         //create object from model board
         $boardModel = $this->loadModel('board');
-        //save all records from the table in $allItems variable
+        //save last 4 records from the table in $allItems variable
         $allItems   = $boardModel->getAll('id', 'desc', 4);
-        //prepare vars for view ($allItems will be accessable with $data['items']
+        //prepare vars for view ($allItems will be accessable via $data['items']
         $this->view->assign('items', $allItems);
-        //render page with code from file located in view/[template]/board/index.php
+        //render page with code from file located in content/view/[template]/board/index.php
         $this->view->render("board/index");
     }
 
     public function updateAction($id = 0) {
-        //set higher right for user access
+        //set higher access level for user access
         $this->tools->checkPageRights(3);
-        //create object from model board
+        //create object from model 'board'
         $boardModel = $this->loadModel("board");
         //if $id exists, fill the object with data from DB, otherwise leave object empty
         if ($id) {
@@ -53,11 +53,13 @@ class boardController extends controller {
     }
 
     public function removeAction($id) {
+        //set higher access level for user access
+        $this->tools->checkPageRights(3);
         //check if $id exists, otherwise do not delete
         if ($id) {
             //load model
             $boardModel = $this->loadModel("board");
-            //fill model vars with existing valuies
+            //fill object
             $boardModel->getOneBy('id', $id);
             //delete record in DB table
             $boardModel->remove();
