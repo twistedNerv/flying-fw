@@ -56,7 +56,7 @@ When all options selected it will be created:
 - Controllers, models, views for the module are in folder app/content/*[ controller, model, view ]*/*[module name]*
 - Assets are in public folder
 - Config data can be manually set or reset in app/config/custom.php  
-- Module "Board" is added as an example located in folders app/content/*[ controller, model, view ]*/board 
+- Module "Board" is added as an example located in folders app/content/*[ controller, model, view ]*/board -> https://github.com/twistedNerv/flying-fw/blob/master/app/content/controllers/boardController.php
 
 ------------------------------------------
 
