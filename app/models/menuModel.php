@@ -171,8 +171,8 @@ class menuModel extends model {
             $way = "ASC";
         }
         $sql = "SELECT * FROM menu 
-            WHERE active = 1 AND admin = :admin AND parent = :parent AND position " . $direction . " " . $currentPosition . "
-            ORDER BY position " . $way . " LIMIT 1;";
+                WHERE active = 1 AND admin = :admin AND parent = :parent AND position " . $direction . " " . $currentPosition . "
+                ORDER BY position " . $way . " LIMIT 1;";
         $this->db->result = $this->db->prepare($sql);
         $this->db->result->bindParam(':admin', $admin);
         $this->db->result->bindParam(':parent', $parent);

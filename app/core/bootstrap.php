@@ -8,7 +8,7 @@ class bootstrap {
     protected $contentPath = "content/";
 
     public function __construct() {
-        $url = (isset($_GET['url'])) ? explode('/', filter_var(rtrim($_GET['url'], '/'), FILTER_SANITIZE_URL)) : false;
+        $url = (isset($_GET['url'])) ? explode('/', htmlspecialchars(rtrim($_GET['url'], '/'))) : false;
         if(isset($url[0]) && file_exists('app/controllers/' . $url[0] . 'Controller.php')) {
             $this->controller = $url[0] . "Controller";
             $this->contentPath = "";
@@ -19,7 +19,7 @@ class bootstrap {
             }
             $this->controller = $url[0] . "Controller";
         }
-        unset($url[0]);
+        if (isset($url[0])) unset($url[0]);
         require_once 'app/' . $this->contentPath . 'controllers/' . $this->controller . '.php';
         $this->controller = new $this->controller;
         

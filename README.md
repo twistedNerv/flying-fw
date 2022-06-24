@@ -27,7 +27,7 @@ Why yet another framework? Because I had time and it was fun :)
 ------------------------------------------
 
 **Module builder:**
-1. Open builder/index
+1. Open builder
 2. Set source destination (db table / schema file / create new - write a name)
 3. Choose options to be created
 4. Confirm   
@@ -45,11 +45,11 @@ When all options selected it will be created:
 ------------------------------------------
 
 **Form builder:**
-- Open builder/form
+- Open builder
 - Select link from (Re)build edit form
 - Set the parameters
 - Submit
-(update and index files will be created
+(update and index files will be created)
 ------------------------------------------
 
 [TODO -> workflow description] 
