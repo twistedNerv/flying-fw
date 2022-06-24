@@ -90,6 +90,7 @@ class builderController extends controller {
             $collection[$single_column]['view_index'] = (file_exists('app/content/views/' . TEMPLATE . '/' . $single_column . '/index.php')) ? true : false;
             $collection[$single_column]['view'] = (file_exists('app/content/views/' . TEMPLATE . '/' . $single_column . '/update.php')) ? true : false;
             $collection[$single_column]['menu'] = ($menuModel->getOneBy('url', $single_column . '/update')->url) ? true : false;
+            $collection[$single_column]['mysqldump'] = (file_exists('app/dbschemas/' . $single_column . '.sql')) ? true : false;
         }
         $this->view->assign('collection', $collection);
         $this->view->render('builder/chooseTableToCreateForm');
