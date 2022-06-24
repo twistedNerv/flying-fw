@@ -11,6 +11,7 @@
                 <td><h5d>| View-index</h5d></td>
                 <td><h5d>| View-update</h5d></td>
                 <td><h5d>| Menu-record</h5d></td>
+                <td><h5d>| Sqldump-file | </h5d></td>
             </thead>
             <?php foreach ($data['collection'] as $name => $singleColumn) {
                 if ($singleColumn != 'id') { ?>
@@ -31,13 +32,16 @@
                             <td>
                                 <?= $this->template->drawChecker($singleColumn['menu']) ?>
                             </td>
+                            <td>
+                                <?= $this->template->drawChecker($singleColumn['mysqldump']) ?>
+                            </td>
                         </tr>
                     <?php
                         }
                     }
                     ?>
                     <tr class="filter-bg text-center">
-                        <td colspan="6"><strong>Files and menu status</strong></td>
+                        <td colspan="7"><strong>Files and menu status</strong></td>
                     </tr>
         </table>
     </div>
