@@ -25,7 +25,7 @@ class menuController extends controller {
             $newMenuItem->setActive($this->tools->getPost('menu-active'));
             $newMenuItem->setAdmin($this->tools->getPost('menu-admin'));
             $newMenuItem->flush();
-            $this->tools->log('menu', "New menu element $newMenuItem->title added");
+            $this->tools->log('menu', "New menu element $newMenuItem->title added", __METHOD__);
         }
         $menuModel = $this->loadModel('menu');
         $allPageMenuItems = $menuModel->getMenuItems(false, false, 'all');
@@ -49,7 +49,7 @@ class menuController extends controller {
                 $menuModel->getOneBy('id', $singleChild['id']);
                 $menuModel->remove();
             }
-            $this->tools->log('menu', "Menu item with id: $menuItemId and its potential subitems removed.");
+            $this->tools->log('menu', "Menu item with id: $menuItemId and its potential subitems removed.", __METHOD__);
             $this->tools->redirect(URL . 'menu');
         } else {
             echo "No menu item id selected!";
@@ -68,7 +68,7 @@ class menuController extends controller {
             $swapItem->setPosition($current_position);
             $swapItem->flush();
         }
-        $this->tools->log('menu', "Menu item with id: $id moved $direction.");
+        $this->tools->log('menu', "Menu item with id: $id moved $direction.", __METHOD__);
         $this->tools->redirect(URL . 'menu');
     }
 }

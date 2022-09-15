@@ -102,6 +102,8 @@ class logsModel extends model {
     public function getAllLogsByParams($condition = [], $order = [], $limit = []) {
         $sql = "SELECT 
                 l.id as lid,
+                l.class as class,
+                l.method as method,
                 l.type as type,
                 l.log as log,
                 l.datetime as logdatetime,
@@ -117,6 +119,12 @@ class logsModel extends model {
         if (isset($condition['search']) && $condition['search'] && $condition['search'] != "") {
             $sql .= "AND (l.log LIKE :search) ";
             $condition['search'] = "%" . $condition['search'] . "%";
+        }
+        if (isset($condition['class']) && $condition['class'] && $condition['class'] != "") {
+            $sql .= "AND (l.class LIKE :class) ";
+        }
+        if (isset($condition['method']) && $condition['method'] && $condition['method'] != "") {
+            $sql .= "AND (l.method LIKE :method) ";
         }
         if (isset($condition['type']) && $condition['type'] && $condition['type'] != "") {
             $sql .= "AND (l.type LIKE :type) ";
@@ -149,6 +157,12 @@ class logsModel extends model {
         if (isset($condition['search']) && $condition['search'] && $condition['search'] != "") {
             $result->bindParam(':search', $condition['search']);
         }
+        if (isset($condition['class']) && $condition['class'] && $condition['class'] != "") {
+            $result->bindParam(':class', $condition['class']);
+        }
+        if (isset($condition['method']) && $condition['method'] && $condition['method'] != "") {
+            $result->bindParam(':method', $condition['method']);
+        }
         if (isset($condition['type']) && $condition['type'] && $condition['type'] != "") {
             $result->bindParam(':type', $condition['type']);
         }
@@ -167,6 +181,24 @@ class logsModel extends model {
         return $rows;
     }
 
+    public function getAllClasses() {
+        $sql = "SELECT class FROM logs GROUP BY class ORDER BY class";
+        $result = $this->db->prepare($sql);
+        $result->execute();
+        //echo "<pre>";$result->debugDumpParams();echo "</pre>";//die;
+        $rows = $result->fetchAll(PDO::FETCH_ASSOC);
+        return $rows;
+    }
+    
+    public function getAllMethods() {
+        $sql = "SELECT method FROM logs GROUP BY method ORDER BY method";
+        $result = $this->db->prepare($sql);
+        $result->execute();
+        //echo "<pre>";$result->debugDumpParams();echo "</pre>";//die;
+        $rows = $result->fetchAll(PDO::FETCH_ASSOC);
+        return $rows;
+    }
+    
     public function getAllTypes() {
         $sql = "SELECT type FROM logs GROUP BY type ORDER BY type";
         $result = $this->db->prepare($sql);

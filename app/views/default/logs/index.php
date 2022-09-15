@@ -11,42 +11,71 @@
                             <div class="col-sm-12">
                                 <strong>Search log:</strong><input type="text" class="form-control filter-condition-search" id="person-surname" name="filter-condition-search" placeholder="Insert string..." value="<?php echo $this->tools->getPost('filter-condition-search') ?>">
                             </div>
+                            <div class="col-sm-12 filter-logs-submit">
+                                <br><button type="submit" class="btn btn-primary filter-logs-submit-btn no-print">Search</button>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-sm-4 filter-logs-date">
+                    <div class="col-sm-2 filter-logs-date">
                         <div class="row">
-                            <div class="col-sm-6">
+                            <div class="col-sm-12">
                                 <strong>From:</strong>
                                 <input type="date" class="form-control" name="filter-condition-logs_datetime-from" value="<?php echo ($this->tools->getPost('filter-condition-logs_datetime-from')) ? date('Y-m-d', strtotime($this->tools->getPost('filter-condition-logs_datetime-from'))) : ""; ?>" min="01/01/1900" max="31/12/2020">
                             </div>  
-                            <div class="col-sm-6">
+                            <div class="col-sm-12">
                                 <strong>To:</strong>
                                 <input type="date" class="form-control" name="filter-condition-logs_datetime-to" value="<?php echo ($this->tools->getPost('filter-condition-logs_datetime-to')) ? date('Y-m-d', strtotime($this->tools->getPost('filter-condition-logs_datetime-to'))) : ""; ?>" min="01/01/1900" max="31/12/2020">
                             </div>  
                         </div>  
                     </div>  
-                    <div class="col-sm-1">
-                        <strong>Class:</strong>
-                        <select name="filter-condition-type" class="form-control">
-                            <option value=""> - - - </option>
-                            <?php foreach ($data['typeset'] as $singleType) { ?>
-                                <option value="<?=$singleType['type']?>" <?= ($this->tools->getPost('filter-condition-type') == $singleType['type']) ? 'selected' : ''; ?>><?=$singleType['type']?></option>
-                            <?php } ?>
-                        </select>
-                    </div>
-                    <div class="col-sm-1">
-                        <strong>User:</strong>
-                        <select name="filter-condition-user" class="form-control">
-                            <option value=""> - - - </option>
-                            <?php foreach ($data['userset'] as $singleUser) { ?>
-                                <option value="<?=$singleUser['uid']?>" <?= ($this->tools->getPost('filter-condition-user') == $singleUser['uid']) ? 'selected' : ''; ?>><?=$singleUser['uname']?> <?=$singleUser['usurname']?></option>
-                            <?php } ?>
-                        </select>
+                    <div class="col-sm-4">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <strong>User:</strong>
+                                <select name="filter-condition-user" class="form-control">
+                                    <option value=""> - - - </option>
+                                    <?php foreach ($data['userset'] as $singleUser) { ?>
+                                        <option value="<?=$singleUser['uid']?>" <?= ($this->tools->getPost('filter-condition-user') == $singleUser['uid']) ? 'selected' : ''; ?>><?=$singleUser['uname']?> <?=$singleUser['usurname']?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                            <div class="col-sm-6">
+                                <strong>Class:</strong>
+                                <select name="filter-condition-class" class="form-control">
+                                    <option value=""> - - - </option>
+                                    <?php foreach ($data['classset'] as $singleClass) { 
+                                        if ($singleClass['class'] != "") { ?>
+                                            <option value="<?=$singleClass['class']?>" <?= ($this->tools->getPost('filter-condition-class') == $singleClass['class']) ? 'selected' : ''; ?>><?=$singleClass['class']?></option>
+                                    <?php } 
+                                        } ?>
+                                </select>
+                            </div>
+                            <div class="col-sm-6">
+                                <strong>Type:</strong>
+                                <select name="filter-condition-type" class="form-control">
+                                    <option value=""> - - - </option>
+                                    <?php foreach ($data['typeset'] as $singleType) { ?>
+                                        <option value="<?=$singleType['type']?>" <?= ($this->tools->getPost('filter-condition-type') == $singleType['type']) ? 'selected' : ''; ?>><?=$singleType['type']?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                            <div class="col-sm-6">
+                                <strong>Method:</strong>
+                                <select name="filter-condition-method" class="form-control">
+                                    <option value=""> - - - </option>
+                                    <?php foreach ($data['methodset'] as $singleMethod) { 
+                                        if ($singleMethod['method'] != "") { ?>
+                                            <option value="<?=$singleMethod['method']?>" <?= ($this->tools->getPost('filter-condition-method') == $singleMethod['method']) ? 'selected' : ''; ?>><?=$singleMethod['method']?></option>
+                                    <?php } 
+                                        }?>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-sm-4 filter-swab-order">
                         <div class="row">
                             <div class="col-sm-4">
-                                <strong>Order by:</strong>
+                                <strong>Order:</strong>
                                 <select name="filter-order-by" class="form-control">
                                     <option value=""> - - - </option>
                                     <option value="type" <?= ($this->tools->getPost('filter-order-by') == 'type') ? 'selected' : ''; ?>>class</option>
@@ -75,9 +104,6 @@
                             </div>  
                         </div>
                     </div>
-                    <div class="col-sm-1 filter-logs-submit">
-                        <button type="submit" class="btn btn-primary filter-logs-submit-btn no-print">Search</button>
-                    </div>
                     </form>
                 </div>
             </div>
@@ -88,6 +114,8 @@
                             <tr>
                                 <th>Date</th>
                                 <th>Class</th>
+                                <th>Method</th>
+                                <th>Type</th>
                                 <th>Log</th>
                                 <th>User</th>
                                 <th>Ip</th>
@@ -99,6 +127,8 @@
                                 ?>
                                 <tr>
                                     <td><?= $singleLog['logdatetime'] ?></td>
+                                    <td><?= $singleLog['class'] ?></td>
+                                    <td><?= $singleLog['method'] ?></td>
                                     <td><?= $singleLog['type'] ?></td>
                                     <td><?= $singleLog['log'] ?></td>
                                     <td><?= $singleLog['user_name'] ?> <?= $singleLog['user_surname'] ?></td>

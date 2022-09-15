@@ -190,10 +190,10 @@ class userModel extends model {
             $temp_user = $this->db->result->fetch(PDO::FETCH_ASSOC);
              if (password_verify($user_pass, $temp_user['password'])) {
                 $session->set('activeUser', $temp_user);
-                $this->tools->log("login", "Logged in with userid: " . $session->get('activeUser')['id'] . " / mail: " . $this->tools->getPost('login-email'));
+                $this->tools->log("login", "Logged in with userid: " . $session->get('activeUser')['id'] . " / mail: " . $this->tools->getPost('login-email'), __METHOD__);
                 return true;    
             } else {
-                $this->tools->log("login", "Failed for user: " . $this->tools->getPost('login-email') . " / pass: " . $this->tools->getPost('login-password') . ").");
+                $this->tools->log("login", "Failed for user: " . $this->tools->getPost('login-email') . " / pass: " . $this->tools->getPost('login-password') . ").", __METHOD__);
             }
         }
         return false;

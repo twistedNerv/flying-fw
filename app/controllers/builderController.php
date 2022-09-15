@@ -350,7 +350,7 @@ class builderController extends controller {
             $fileString .= "\n\t\t\t";
             $fileString .= '$action = ($id != 0) ? "' . ucfirst($table) . ' element with id: $id updated successfully." : "' . $table . ' successfully added.";';
             $fileString .= "\n\t\t\t";
-            $fileString .= '$this->tools->log("' . $table . '", $action);';
+            $fileString .= '$this->tools->log("' . $table . '", $action, __METHOD__);';
             $fileString .= "\n\t\t\t";
             $fileString .= "if ($" . "id == 0)";
             $fileString .= "\n\t\t\t\t";
@@ -378,7 +378,7 @@ class builderController extends controller {
             $fileString .= "\n\t\t\t";
             $fileString .= '$' . $table . 'Model->remove();';
             $fileString .= "\n\t\t\t";
-            $fileString .= '$this->tools->log("' . $table . '", "' . ucfirst($table) . ' element with id: $id removed.");';
+            $fileString .= '$this->tools->log("' . $table . '", "' . ucfirst($table) . ' element with id: $id removed.", __METHOD__);';
             $fileString .= "\n\t\t\t";
             $fileString .= '$this->tools->redirect(URL . "' . $table . '/update");';
             $fileString .= "\n\t\t";

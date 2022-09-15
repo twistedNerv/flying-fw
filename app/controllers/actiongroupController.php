@@ -28,7 +28,7 @@ class actiongroupController extends controller {
             $actiongroupModel->setSection($this->tools->getPost("actiongroup-section"));
             $actiongroupModel->flush();
             $action = ($id != 0) ? "Actiongroup element with id: $id updated successfully." : "actiongroup successfully added.";
-            $this->tools->log("actiongroup", $action);
+            $this->tools->log("actiongroup", $action, __METHOD__);
         }
         $allItems = $actiongroupModel->getAll();
         $this->view->assign("items", $allItems);
@@ -42,7 +42,7 @@ class actiongroupController extends controller {
             $actiongroupModel = $this->loadModel("actiongroup");
             $actiongroupModel->getOneBy('id', $id);
             $actiongroupModel->remove();
-            $this->tools->log("actiongroup", "Actiongroup element with id: $id removed.");
+            $this->tools->log("actiongroup", "Actiongroup element with id: $id removed.", __METHOD__);
             $this->tools->redirect(URL . "actiongroup/update");
         } else {
             echo "No actiongroup element id selected!";

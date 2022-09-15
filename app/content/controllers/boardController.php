@@ -41,7 +41,7 @@ class boardController extends controller {
             //prepare log description
             $action = ($id != 0) ? "Board element with id: $id updated successfully." : "Board successfully added.";
             //save action in logs
-            $this->tools->log("board", $action);
+            $this->tools->log("board", $action, __METHOD__);
         }
         //get top 20 records ordered by id desc
         $allItems = $boardModel->getAll('id', 'desc', 20);
@@ -64,7 +64,7 @@ class boardController extends controller {
             //delete record in DB table
             $boardModel->remove();
             //save action in logs
-            $this->tools->log("board", "Board element with id: $id removed.");
+            $this->tools->log("board", "Board element with id: $id removed.", __METHOD__);
             //redirect to board update page
             $this->tools->redirect(URL . "board/update");
         } else {

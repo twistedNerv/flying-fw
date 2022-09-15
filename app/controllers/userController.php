@@ -34,7 +34,7 @@ class userController extends controller {
             $userModel->setLevel($this->tools->getPost('user-level'));
             $userModel->setActive(1);
             $userModel->flush();
-            $this->tools->log('user', "User: " . $userModel->getEmail() . " successfully added.");
+            $this->tools->log('user', "User: " . $userModel->getEmail() . " successfully added.", __METHOD__);
         }
         $allUsers = $userModel->getAll();
         $this->view->assign('allUsers', $allUsers);
@@ -50,7 +50,7 @@ class userController extends controller {
             $userModel = $this->loadModel('user');
             $userModel->getOneBy('id', $userId);
             $userModel->remove();
-            $this->tools->log('user', "User with id: $userId removed.");
+            $this->tools->log('user', "User with id: $userId removed.", __METHOD__);
             $this->tools->redirect(URL . 'user/update');
         } else {
             echo "No user id selected!";

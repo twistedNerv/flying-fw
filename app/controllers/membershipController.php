@@ -15,7 +15,7 @@ class membershipController extends controller {
                 $membershipModel->setUser_id($userId);
                 $membershipModel->setActiongroup_id($this->tools->getPost('membership-group_id'));
                 $membershipModel->flush();
-                $this->tools->log('membership', "User with id " . $userId . " and group with id" . $this->tools->getPost('membership-group_id') . " added.");
+                $this->tools->log('membership', "User with id " . $userId . " and group with id" . $this->tools->getPost('membership-group_id') . " added.", __METHOD__);
             } else {
                 echo "Not added. Already in.";
             }
@@ -29,7 +29,7 @@ class membershipController extends controller {
             $userModel = $this->loadModel('membership');
             $userModel->getOneBy('id', $id);
             $userModel->remove();
-            $this->tools->log('membership', "Membership with id: $id removed.");
+            $this->tools->log('membership', "Membership with id: $id removed.", __METHOD__);
             $this->tools->redirect(URL . 'user/update/' . $userId);
         } else {
             echo "No user id selected!";

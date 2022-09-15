@@ -55,12 +55,15 @@ class tools {
         return $result;
     }
 
-    public function log($logtype, $log) {
+    public function log($logtype, $log, $class_method) {
+        $methodArray = explode('::', $class_method);
         $link = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
         $dtNow = date("d.m.Y H:i:s");
         $userIdParam = (isset($this->session->get('activeUser')['id'])) ? $this->session->get('activeUser')['id'] : "N/A";
-        $insertLog = $link->prepare('INSERT INTO logs (type, log, datetime, userid, userip, useragent) '
-                . 'VALUES (:type, :log, :datetime, :userid, :userip, :useragent)');
+        $insertLog = $link->prepare('INSERT INTO logs (class, method, type, log, datetime, userid, userip, useragent) '
+                . 'VALUES (:class, :method, :type, :log, :datetime, :userid, :userip, :useragent)');
+        $insertLog->bindParam(':class', $methodArray[0]);
+        $insertLog->bindParam(':method', $methodArray[1]);
         $insertLog->bindParam(':type', $logtype);
         $insertLog->bindParam(':log', $log);
         $insertLog->bindParam(':datetime', $dtNow);

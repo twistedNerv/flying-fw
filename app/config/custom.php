@@ -16,7 +16,7 @@ $mainSettings = [
     //options
     'DISPLAY_ERRORS' => true,
     'DISPLAY_PAGE_HEADER' => true,
-    'PUBLIC_SETTINGS' => true,
+    'PUBLIC_SETTINGS' => false,
     'LIMIT_LOGIN_ATTEMPTS' => true,
     'MAX_LOGIN_ATTEMPTS' => 5,
     'LOGIN_PENALTY_DURATION' => 60
