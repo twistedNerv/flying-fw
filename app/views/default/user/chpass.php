@@ -3,9 +3,11 @@
         <div class="col-sm-12" style="text-align: center;">
             <h4>Password change for: <br><?= $data['selected_user']->name . " " . $data['selected_user']->surname ?></h4><hr>
         </div>
-        <div class="col-sm-12 alert alert-danger text-center">
-            <?= $data['notification'] ?>
-        </div>
+        <?php if ($data['notification'] != "") { ?>
+            <div class="col-sm-12 alert alert-danger text-center">
+                <?= $data['notification'] ?>
+            </div>
+        <?php } ?>
         <div class="col-sm-4"></div>
         <div class="col-sm-4">
             <div class="login-wrapper" style="text-align: center;">

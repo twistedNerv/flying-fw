@@ -73,10 +73,10 @@ class userController extends controller {
                                 $this->tools->log('password', "User: " . $userModel->getEmail() . " successfully changed password.", __METHOD__);
                                 $this->tools->redirect(URL . 'user/update/' . $userId);
                             } else {
-                                $notification = "New passwords doesn't match!<br>";
+                                $notification = "New password don't match with confirm password!<br>";
                             }
                         } else {
-                            $notification = "Is old password correct?<br>";
+                            $notification = "Old password not correct!<br>";
                         }
                     } else {
                         $notification = "Empty fields!<br>";
