@@ -13,8 +13,11 @@
                 echo "<div>
                         <span class='" . $selectedUserClass . "'>" . $singleItem['name'] . " " . $singleItem['surname'] . " (" . $singleItem['level'] . ")</span> | 
                         <a href='" . URL . "user/update/" . $singleItem['id'] . "' title='Edit user'><i class='far fa-edit'></i></a> | 
-                        <a href='" . URL . "user/remove/" . $singleItem['id'] . "' title='Remove user'><i class='fas fa-times'></i></a>
-                      </div>";
+                        <a href='" . URL . "user/remove/" . $singleItem['id'] . "' title='Remove user'><i class='fas fa-times'></i></a>";
+                if ($this->session->get('activeUser')['id'] == $data['selectedUser']->id || $this->session->get('activeUser')['level'] == 5) {
+                    echo "| <a href='" . URL . "user/chpass/" . $singleItem['id'] . "' title='Change password'><i class='fa fa-key'></i></a>"; 
+                }
+                echo "</div>";
             }
             ?>
         </div>

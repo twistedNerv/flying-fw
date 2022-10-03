@@ -56,6 +56,39 @@ class userController extends controller {
             echo "No user id selected!";
         }
     }
+    
+    public function chpassAction($userId) {
+        $notification = "";
+        if ($userId && ($this->session->get('activeUser')['id'] == $userId || $this->session->get('activeUser')['level'] == 5)) {
+            $userModel = $this->loadModel('user');
+            $selected_user = $userModel->getOneBy('id', $userId);
+                if ($this->tools->getPost('action') == 'handlepass') {
+                    if ($this->tools->getPost('old-pass') != ""
+                    && $this->tools->getPost('new-pass') != ""
+                    && $this->tools->getPost('confirm-new-pass') != "") {
+                        if (password_verify($this->tools->getPost('old-pass'), $selected_user->password)) {
+                            if ($this->tools->getPost('new-pass') == $this->tools->getPost('confirm-new-pass')) {
+                                $selected_user->setPassword(password_hash($this->tools->getPost('new-pass'), PASSWORD_DEFAULT));
+                                $selected_user->flush();
+                                $this->tools->log('password', "User: " . $userModel->getEmail() . " successfully changed password.", __METHOD__);
+                                $this->tools->redirect(URL . 'user/update/' . $userId);
+                            } else {
+                                $notification = "New passwords doesn't match!<br>";
+                            }
+                        } else {
+                            $notification = "Is old password correct?<br>";
+                        }
+                    } else {
+                        $notification = "Empty fields!<br>";
+                    }
+                }
+            $this->view->assign('notification', $notification);
+            $this->view->assign('selected_user', $selected_user);
+            $this->view->render('user/chpass');
+        } else {
+            $this->tools->redirect(URL . 'user/update/' . $userId);
+        }
+    }
 
     public function loginAction() {
         $time_over = (abs(time() - $this->session->get('lg_at')) > LOGIN_PENALTY_DURATION) ? true : false;

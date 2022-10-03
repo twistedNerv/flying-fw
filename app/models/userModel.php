@@ -166,12 +166,12 @@ class userModel extends model {
     public function getAll($orderBy = null, $order = null, $limit = null) {
         return $this->db->getAll($orderBy, $order, $limit, 'user');
     }
-    
-    public function getAllBy($ident, $identVal, $orderBy = null, $orderDirection = 'ASC', $limit=null) {
+
+    public function getAllBy($ident, $identVal, $orderBy = null, $orderDirection = 'ASC', $limit = null) {
         return $this->db->getAllByParam($ident, $identVal, 'user', $orderBy, $orderDirection, $limit);
     }
 
-    public function flush($sqlDump=0) {
+    public function flush($sqlDump = 0) {
         $this->db->flush($this, 'user', $sqlDump);
     }
 
@@ -188,14 +188,15 @@ class userModel extends model {
         $this->db->result->execute();
         if ($this->db->result->rowCount() == 1) {
             $temp_user = $this->db->result->fetch(PDO::FETCH_ASSOC);
-             if (password_verify($user_pass, $temp_user['password'])) {
+            if (password_verify($user_pass, $temp_user['password'])) {
                 $session->set('activeUser', $temp_user);
                 $this->tools->log("login", "Logged in with userid: " . $session->get('activeUser')['id'] . " / mail: " . $this->tools->getPost('login-email'), __METHOD__);
-                return true;    
+                return true;
             } else {
                 $this->tools->log("login", "Failed for user: " . $this->tools->getPost('login-email') . " / pass: " . $this->tools->getPost('login-password') . ").", __METHOD__);
             }
         }
         return false;
     }
+
 }
