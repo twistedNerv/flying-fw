@@ -23,39 +23,52 @@ class config {
     }
     
     public function includeStyle($filename) {
-        echo "<link rel='stylesheet' href='" . URL . "public/" . $this->getParam('template') . "/css/" . $filename . "'>";
+        if (file_exists(URL . "public/" . $this->getParam('template') . "/css/" . $filename)) {
+            echo "<link rel='stylesheet' href='" . URL . "public/" . $this->getParam('template') . "/css/" . $filename . "'>";
+        } else {
+            echo "<link rel='stylesheet' href='" . URL . "public/default/css/" . $filename . "'>";
+        }
     }
     
     public function includeScript($filename) {
-        echo "<script type='text/javascript' src='" . URL . "public/" . $this->getParam('template') . "/js/" . $filename . "'></script>";
-    }
-    
-    public function includeJquery() {
-        echo "<link rel='stylesheet' href='" . URL . "public/" . $this->getParam('template') . "/custom/jquery-3.4.1/jquery-ui.css'>";
-        echo "<script type='text/javascript' src='" . URL . "public/" . $this->getParam('template') . "/custom/jquery-3.4.1/jquery.js'></script>";
-        echo "<script type='text/javascript' src='" . URL . "public/" . $this->getParam('template') . "/custom/jquery-3.4.1/jquery-ui.js'></script>";
-    }
-    
-    public function includeBootstrap() {
-        echo "<link rel='stylesheet' href='" . URL . "public/" . $this->getParam('template') . "/custom/bootstrap-4.3.1/css/bootstrap.min.css'>";
-        echo "<script type='text/javascript' src='" . URL . "public/" . $this->getParam('template') . "/custom/bootstrap-4.3.1/js/bootstrap.min.js'></script>";
-    }
-    
-    public function includeFontawesome() {
-        echo "<link rel='stylesheet' href='" . URL . "public/" . $this->getParam('template') . "/custom/fontawesome-free-5.12.0-web/css/all.css'>";
-    }
-    
-    public function includeFontawesomeCustom() {
-        echo "<link rel='stylesheet' href='" . URL . "public/" . $this->getParam('template') . "/custom/fontawesome-free-5.12.0-web/css/all.css'>";
-    }
-    
-    public function includeEasyeditor() {
-        echo "<script type='text/javascript' src='" . URL . "public/" . $this->getParam('template') . "/custom/easyeditor/jquery.easyeditor.js'></script>";
-        echo "<link rel='stylesheet' href='" . URL . "public/" . $this->getParam('template') . "/custom/easyeditor/easyeditor.css'>";
-        echo "<link rel='stylesheet' href='" . URL . "public/" . $this->getParam('template') . "/custom/easyeditor/easyeditor-modal.css'>";
+        if (file_exists(URL . "public/" . $this->getParam('template') . "/js/" . $filename)){
+            echo "<script type='text/javascript' src='" . URL . "public/" . $this->getParam('template') . "/js/" . $filename . "'></script>";
+        } else {
+            echo "<script type='text/javascript' src='" . URL . "public/default/js/" . $filename . "'></script>";
+        }
     }
     
     public function includeLibsFont($fontname) {
-        echo "<link rel='stylesheet' href='" . URL . "public/" . $this->getParam('template') . "/custom/fonts/fonts-" . $fontname .".css'>";
+        if (file_exists(URL . "public/" . $this->getParam('template') . "/custom/fonts/fonts-" . $fontname . ".css")) {
+            echo "<link rel='stylesheet' href='" . URL . "public/" . $this->getParam('template') . "/custom/fonts/fonts-" . $fontname .".css'>";
+        } else {
+            echo "<link rel='stylesheet' href='" . URL . "public/default/custom/fonts/fonts-" . $fontname .".css'>";
+        }
     }
+    
+    public function includeJquery() {
+        echo "<link rel='stylesheet' href='" . URL . "public/default/custom/jquery-3.4.1/jquery-ui.css'>";
+        echo "<script type='text/javascript' src='" . URL . "public/default/custom/jquery-3.4.1/jquery.js'></script>";
+        echo "<script type='text/javascript' src='" . URL . "public/default/custom/jquery-3.4.1/jquery-ui.js'></script>";
+    }
+    
+    public function includeBootstrap() {
+        echo "<link rel='stylesheet' href='" . URL . "public/default/custom/bootstrap-4.3.1/css/bootstrap.min.css'>";
+        echo "<script type='text/javascript' src='" . URL . "public/default/custom/bootstrap-4.3.1/js/bootstrap.min.js'></script>";
+    }
+    
+    public function includeFontawesome() {
+        echo "<link rel='stylesheet' href='" . URL . "public/default/custom/fontawesome-free-5.12.0-web/css/all.css'>";
+    }
+    
+    public function includeFontawesomeCustom() {
+        echo "<link rel='stylesheet' href='" . URL . "public/default/custom/fontawesome-free-5.12.0-web/css/all.css'>";
+    }
+    
+    public function includeEasyeditor() {
+        echo "<script type='text/javascript' src='" . URL . "public/default/custom/easyeditor/jquery.easyeditor.js'></script>";
+        echo "<link rel='stylesheet' href='" . URL . "public/default/custom/easyeditor/easyeditor.css'>";
+        echo "<link rel='stylesheet' href='" . URL . "public/default/custom/easyeditor/easyeditor-modal.css'>";
+    }
+    
 }

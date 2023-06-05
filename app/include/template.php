@@ -30,7 +30,11 @@ class template {
     }
     
     public function getImage($file) {
-        return  URL . "public/" . TEMPLATE . "/images/" . $file;
+        if (file_exists(URL . "public/" . TEMPLATE . "/images/" . $file)) {
+            return  URL . "public/" . TEMPLATE . $file;
+        } else {
+            return  URL . "public/default/images/" . $file;
+        }
     }
     
     public function progressBar($percent, $title, $bar_color, $bg_color, $status_index=0) {
@@ -66,7 +70,11 @@ class template {
     
     public function getImagePath($file) {
         $this->config = new config;
-        return URL . 'public/' . $this->config->getParam('template') . '/images/' . $file;
+        if (file_exists(URL . 'public/' . $this->config->getParam('template') . '/images/' . $file)) {
+            return URL . 'public/' . $this->config->getParam('template') . '/images/' . $file;
+        } else {
+            return URL . 'public/default/images/' . $file;
+        }
     }
     
     public function getFileIcon($file) {
