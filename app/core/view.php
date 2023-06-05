@@ -23,7 +23,6 @@ class view {
         } else if (file_exists('app/views/default/' . $view . '.php')) {
             $contentPath = "";
         }
-
         if ($contentPath && !file_exists('app/content/views/' . $this->config->getParam('template') . '/' . $view . '.php')) {
             if ($contentPath && !file_exists('app/content/views/default/' . $view . '.php')) {
                 die("Err: View file is missing.");
