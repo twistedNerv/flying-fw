@@ -13,7 +13,7 @@
         <?php $this->config->includeScript('default.js');?>
         <script>var URL = "<?=URL?>";</script>
         <?php $this->config->includeScript('ajax.js');?>
-        <link href="<?=URL?>public/<?=TEMPLATE?>/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <link href="<?=URL?>public/default/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
    </head>
     <body>
         <div class="col-sm-2"></div>
