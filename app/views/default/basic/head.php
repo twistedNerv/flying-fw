@@ -12,8 +12,12 @@
         <?php $this->config->includeStyle('default.css');?>
         <?php $this->config->includeScript('default.js');?>
         <script>var URL = "<?=URL?>";</script>
-        <?php $this->config->includeScript('ajax.js');?>
-        <link href="<?=URL?>public/default/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <?php $this->config->includeScript('ajax.js');
+        if (file_exists(URL . 'public/' . TEMPLATE . '/images/favicon.ico')) {?>
+            <link href="<?=URL?>public/<?=TEMPLATE?>/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <?php } else { ?>
+            <link href="<?=URL?>public/default/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <?php } ?>
    </head>
     <body>
         <div class="col-sm-2"></div>
