@@ -57,6 +57,7 @@ $" . "mainSettings = [
     'MAX_LOGIN_ATTEMPTS' => " . $max_login_attempts . ",
     'LOGIN_PENALTY_DURATION' => " . $login_penalty_duration . "
 ];";
+            exec('chmod 777 ../app/config/custom.php');
             file_put_contents('../app/config/custom.php', $custom_file);
             exec('chown root:root ../app/config/custom.php');
             exec('chmod 777 ../app/config/custom.php');
