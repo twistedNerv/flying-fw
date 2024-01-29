@@ -119,7 +119,8 @@
                     <option value="0">Head menu group</option>
                     <?php
                     foreach ($data['parentGroups'] as $parentGroupItem) {
-                        echo "<option " . $this->template->setUpdateSelectValue($parentGroupItem['id'], $parentGroupItem['id'], $data['selectedItem']->parent) . ">" . $parentGroupItem['title'] . "</option>";
+                        $selected = ($parentGroupItem['id'] == $data['selectedItem']->parent) ? "selected" : "";
+                        echo "<option value='" . $parentGroupItem['id'] . "' " . $selected . ">" . $parentGroupItem['title'] . "</option>";
                     }
                     ?>
                 </select>
