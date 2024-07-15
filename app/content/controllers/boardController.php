@@ -12,7 +12,7 @@ class boardController extends controller {
     public function indexAction() {
         //create object from model board
         $boardModel = $this->loadModel('board');
-        //save last 4 records from the table in $allItems variable
+        //get last 4 records from the table in $allItems variable
         $allItems   = $boardModel->getAll('id', 'desc', 4);
         //prepare vars for view ($allItems will be accessable via $data['items']
         $this->view->assign('items', $allItems);
