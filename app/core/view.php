@@ -2,7 +2,7 @@
 
 require_once 'app/include/template.php';
 require_once 'app/include/tools.php';
-
+#[AllowDynamicProperties]
 class view {
 
     public $vars = [];
