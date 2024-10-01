@@ -1,5 +1,5 @@
 <?php
-
+#[AllowDynamicProperties]
 class model {
 
     public function __construct() {
