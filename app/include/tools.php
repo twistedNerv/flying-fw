@@ -1,5 +1,5 @@
 <?php
-
+#[AllowDynamicProperties]
 class tools {
 
     public function __construct() {
