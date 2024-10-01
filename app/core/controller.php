@@ -1,5 +1,5 @@
 <?php
-
+#[AllowDynamicProperties]
 class controller {
 
     public function __construct() {
