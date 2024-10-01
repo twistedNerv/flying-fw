@@ -1,4 +1,5 @@
 <?php
+#[AllowDynamicProperties]
 class session {
     
     function __construct() {
