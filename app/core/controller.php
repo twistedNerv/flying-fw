@@ -23,6 +23,19 @@ class controller {
         $modelName = $model . 'Model';
         return new $modelName();
     }
+    
+    public function loadController($controller) {
+        $contentPath = 'content/';
+        if (file_exists('app/controllers/' . strtolower($controller) . 'Controller.php')) {
+            $contentPath = '';
+        }
+        if (!$contentPath && file_exists('app/content/controller/' . strtolower($controller) . 'Controller.php')) {
+            die("Err: Controller class redefinition");
+        }
+        require_once 'app/' . $contentPath . 'controllers/' . strtolower($controller) . 'Controller.php';
+        $controllerName = $controller . 'Controller';
+        return new $controllerName();
+    }
 
     public function loadInclude($include) {
         if (file_exists('app/include/' . strtolower($include) . '.php')) {
